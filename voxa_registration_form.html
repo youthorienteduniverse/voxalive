@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VOXA – RAS Mains 2026-27 Answer Writing Guidance Program</title>
+<style>
+  :root {
+    --bg:     #0a0e1a;
+    --bg2:    #111827;
+    --bg3:    #1a2235;
+    --border: #1e2d4a;
+    --gold:   #FFD700;
+    --gold2:  #FFA500;
+    --teal:   #00C9A7;
+    --blue:   #3B82F6;
+    --purple: #845EF7;
+    --text:   #F1F5F9;
+    --muted:  #94A3B8;
+    --green:  #22C55E;
+    --red:    #EF4444;
+    --radius: 12px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--bg); color: var(--text);
+    min-height: 100vh; line-height: 1.6;
+  }
+
+  /* ── HERO ─────────────────────────────────────────────── */
+  .hero {
+    background: linear-gradient(135deg, #0a0e1a 0%, #0d1b3e 50%, #0a1628 100%);
+    padding: 48px 20px 36px; text-align: center;
+    border-bottom: 1px solid var(--border); position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(0,201,167,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .logo-badge {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: rgba(255,215,0,0.08); border: 1px solid rgba(255,215,0,0.3);
+    border-radius: 40px; padding: 8px 20px; margin-bottom: 20px;
+    font-size: 13px; font-weight: 700; color: var(--gold); letter-spacing: 1px;
+  }
+  .hero h1 {
+    font-size: clamp(22px, 5vw, 36px); font-weight: 800;
+    background: linear-gradient(135deg, #FFD700, #00C9A7);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text; line-height: 1.25; margin-bottom: 8px;
+  }
+  .hero-sub { font-size: clamp(13px, 3vw, 15px); color: var(--muted); margin-bottom: 22px; }
+  .tag-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 7px; margin-bottom: 24px; }
+  .tag {
+    border-radius: 20px; padding: 4px 14px; font-size: 12px; font-weight: 600;
+    background: rgba(59,130,246,0.12); border: 1px solid rgba(59,130,246,0.3); color: var(--blue);
+  }
+  .tag.gold  { background:rgba(255,215,0,0.1);  border-color:rgba(255,215,0,0.3);  color:var(--gold); }
+  .tag.teal  { background:rgba(0,201,167,0.1);  border-color:rgba(0,201,167,0.3);  color:var(--teal); }
+  .tag.green { background:rgba(34,197,94,0.1);  border-color:rgba(34,197,94,0.3);  color:var(--green);}
+  .benefits-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
+    gap: 8px; max-width: 720px; margin: 0 auto 24px;
+  }
+  .benefit-item {
+    background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+    border-radius: 8px; padding: 10px 12px;
+    display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500;
+  }
+  .urgency-bar {
+    background: linear-gradient(90deg, rgba(255,160,0,0.15), rgba(255,215,0,0.15));
+    border: 1px solid rgba(255,160,0,0.4); border-radius: 8px;
+    padding: 10px 20px; font-size: 13px; font-weight: 600; color: var(--gold2);
+    max-width: 520px; margin: 0 auto; display: flex; align-items: center;
+    justify-content: center; gap: 8px;
+  }
+
+  /* ── JOURNEY BOX ─────────────────────────────────────── */
+  .journey-section {
+    max-width: 720px; margin: 0 auto; padding: 28px 16px 0;
+  }
+  .journey-box {
+    background: var(--bg3); border: 1px solid var(--border); border-radius: 12px;
+    overflow: hidden;
+  }
+  .journey-header {
+    background: linear-gradient(90deg, rgba(0,201,167,0.12), rgba(59,130,246,0.08));
+    padding: 14px 20px; border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 10px;
+    font-size: 15px; font-weight: 700; color: var(--teal);
+  }
+  .journey-body { padding: 16px 20px; }
+  .journey-phase {
+    display: flex; gap: 14px; padding: 10px 0;
+    border-bottom: 1px solid rgba(30,45,74,0.6);
+  }
+  .journey-phase:last-child { border-bottom: none; }
+  .phase-dot {
+    width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center; font-size: 16px;
+    margin-top: 2px;
+  }
+  .dot-teal   { background: rgba(0,201,167,0.12); border: 1.5px solid rgba(0,201,167,0.4); }
+  .dot-blue   { background: rgba(59,130,246,0.12); border: 1.5px solid rgba(59,130,246,0.4); }
+  .dot-gold   { background: rgba(255,215,0,0.10);  border: 1.5px solid rgba(255,215,0,0.4);  }
+  .phase-content {}
+  .phase-date { font-size: 12px; font-weight: 700; color: var(--teal); margin-bottom: 2px; }
+  .phase-title { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+  .phase-desc { font-size: 12px; color: var(--muted); line-height: 1.7; }
+  .phase-badges { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 6px; }
+  .pbadge {
+    font-size: 11px; font-weight: 600; padding: 2px 9px; border-radius: 4px;
+    background: rgba(0,201,167,0.08); border: 1px solid rgba(0,201,167,0.2); color: var(--teal);
+  }
+  .pbadge.gold { background: rgba(255,215,0,0.08); border-color: rgba(255,215,0,0.2); color: var(--gold); }
+  .journey-stats {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;
+    margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--border);
+  }
+  .jstat { text-align: center; }
+  .jstat-val { font-size: 20px; font-weight: 800; color: var(--gold); }
+  .jstat-label { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+  /* ── EXAM SCHEDULE ───────────────────────────────────── */
+  .schedule-section {
+    max-width: 720px; margin: 0 auto; padding: 0 16px 0;
+  }
+  .section-label {
+    font-size: 15px; font-weight: 700; color: var(--gold);
+    margin: 28px 0 12px; display: flex; align-items: center; gap: 8px;
+  }
+  .schedule-table { width: 100%; border-collapse: collapse; border-radius: 10px; overflow: hidden; }
+  .schedule-table th {
+    background: var(--bg3); padding: 10px 12px; font-size: 12px;
+    font-weight: 700; color: var(--teal); text-align: left; letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--border);
+  }
+  .schedule-table td {
+    padding: 10px 12px; font-size: 13px; border-bottom: 1px solid var(--border);
+    background: rgba(26,34,53,0.6);
+  }
+  .schedule-table tr:last-child td { border-bottom: none; }
+  .exam-badge {
+    display: inline-block; padding: 2px 9px; border-radius: 4px; font-size: 11px; font-weight: 700;
+  }
+  .badge-pre   { background: rgba(59,130,246,0.15); color: var(--blue); border: 1px solid rgba(59,130,246,0.3); }
+  .badge-mains { background: rgba(255,215,0,0.12);  color: var(--gold); border: 1px solid rgba(255,215,0,0.3);  }
+  .badge-start { background: rgba(0,201,167,0.12);  color: var(--teal); border: 1px solid rgba(0,201,167,0.3);  }
+  .countdown-row { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .countdown-chip {
+    background: var(--bg3); border: 1px solid var(--border);
+    border-radius: 8px; padding: 8px 14px; font-size: 12px; font-weight: 600;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .countdown-chip .days { font-size: 18px; font-weight: 800; color: var(--gold); }
+
+  /* ── PRICING ─────────────────────────────────────────── */
+  .pricing-section {
+    max-width: 720px; margin: 0 auto; padding: 0 16px;
+  }
+  .pricing-sub { font-size: 13px; color: var(--muted); margin-bottom: 16px; }
+  .single-plan-card {
+    background: var(--bg3); border: 1.5px solid var(--gold);
+    border-radius: 16px; padding: 22px 22px 18px; position: relative; overflow: hidden;
+  }
+  .single-plan-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--teal));
+  }
+  .plan-top-row { display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .plan-left-title { font-size: 18px; font-weight: 800; color: var(--gold); }
+  .plan-left-sub { font-size: 13px; color: var(--muted); margin-top: 3px; }
+  .plan-pricing-options { display: flex; gap: 10px; flex-wrap: wrap; }
+  .price-option {
+    background: var(--bg); border: 1.5px solid var(--border);
+    border-radius: 10px; padding: 10px 16px; cursor: pointer; transition: all 0.2s;
+    text-align: center; min-width: 130px;
+  }
+  .price-option:hover { border-color: var(--teal); }
+  .price-option.active { border-color: var(--gold); background: rgba(255,215,0,0.05); }
+  .price-option .opt-label { font-size: 11px; color: var(--muted); margin-bottom: 3px; }
+  .price-option .opt-price { font-size: 22px; font-weight: 800; color: var(--text); }
+  .price-option .opt-price span { font-size: 13px; font-weight: 400; color: var(--muted); }
+  .price-option .opt-original { font-size: 11px; color: var(--muted); text-decoration: line-through; margin-top: 2px; }
+  .price-option .opt-save { font-size: 11px; font-weight: 700; color: var(--green); }
+  .plan-divider { border: none; border-top: 1px solid var(--border); margin: 16px 0; }
+  .features-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 16px; }
+  .feat-item { font-size: 13px; color: var(--text); display: flex; align-items: center; gap: 7px; padding: 3px 0; }
+  .feat-item .fi { color: var(--teal); font-size: 14px; flex-shrink: 0; }
+  .pay-note {
+    background: rgba(34,197,94,0.06); border: 1px solid rgba(34,197,94,0.2);
+    border-radius: 10px; padding: 12px 16px; margin-top: 16px;
+    font-size: 13px; color: var(--muted); line-height: 1.8;
+  }
+  .pay-note strong { color: var(--green); }
+  .limited-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3);
+    color: #fc8181; border-radius: 6px; padding: 5px 12px;
+    font-size: 12px; font-weight: 700; margin-bottom: 14px;
+  }
+
+  /* ── FORM ────────────────────────────────────────────── */
+  .form-wrap { max-width: 680px; margin: 0 auto; padding: 28px 16px 60px; }
+  .progress-label { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); margin-bottom: 7px; }
+  .progress-bar { background: var(--bg3); border-radius: 4px; height: 6px; margin-bottom: 24px; overflow: hidden; }
+  .progress-fill {
+    height: 100%; background: linear-gradient(90deg, var(--teal), var(--gold));
+    border-radius: 4px; transition: width 0.5s ease; width: 0%;
+  }
+  .section { display: none; animation: fadeIn 0.4s ease; }
+  .section.active { display: block; }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+
+  .section-header {
+    background: var(--bg3); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 14px 18px; margin-bottom: 18px;
+  }
+  .section-num { font-size: 11px; font-weight: 700; color: var(--teal); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 3px; }
+  .section-title { font-size: 17px; font-weight: 700; color: var(--gold); }
+
+  .field { margin-bottom: 18px; }
+  .field label { display: block; font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 7px; }
+  .field label .req { color: var(--red); margin-left: 2px; }
+  .field label .qlabel {
+    display: inline-block; background: rgba(255,215,0,0.1); color: var(--gold);
+    border-radius: 4px; padding: 1px 8px; font-size: 11px; margin-right: 6px; font-weight: 700;
+  }
+  input[type="text"], input[type="tel"], input[type="email"] {
+    width: 100%; background: var(--bg3); border: 1.5px solid var(--border);
+    border-radius: 8px; padding: 11px 14px; color: var(--text); font-size: 14px;
+    transition: border-color 0.2s, box-shadow 0.2s; outline: none;
+  }
+  input:focus { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(0,201,167,0.12); }
+  input.error { border-color: var(--red); }
+  input::placeholder { color: var(--muted); }
+
+  .options { display: flex; flex-direction: column; gap: 7px; }
+  .options.inline { flex-direction: row; flex-wrap: wrap; gap: 7px; }
+  .opt {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--bg3); border: 1.5px solid var(--border);
+    border-radius: 8px; padding: 11px 14px; cursor: pointer;
+    transition: border-color 0.2s, background 0.2s; user-select: none;
+  }
+  .opt:hover { border-color: var(--teal); background: rgba(0,201,167,0.05); }
+  .opt input { display: none; }
+  .opt .indicator {
+    width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--muted);
+    flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all 0.2s;
+  }
+  .opt.checkbox .indicator { border-radius: 4px; }
+  .opt input:checked ~ .indicator { background: var(--teal); border-color: var(--teal); }
+  .opt input:checked ~ .indicator::after { content: '✓'; color: #000; font-size: 11px; font-weight: 800; }
+  .opt input[type="radio"]:checked ~ .indicator::after {
+    content: ''; width: 8px; height: 8px; background: #000; border-radius: 50%; display: block;
+  }
+  .opt.selected { border-color: var(--teal); background: rgba(0,201,167,0.06); }
+  .opt .opt-text { font-size: 14px; flex: 1; }
+
+  .error-msg { color: var(--red); font-size: 12px; margin-top: 4px; display: none; }
+  .error-msg.show { display: block; }
+
+  .btn-row { display: flex; gap: 12px; margin-top: 26px; }
+  .btn-next, .btn-back, .btn-submit {
+    flex: 1; padding: 13px; border-radius: 10px; font-size: 15px; font-weight: 700;
+    cursor: pointer; border: none; transition: all 0.2s;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  .btn-next, .btn-submit { background: linear-gradient(135deg, var(--teal), #00a88a); color: #0a0e1a; }
+  .btn-next:hover, .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,201,167,0.3); }
+  .btn-back { background: var(--bg3); border: 1.5px solid var(--border); color: var(--muted); }
+  .btn-submit { background: linear-gradient(135deg, var(--gold), var(--gold2)); }
+  .btn-submit:hover { box-shadow: 0 8px 24px rgba(255,215,0,0.3); }
+
+  /* ── SUCCESS ─────────────────────────────────────────── */
+  #success { display: none; text-align: center; padding: 48px 20px; }
+  #success.show { display: block; animation: fadeIn 0.5s ease; }
+  .success-icon { font-size: 72px; margin-bottom: 16px; animation: bounce 0.6s ease; }
+  @keyframes bounce { 0%,100%{transform:scale(1)} 50%{transform:scale(1.2)} }
+  #success h2 {
+    font-size: 28px; font-weight: 800;
+    background: linear-gradient(135deg, var(--gold), var(--teal));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text; margin-bottom: 12px;
+  }
+  #success p { color: var(--muted); font-size: 15px; margin-bottom: 8px; }
+  .whatsapp-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: #25D366; color: #fff; border: none; border-radius: 10px;
+    padding: 14px 28px; font-size: 15px; font-weight: 700;
+    cursor: pointer; margin-top: 20px; text-decoration: none; transition: all 0.2s;
+  }
+  .whatsapp-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(37,211,102,0.4); }
+
+  .footer {
+    text-align: center; padding: 20px;
+    font-size: 12px; color: var(--muted); border-top: 1px solid var(--border);
+  }
+
+  @media (max-width: 480px) {
+    .hero { padding: 32px 16px 26px; }
+    .benefits-grid { grid-template-columns: 1fr 1fr; }
+    .btn-row { flex-direction: column; }
+    .plan-pricing-options { flex-direction: column; }
+    .features-grid { grid-template-columns: 1fr; }
+    .journey-stats { grid-template-columns: repeat(2,1fr); }
+    .schedule-table td, .schedule-table th { font-size: 11px; padding: 8px 8px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ HERO ══════════════════════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="logo-badge"><span>🎯</span> VOXA — Rajasthan's Premier RAS Mains Answer Writing & Guidance Platform</div>
+  <h1>RAS Mains 2026-27<br>Answer Writing Guidance Program</h1>
+  <p class="hero-sub">RAS Mains अभ्यर्थियों के लिए Structured Answer Writing, Evaluation, Feedback एवं Ranking Program</p>
+
+  <div class="tag-row">
+    <span class="tag gold">⭐ Early Access</span>
+    <span class="tag teal">🏆 All Rajasthan Ranking</span>
+    <span class="tag green">📅 Scheduled Answer Writing</span>
+    <span class="tag">📝 Detailed Evaluation</span>
+    <span class="tag">📖 Model Answers</span>
+  </div>
+
+  <div class="benefits-grid">
+    <div class="benefit-item"><span>📅</span>Pre-Planned Answer Writing Schedule</div>
+    <div class="benefit-item"><span>📝</span>Detailed Evaluation</div>
+    <div class="benefit-item"><span>🏆</span>All Rajasthan Ranking</div>
+    <div class="benefit-item"><span>📖</span>Model Answers</div>
+    <div class="benefit-item"><span>💬</span>Personalized Feedback</div>
+    <div class="benefit-item"><span>📉</span>Weak Area Analysis</div>
+    <div class="benefit-item"><span>🔁</span>Revision Planner</div>
+    <div class="benefit-item"><span>📊</span>Full Length Test Series</div>
+  </div>
+
+  <div class="urgency-bar">
+    ⏳ &nbsp;Early Access Batch सीमित है — पहले आएं, पहले पाएं
+  </div>
+</section>
+
+<!-- ═══ JOURNEY BOX ════════════════════════════════════════════════════════ -->
+<div class="journey-section">
+  <div class="section-label">🚀 VOXA RAS Mains 2026–27 Journey</div>
+  <div class="journey-box">
+    <div class="journey-header">📅 Phase-wise Program Timeline</div>
+    <div class="journey-body">
+
+      <!-- Phase 1 -->
+      <div class="journey-phase">
+        <div class="phase-dot dot-teal" style="background:rgba(255,215,0,0.12);border-color:rgba(255,215,0,0.5);">🟡</div>
+        <div class="phase-content">
+          <div class="phase-date">10 July 2026 → 14 August 2026</div>
+          <div class="phase-title">Phase 1 — Paper-III: व्यवहार एवं विधि</div>
+          <div class="phase-desc">11 Topics × 3 Rounds = 33 Questions। सबसे crisp, factual answers। Law और Behavior की मजबूत नींव।</div>
+          <div class="phase-badges">
+            <span class="pbadge">📋 11 Topics</span>
+            <span class="pbadge">🔁 3 Rounds</span>
+            <span class="pbadge gold">5 अंक | 50 शब्द</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phase 2 -->
+      <div class="journey-phase">
+        <div class="phase-dot dot-teal" style="background:rgba(0,201,167,0.12);border-color:rgba(0,201,167,0.5);">🟢</div>
+        <div class="phase-content">
+          <div class="phase-date">17 August 2026 → 24 September 2026</div>
+          <div class="phase-title">Phase 2 — Paper-I: समाजशास्त्र, प्रबंधन, लेखांकन</div>
+          <div class="phase-desc">14 Topics × 2 Rounds = 28 Questions। Sociology, Management और Accounts पर structured practice।</div>
+          <div class="phase-badges">
+            <span class="pbadge">📋 14 Topics</span>
+            <span class="pbadge">🔁 2 Rounds</span>
+            <span class="pbadge gold">5 अंक | 50 शब्द</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phase 3 -->
+      <div class="journey-phase">
+        <div class="phase-dot dot-teal" style="background:rgba(59,130,246,0.12);border-color:rgba(59,130,246,0.5);">🔵</div>
+        <div class="phase-content">
+          <div class="phase-date">27 September 2026 → 05 November 2026</div>
+          <div class="phase-title">Phase 3 — Paper-II: विज्ञान एवं प्रौद्योगिकी</div>
+          <div class="phase-desc">14 Topics × 2 Rounds = 28 Questions। Science & Technology के सभी high-scoring topics।</div>
+          <div class="phase-badges">
+            <span class="pbadge">📋 14 Topics</span>
+            <span class="pbadge">🔁 2 Rounds</span>
+            <span class="pbadge gold">5 अंक | 50 शब्द</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Prelims Mode -->
+      <div class="journey-phase">
+        <div class="phase-dot dot-blue">⚡</div>
+        <div class="phase-content">
+          <div class="phase-date" style="color:var(--muted);">16 November 2026 → 05 December 2026</div>
+          <div class="phase-title" style="color:var(--muted);">Prelims Mode — Reduced Pace</div>
+          <div class="phase-desc">Writing pace कम। Focus: Pre Exam Revision। सप्ताह में 2 optional answers।</div>
+        </div>
+      </div>
+
+      <!-- Pre Exam -->
+      <div class="journey-phase">
+        <div class="phase-dot dot-blue">🎯</div>
+        <div class="phase-content">
+          <div class="phase-date" style="color:var(--blue);">06 December 2026</div>
+          <div class="phase-title">RAS Pre Exam 2026</div>
+          <div class="phase-desc">RPSC आधिकारिक Prelims। 5 महीनों की Answer Writing से Content Recall मजबूत।</div>
+        </div>
+      </div>
+
+      <!-- Intensive -->
+      <div class="journey-phase">
+        <div class="phase-dot dot-gold">🔥</div>
+        <div class="phase-content">
+          <div class="phase-date" style="color:var(--gold);">07 December 2026 → April 2027</div>
+          <div class="phase-title">Intensive Mains Phase — Full Syllabus</div>
+          <div class="phase-desc">10-mark questions + Full Length Tests + Simulations + Revision। सभी Papers का intensive coverage।</div>
+          <div class="phase-badges">
+            <span class="pbadge">📋 Weekly Tests</span>
+            <span class="pbadge">📉 Weak Area Analysis</span>
+            <span class="pbadge gold">📊 Performance Dashboard</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mains -->
+      <div class="journey-phase" style="border-bottom:none;">
+        <div class="phase-dot dot-gold">🏅</div>
+        <div class="phase-content">
+          <div class="phase-date" style="color:var(--gold);">01 May 2027 → 02 May 2027</div>
+          <div class="phase-title">RAS Mains 2026 — Final Exam</div>
+          <div class="phase-desc">10 महीनों की Structured Practice का परिणाम।</div>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="journey-stats">
+        <div class="jstat"><div class="jstat-val">250+</div><div class="jstat-label">Answer Writing Questions</div></div>
+        <div class="jstat"><div class="jstat-val">40+</div><div class="jstat-label">Tests & Simulations</div></div>
+        <div class="jstat"><div class="jstat-val">1000+</div><div class="jstat-label">Pages of Content & Feedback</div></div>
+        <div class="jstat"><div class="jstat-val">10</div><div class="jstat-label">Months of Structured Practice</div></div>
+      </div>
+
+      <!-- Google Sheet Link -->
+      <div style="margin-top:16px;padding:14px 16px;background:rgba(0,201,167,0.06);border:1px solid rgba(0,201,167,0.25);border-radius:10px;">
+        <div style="font-size:12px;color:var(--teal);font-weight:700;margin-bottom:6px;">📊 Detailed Answer Writing Schedule</div>
+        <div style="font-size:12px;color:var(--muted);margin-bottom:10px;">
+          5-Mark Questions का पूरा Day-by-Day Schedule (10 July → 05 November 2026) Google Sheet में उपलब्ध है।
+        </div>
+        <a href="https://docs.google.com/spreadsheets/d/1M7IQEscGPa83Dia53MIvGnQVxMIioc03/edit?usp=sharing&ouid=116497281326507302515&rtpof=true&sd=true" target="_blank"
+           style="display:inline-flex;align-items:center;gap:8px;background:var(--teal);color:#0a0e1a;
+                  font-size:12px;font-weight:700;padding:8px 18px;border-radius:8px;text-decoration:none;
+                  transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+          📅 &nbsp;Full Schedule देखें (Google Sheet)
+        </a>
+        <span style="font-size:11px;color:var(--muted);margin-left:10px;">View Only — Edit नहीं कर सकते</span>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ═══ EXAM SCHEDULE ══════════════════════════════════════════════════════ -->
+<div class="schedule-section">
+  <div class="section-label">📅 RPSC Official Exam Calendar 2026-27</div>
+
+  <table class="schedule-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Exam</th>
+        <th>Stage</th>
+        <th>Date</th>
+        <th>Days Left</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="color:var(--muted);font-weight:700;">01</td>
+        <td style="font-weight:600;">RAS/RTS 2026</td>
+        <td><span class="exam-badge badge-pre">Pre Exam</span></td>
+        <td style="font-weight:600;">06 Dec 2026</td>
+        <td><span id="days-pre" style="color:var(--blue);font-weight:600;">—</span></td>
+      </tr>
+      <tr>
+        <td style="color:var(--muted);font-weight:700;">02</td>
+        <td style="font-weight:600;">RAS/RTS 2026</td>
+        <td><span class="exam-badge badge-start">Mains Start</span></td>
+        <td style="font-weight:600;">01 May 2027</td>
+        <td><span id="days-mains-start" style="color:var(--teal);font-weight:600;">—</span></td>
+      </tr>
+      <tr>
+        <td style="color:var(--muted);font-weight:700;">03</td>
+        <td style="font-weight:600;">RAS/RTS 2026</td>
+        <td><span class="exam-badge badge-mains">Mains End</span></td>
+        <td style="font-weight:600;">02 May 2027</td>
+        <td><span id="days-mains-end" style="color:var(--gold);font-weight:600;">—</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="countdown-row">
+    <div class="countdown-chip">📋 Notification Released: <strong style="color:var(--teal);margin-left:4px;">02 Jul 2026</strong></div>
+    <div class="countdown-chip">⏱️ Pre Exam में: <span class="days" id="cnt-pre">—</span> दिन</div>
+    <div class="countdown-chip">📝 Mains में: <span class="days" id="cnt-mains">—</span> दिन</div>
+  </div>
+</div>
+
+<!-- ═══ PRICING ══════════════════════════════════════════════════════════════ -->
+<div class="pricing-section">
+  <div class="section-label">💳 Program Fee — Full Access (Aug 2026 → May 2027)</div>
+  <div class="pricing-sub">Early Bird Registration — पूरे Program का एक बार भुगतान या convenient monthly payment। Monthly charge में lock-in नहीं।</div>
+
+  <div class="limited-badge">🔴 Early Access Batch — पहले चरण में सीमित अभ्यर्थियों को ही शामिल किया जाएगा</div>
+
+  <div class="single-plan-card">
+    <div class="plan-top-row">
+      <div>
+        <div class="plan-left-title">VOXA RAS Mains 2027 Program</div>
+        <div class="plan-left-sub">August 2026 → May 2027 • 10 Months Full Access</div>
+      </div>
+      <div class="plan-pricing-options">
+        <div class="price-option active" onclick="selectOption(this,'monthly')">
+          <div class="opt-label">Monthly</div>
+          <div class="opt-price">₹499<span>/month</span></div>
+          <div class="opt-original">Regular: ₹799/month</div>
+          <div class="opt-save">Early Bird</div>
+        </div>
+        <div class="price-option" onclick="selectOption(this,'onetime')">
+          <div class="opt-label">One-Time (Best Value)</div>
+          <div class="opt-price">₹3,499</div>
+          <div class="opt-original">Regular: ₹5,990</div>
+          <div class="opt-save">🔥 Recommended by Serious Aspirants</div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="plan-divider">
+
+    <div class="features-grid">
+      <div class="feat-item"><span class="fi">✅</span>Pre-Planned Answer Writing Schedule</div>
+      <div class="feat-item"><span class="fi">✅</span>Detailed Evaluation & Feedback</div>
+      <div class="feat-item"><span class="fi">✅</span>Model Answers</div>
+      <div class="feat-item"><span class="fi">✅</span>All Rajasthan Ranking</div>
+      <div class="feat-item"><span class="fi">✅</span>Weak Area Analysis</div>
+      <div class="feat-item"><span class="fi">✅</span>Revision Planner</div>
+      <div class="feat-item"><span class="fi">✅</span>Full Length Test Series</div>
+      <div class="feat-item"><span class="fi">✅</span>Performance Dashboard</div>
+      <div class="feat-item"><span class="fi">✅</span>Daily Writing Schedule</div>
+      <div class="feat-item"><span class="fi">✅</span>Paper-wise Coverage</div>
+      <div class="feat-item"><span class="fi">✅</span>Topic-wise Revision</div>
+    </div>
+
+    <div class="pay-note">
+      <strong>📅 Program Start:</strong> 10 July 2026
+    </div>
+  </div>
+</div>
+
+<!-- ═══ FORM ════════════════════════════════════════════════════════════════ -->
+<div class="form-wrap">
+  <div class="progress-label">
+    <span id="prog-text">Section 1 of 5 — Basic Details</span>
+    <span id="prog-pct">20%</span>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" id="prog-fill" style="width:20%"></div></div>
+
+  <form id="regForm" novalidate>
+
+    <!-- ── SECTION 1 ──────────────────────────────────────────────────── -->
+    <div class="section active" id="sec1">
+      <div class="section-header">
+        <div class="section-num">Section 1 / 5</div>
+        <div class="section-title">📋 Basic Details</div>
+      </div>
+
+      <div class="field">
+        <label><span class="qlabel">1</span>आपका नाम <span class="req">*</span></label>
+        <input type="text" id="q1" placeholder="अपना पूरा नाम लिखें">
+        <div class="error-msg" id="e1">कृपया अपना नाम लिखें</div>
+      </div>
+
+      <div class="field">
+        <label><span class="qlabel">2</span>मोबाइल नंबर (WhatsApp) <span class="req">*</span></label>
+        <input type="tel" id="q2" placeholder="10 अंकों का WhatsApp नंबर" maxlength="10">
+        <div class="error-msg" id="e2">कृपया सही 10 अंकों का नंबर लिखें</div>
+      </div>
+
+      <div class="field">
+        <label><span class="qlabel">3</span>Email ID <span class="req">*</span></label>
+        <input type="email" id="q3" placeholder="yourname@gmail.com">
+        <div class="error-msg" id="e3">कृपया सही Email लिखें</div>
+      </div>
+
+      <div class="field">
+        <label><span class="qlabel">4</span>आपका शहर <span class="req">*</span></label>
+        <input type="text" id="q4" placeholder="जैसे: जयपुर, जोधपुर, कोटा…">
+        <div class="error-msg" id="e4">कृपया शहर का नाम लिखें</div>
+      </div>
+
+      <div class="btn-row">
+        <button type="button" class="btn-next" onclick="nextSection(1)">आगे बढ़ें →</button>
+      </div>
+    </div>
+
+    <!-- ── SECTION 2 ──────────────────────────────────────────────────── -->
+    <div class="section" id="sec2">
+      <div class="section-header">
+        <div class="section-num">Section 2 / 5</div>
+        <div class="section-title">🎯 Answer Writing Medium</div>
+      </div>
+
+      <div class="field">
+        <label><span class="qlabel">6</span>आपका उत्तर माध्यम <span class="req">*</span></label>
+        <div class="options inline" id="q8">
+          <label class="opt"><input type="radio" name="q8" value="Hindi"><div class="indicator"></div><span class="opt-text">🇮🇳 हिंदी</span></label>
+          <label class="opt"><input type="radio" name="q8" value="English"><div class="indicator"></div><span class="opt-text">🇬🇧 English</span></label>
+        </div>
+        <div class="error-msg" id="e8">कृपया माध्यम चुनें</div>
+      </div>
+
+      <div class="btn-row">
+        <button type="button" class="btn-back" onclick="prevSection(2)">← वापस</button>
+        <button type="button" class="btn-next" onclick="nextSection(2)">आगे बढ़ें →</button>
+      </div>
+    </div>
+
+    <!-- ── SECTION 3 ──────────────────────────────────────────────────── -->
+    <div class="section" id="sec3">
+      <div class="section-header">
+        <div class="section-num">Section 3 / 5</div>
+        <div class="section-title">✍️ Answer Writing Habits</div>
+      </div>
+
+      <div class="field">
+        <label><span class="qlabel">9</span>क्या आप वर्तमान में Answer Writing करते हैं? <span class="req">*</span></label>
+        <div class="options" id="q9">
+          <label class="opt"><input type="radio" name="q9" value="Daily"><div class="indicator"></div><span class="opt-text">Daily — हर रोज़</span></label>
+          <label class="opt"><input type="radio" name="q9" value="Weekly"><div class="indicator"></div><span class="opt-text">Weekly — सप्ताह में कुछ बार</span></label>
+          <label class="opt"><input type="radio" name="q9" value="Occasionally"><div class="indicator"></div><span class="opt-text">Occasionally — कभी-कभी</span></label>
+          <label class="opt"><input type="radio" name="q9" value="Never"><div class="indicator"></div><span class="opt-text">Never — अभी शुरू नहीं किया</span></label>
+        </div>
+        <div class="error-msg" id="e9">कृपया एक विकल्प चुनें</div>
+      </div>
+
+      <div class="field">
+        <label><span class="qlabel">10</span>अच्छा उत्तर लिखने में आपको किस समस्या का सामना करना पड़ता है? <span class="req">*</span></label>
+        <div class="options" id="q10">
+          <label class="opt checkbox"><input type="checkbox" value="Answer Structure"><div class="indicator"></div><span class="opt-text">📐 Answer Structure</span></label>
+          <label class="opt checkbox"><input type="checkbox" value="Content Recall"><div class="indicator"></div><span class="opt-text">🧠 Content Recall</span></label>
+          <label class="opt checkbox"><input type="checkbox" value="Time Management"><div class="indicator"></div><span class="opt-text">⏱️ Time Management</span></label>
+          <label class="opt checkbox"><input type="checkbox" value="No Evaluation"><div class="indicator"></div><span class="opt-text">📝 Evaluation नहीं मिलता</span></label>
+          <label class="opt checkbox"><input type="checkbox" value="Lack of Guidance"><div class="indicator"></div><span class="opt-text">🎯 Guidance की कमी</span></label>
+          <label class="opt checkbox"><input type="checkbox" value="Hindi Writing"><div class="indicator"></div><span class="opt-text">✍️ Hindi Writing</span></label>
+          <label class="opt checkbox"><input type="checkbox" value="Presentation"><div class="indicator"></div><span class="opt-text">📊 Presentation</span></label>
+        </div>
+        <div class="error-msg" id="e10">कृपया कम से कम एक समस्या चुनें</div>
+      </div>
+
+      <div class="field">
+        <label><span class="qlabel">11</span>प्रति सप्ताह आप कितने उत्तर लिख सकते हैं? <span class="req">*</span></label>
+        <div class="options inline" id="q11">
+          <label class="opt"><input type="radio" name="q11" value="3-5"><div class="indicator"></div><span class="opt-text">3–5</span></label>
+          <label class="opt"><input type="radio" name="q11" value="5-10"><div class="indicator"></div><span class="opt-text">5–10</span></label>
+          <label class="opt"><input type="radio" name="q11" value="10-20"><div class="indicator"></div><span class="opt-text">10–20</span></label>
+          <label class="opt"><input type="radio" name="q11" value="20+"><div class="indicator"></div><span class="opt-text">20+</span></label>
+        </div>
+        <div class="error-msg" id="e11">कृपया एक विकल्प चुनें</div>
+      </div>
+
+      <div class="btn-row">
+        <button type="button" class="btn-back" onclick="prevSection(3)">← वापस</button>
+        <button type="button" class="btn-next" onclick="nextSection(3)">आगे बढ़ें →</button>
+      </div>
+    </div>
+
+    <!-- ── SECTION 4 ──────────────────────────────────────────────────── -->
+    <div class="section" id="sec4">
+      <div class="section-header">
+        <div class="section-num">Section 4 / 5</div>
+        <div class="section-title">🏆 Program Goals</div>
+      </div>
+
+      <div class="field">
+        <label><span class="qlabel">12</span>VOXA Program से आपकी मुख्य अपेक्षा क्या है? <span class="req">*</span></label>
+        <div class="options" id="q12">
+          <label class="opt checkbox"><input type="checkbox" value="Consistent Writing Habit"><div class="indicator"></div><span class="opt-text">✍️ Consistent Writing Habit बनाना</span></label>
+          <label class="opt checkbox"><input type="checkbox" value="Better Marks in Mains"><div class="indicator"></div><span class="opt-text">📈 Mains में बेहतर Marks</span></label>
+          <label class="opt checkbox"><input type="checkbox" value="Know My Weak Areas"><div class="indicator"></div><span class="opt-text">📉 Weak Areas जानना और सुधारना</span></label>
+          <label class="opt checkbox"><input type="checkbox" value="Compare with Others"><div class="indicator"></div><span class="opt-text">🏆 All Rajasthan में अपनी Position जानना</span></label>
+          <label class="opt checkbox"><input type="checkbox" value="Structured Preparation"><div class="indicator"></div><span class="opt-text">🗂️ Structured Preparation</span></label>
+          <label class="opt checkbox"><input type="checkbox" value="Improve Presentation"><div class="indicator"></div><span class="opt-text">📊 Answer Presentation सुधारना</span></label>
+        </div>
+        <div class="error-msg" id="e12">कृपया कम से कम एक उम्मीद चुनें</div>
+      </div>
+
+      <div class="field">
+        <label><span class="qlabel">13</span>कौन सा Feature सबसे महत्वपूर्ण लगता है? <span class="req">*</span></label>
+        <div class="options" id="q13">
+          <label class="opt"><input type="radio" name="q13" value="Detailed Evaluation"><div class="indicator"></div><span class="opt-text">📝 Detailed Evaluation & Feedback</span></label>
+          <label class="opt"><input type="radio" name="q13" value="All Rajasthan Ranking"><div class="indicator"></div><span class="opt-text">🏆 All Rajasthan Ranking</span></label>
+          <label class="opt"><input type="radio" name="q13" value="Model Answers"><div class="indicator"></div><span class="opt-text">📖 Model Answers</span></label>
+          <label class="opt"><input type="radio" name="q13" value="Weak Area Analysis"><div class="indicator"></div><span class="opt-text">📉 Weak Area Analysis</span></label>
+          <label class="opt"><input type="radio" name="q13" value="Full Length Tests"><div class="indicator"></div><span class="opt-text">📋 Full Length Tests</span></label>
+          <label class="opt"><input type="radio" name="q13" value="All Features Important"><div class="indicator"></div><span class="opt-text">✅ सभी features महत्त्वपूर्ण हैं</span></label>
+        </div>
+        <div class="error-msg" id="e13">कृपया एक feature चुनें</div>
+      </div>
+
+      <div class="btn-row">
+        <button type="button" class="btn-back" onclick="prevSection(4)">← वापस</button>
+        <button type="button" class="btn-next" onclick="nextSection(4)">आगे बढ़ें →</button>
+      </div>
+    </div>
+
+    <!-- ── SECTION 5 ──────────────────────────────────────────────────── -->
+    <div class="section" id="sec5">
+      <div class="section-header">
+        <div class="section-num">Section 5 / 5</div>
+        <div class="section-title">🚀 Final Confirmation</div>
+      </div>
+
+      <div style="background:rgba(255,215,0,0.05);border:1px solid rgba(255,215,0,0.2);border-radius:10px;padding:14px 16px;margin-bottom:18px;">
+        <div style="font-size:13px;color:var(--gold);font-weight:700;margin-bottom:8px;">⭐ Early Access Members को मिलेगा</div>
+        <div style="font-size:13px;color:var(--muted);line-height:1.9;">
+          ✅ Program Launch पर सबसे पहले Access<br>
+          ✅ Early Bird Pricing — Regular से कम में<br>
+          ✅ VOXA Development Team से Direct Feedback<br>
+          ✅ Extra Practice Questions — First Batch के लिए
+        </div>
+      </div>
+
+      <div class="field">
+        <label><span class="qlabel">14</span>क्या आप RAS Mains 2027 की तैयारी समय रहते शुरू करना चाहते हैं? <span class="req">*</span></label>
+        <div class="options" id="q14">
+          <label class="opt"><input type="radio" name="q14" value="Yes — Abhi Shuru Karna Hai"><div class="indicator"></div><span class="opt-text">✅ हाँ, मैं अभी शुरुआत करना चाहता/चाहती हूँ</span></label>
+          <label class="opt"><input type="radio" name="q14" value="Need More Info"><div class="indicator"></div><span class="opt-text">🤔 मुझे और जानकारी चाहिए</span></label>
+        </div>
+        <div class="error-msg" id="e14">कृपया एक विकल्प चुनें</div>
+      </div>
+
+      <div class="field">
+        <label><span class="qlabel">15</span>Program Start Date <span style="color:var(--muted);font-size:12px;">(वैकल्पिक)</span></label>
+        <input type="date" id="q15date" name="startDate"
+               style="width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-size:14px;margin-top:6px;">
+        <div style="font-size:12px;color:var(--muted);margin-top:5px;">प्रस्तावित आरंभ तिथि: 10 July 2026 — आप जिस तारीख से शुरू करना चाहते हैं वह चुनें</div>
+      </div>
+
+      <div style="background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.2);border-radius:10px;padding:12px 16px;margin-bottom:6px;">
+        <div style="font-size:12px;color:#fc8181;font-weight:700;display:flex;align-items:center;gap:6px;">
+          🔴 Limited Early Access Batch
+        </div>
+        <div style="font-size:13px;color:var(--muted);margin-top:4px;line-height:1.7;">
+          पहले चरण में सीमित अभ्यर्थियों को ही शामिल किया जाएगा। Registration जल्दी करें।
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button type="button" class="btn-back" onclick="prevSection(5)">← वापस</button>
+        <button type="button" class="btn-submit" onclick="submitForm()">🎯 &nbsp;Register करें</button>
+      </div>
+    </div>
+
+  </form>
+
+  <!-- ── SUCCESS MODAL ─────────────────────────────────────────────── -->
+  <div id="success-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:9999;display:none;align-items:center;justify-content:center;padding:20px;">
+    <div style="background:#111827;border:1px solid rgba(255,215,0,0.3);border-radius:16px;padding:32px 28px;max-width:380px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.6);">
+      <div style="font-size:52px;margin-bottom:12px;">🎉</div>
+      <h2 style="color:#FFD700;font-size:22px;font-weight:800;margin-bottom:10px;">Registration सफल!</h2>
+      <p style="color:#cbd5e1;font-size:14px;line-height:1.8;margin-bottom:6px;">
+        आपकी Registration सफलतापूर्वक दर्ज कर ली गई है।
+      </p>
+      <p style="color:#94a3b8;font-size:13px;line-height:1.8;margin-bottom:24px;">
+        VOXA Program का Early Access जानकारी<br>
+        जल्द ही आपको <strong style="color:#00C9A7;">WhatsApp</strong> पर भेजी जाएगी।
+      </p>
+      <button onclick="window.close(); document.getElementById('success-overlay').style.display='none';"
+              style="width:100%;padding:14px;background:#FFD700;color:#0a0e1a;border:none;border-radius:10px;font-weight:800;font-size:15px;cursor:pointer;letter-spacing:0.3px;">
+        ✓ &nbsp;OK
+      </button>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══ FOOTER ════════════════════════════════════════════════════════════ -->
+<footer class="footer">
+  <p>© 2026 VOXA — Rajasthan's Premier RAS Mains Answer Writing & Guidance Platform</p>
+  <p style="margin-top:4px;">यह form Early Access Registration के लिए है।</p>
+</footer>
+
+<script>
+  // ── Countdown ──────────────────────────────────────────────────────────
+  function daysLeft(dateStr) {
+    const target = new Date(dateStr);
+    const today  = new Date(); today.setHours(0,0,0,0);
+    const diff   = Math.ceil((target - today) / (1000 * 60 * 60 * 24));
+    return diff > 0 ? diff : 0;
+  }
+  window.addEventListener('DOMContentLoaded', () => {
+    const pre        = daysLeft('2026-12-06');
+    const mainsStart = daysLeft('2027-05-01');
+    const mainsEnd   = daysLeft('2027-05-02');
+    document.getElementById('days-pre').textContent         = pre + ' दिन';
+    document.getElementById('days-mains-start').textContent = mainsStart + ' दिन';
+    document.getElementById('days-mains-end').textContent   = mainsEnd + ' दिन';
+    document.getElementById('cnt-pre').textContent          = pre;
+    document.getElementById('cnt-mains').textContent        = mainsStart;
+  });
+
+  // ── Pricing toggle ─────────────────────────────────────────────────────
+  function selectOption(el, type) {
+    document.querySelectorAll('.price-option').forEach(o => o.classList.remove('active'));
+    el.classList.add('active');
+  }
+
+  // ── Navigation ─────────────────────────────────────────────────────────
+  const sectionLabels = ['','Basic Details','RAS Preparation','Answer Writing','Program Goals','Final Confirmation'];
+  function showSection(n) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.getElementById('sec'+n).classList.add('active');
+    const pct = Math.round((n / 5) * 100);
+    document.getElementById('prog-fill').style.width = pct + '%';
+    document.getElementById('prog-pct').textContent  = pct + '%';
+    document.getElementById('prog-text').textContent = 'Section ' + n + ' of 5 — ' + sectionLabels[n];
+    window.scrollTo({ top: document.querySelector('.form-wrap').offsetTop - 16, behavior: 'smooth' });
+  }
+  function nextSection(n) { if (!validateSection(n)) return; showSection(n + 1); }
+  function prevSection(n) { showSection(n - 1); }
+
+  // ── Validation ──────────────────────────────────────────────────────────
+  function validateSection(n) {
+    let ok = true;
+    const show = id => { document.getElementById(id).classList.add('show'); ok = false; };
+    const hide = id => document.getElementById(id).classList.remove('show');
+    const inp  = id => document.getElementById(id);
+    const radVal = name => { const e = document.querySelector(`input[name="${name}"]:checked`); return e ? e.value : ''; };
+    const cbVals = id   => [...document.querySelectorAll(`#${id} input:checked`)].map(e => e.value);
+
+    if (n === 1) {
+      inp('q1').value.trim() ? hide('e1') : (show('e1'), inp('q1').classList.add('error'));
+      /^\d{10}$/.test(inp('q2').value.trim()) ? hide('e2') : (show('e2'), inp('q2').classList.add('error'));
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inp('q3').value.trim()) ? hide('e3') : (show('e3'), inp('q3').classList.add('error'));
+      inp('q4').value.trim() ? hide('e4') : (show('e4'), inp('q4').classList.add('error'));
+    }
+    if (n === 2) {
+      radVal('q8')        ? hide('e8') : show('e8');
+    }
+    if (n === 3) {
+      radVal('q9')         ? hide('e9')  : show('e9');
+      cbVals('q10').length ? hide('e10') : show('e10');
+      radVal('q11')        ? hide('e11') : show('e11');
+    }
+    if (n === 4) {
+      cbVals('q12').length ? hide('e12') : show('e12');
+      radVal('q13')        ? hide('e13') : show('e13');
+    }
+    if (n === 5) {
+      radVal('q14') ? hide('e14') : show('e14');
+    }
+    return ok;
+  }
+
+  // ── Option highlight sync ───────────────────────────────────────────────
+  document.querySelectorAll('.opt input').forEach(inp => {
+    inp.addEventListener('change', () => {
+      if (inp.type === 'radio') {
+        document.querySelectorAll(`input[name="${inp.name}"]`).forEach(r => {
+          r.closest('.opt').classList.toggle('selected', r.checked);
+        });
+      } else {
+        inp.closest('.opt').classList.toggle('selected', inp.checked);
+      }
+    });
+  });
+
+  // ── Submit ──────────────────────────────────────────────────────────────
+  function submitForm() {
+    if (!validateSection(5)) return;
+    const inp    = id => document.getElementById(id).value.trim();
+    const radVal = name => { const e = document.querySelector(`input[name="${name}"]:checked`); return e ? e.value : ''; };
+    const cbVals = id   => [...document.querySelectorAll(`#${id} input:checked`)].map(e => e.value);
+
+    const data = {
+      timestamp: new Date().toLocaleString('hi-IN'),
+      name: inp('q1'), mobile: inp('q2'), email: inp('q3'), city: inp('q4'),
+      medium: radVal('q8'),
+      writingFreq: radVal('q9'), problems: cbVals('q10').join(', '), weeklyCount: radVal('q11'),
+      expectations: cbVals('q12').join(', '), topFeature: radVal('q13'),
+      joinDecision: radVal('q14'),
+      startDate: document.getElementById('q15date').value || 'Not specified'
+    };
+    // Target Sheet: https://docs.google.com/spreadsheets/d/1BjuY_v0mNJBslrLaLDqCdhNXZ5IcZG3ciZUTjcGhqF0/edit
+    // Replace URL below with your Google Apps Script Web App URL (deploy from that Sheet's Extensions > Apps Script)
+
+    const btn = document.querySelector('.btn-submit');
+    btn.textContent = '⏳ Submitting…'; btn.disabled = true;
+
+    fetch('https://script.google.com/macros/s/AKfycbxQalYBaq04CMo_3kolBfkJ3sUmi8yRWWuAZV7Hx8AJjAi_o2Gig-k9wqFuh_shdlTs/exec', {
+      method: 'POST', mode: 'no-cors',
+      body: JSON.stringify(data),
+      headers: { 'Content-Type': 'application/json' }
+    }).catch(() => {}).finally(() => showSuccess());
+  }
+
+  function showSuccess() {
+    const overlay = document.getElementById('success-overlay');
+    overlay.style.display = 'flex';
+  }
+
+  document.getElementById('q2').addEventListener('input', function() {
+    this.value = this.value.replace(/\D/g,'').slice(0,10);
+  });
+</script>
+</body>
+</html>
