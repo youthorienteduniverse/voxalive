@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VOXA Admin</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+Devanagari:wght@400;500;600&display=swap');
+  :root {
+    --navy:#0F1B2D; --navy-mid:#162236; --navy-light:#1E3050;
+    --saffron:#F97316; --saffron-glow:rgba(249,115,22,0.12);
+    --text-primary:#F1F5F9; --text-secondary:#94A3B8; --text-muted:#64748B;
+    --border:rgba(255,255,255,0.08); --card-bg:rgba(255,255,255,0.04);
+    --success:#22C55E; --error:#EF4444;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--navy);color:var(--text-primary);font-family:'Inter','Noto Sans Devanagari',sans-serif;min-height:100vh}
+  body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 15% 15%,rgba(249,115,22,0.07) 0%,transparent 55%);pointer-events:none;z-index:0}
+
+  /* Login Screen */
+  .login-screen{position:fixed;inset:0;background:var(--navy);display:flex;align-items:center;justify-content:center;z-index:100;padding:20px}
+  .login-box{background:rgba(255,255,255,0.04);border:0.5px solid rgba(249,115,22,0.3);border-radius:20px;padding:32px 28px;width:100%;max-width:340px;text-align:center}
+  .login-logo{font-size:28px;font-weight:600;letter-spacing:4px;color:var(--text-primary);margin-bottom:4px}
+  .login-sub{font-size:11px;color:var(--text-muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:24px}
+  .login-label{font-size:11px;color:var(--text-muted);text-align:left;display:block;margin-bottom:6px;letter-spacing:0.8px;text-transform:uppercase}
+  .login-input{width:100%;background:rgba(255,255,255,0.05);border:0.5px solid var(--border);border-radius:10px;padding:13px 14px;color:var(--text-primary);font-size:15px;outline:none;text-align:center;letter-spacing:4px;margin-bottom:16px;transition:border-color 0.2s}
+  .login-input:focus{border-color:var(--saffron)}
+  .login-btn{width:100%;background:var(--saffron);color:white;border:none;border-radius:12px;padding:13px;font-size:14px;font-weight:600;cursor:pointer;transition:all 0.2s}
+  .login-btn:hover{background:#EA6C0A}
+  .login-err{font-size:12px;color:#FCA5A5;margin-top:10px;display:none}
+
+  /* Main */
+  .container{max-width:680px;margin:0 auto;padding:0 16px 48px;position:relative;z-index:1}
+
+  .header{text-align:center;padding:24px 0 18px}
+  .logo-wrap{display:inline-flex;align-items:center;gap:10px;margin-bottom:4px}
+  .logo-icon{width:34px;height:34px;background:var(--saffron);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:white}
+  .logo-text{font-size:20px;font-weight:600;letter-spacing:3px}
+  .admin-badge{display:inline-block;background:rgba(249,115,22,0.2);color:var(--saffron);font-size:10px;font-weight:600;padding:2px 10px;border-radius:20px;letter-spacing:1px;margin-top:4px}
+
+  /* Stats row */
+  .stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+  .stat-card{background:var(--card-bg);border:0.5px solid var(--border);border-radius:12px;padding:12px 14px;text-align:center}
+  .stat-val{font-size:24px;font-weight:600;color:var(--text-primary)}
+  .stat-lbl{font-size:11px;color:var(--text-muted);margin-top:2px}
+
+  /* Section */
+  .sec-title{font-size:13px;font-weight:500;color:var(--text-primary);margin-bottom:10px;padding-left:10px;border-left:3px solid var(--saffron)}
+
+  /* Model answer upload */
+  .model-card{background:var(--card-bg);border:0.5px solid var(--border);border-radius:16px;padding:16px 18px;margin-bottom:16px}
+  .model-upload-zone{border:1.5px dashed rgba(255,255,255,0.1);border-radius:10px;padding:18px;text-align:center;cursor:pointer;position:relative;transition:all 0.2s;background:rgba(255,255,255,0.02)}
+  .model-upload-zone:hover{border-color:var(--saffron);background:var(--saffron-glow)}
+  .model-upload-zone input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+  .muz-icon{font-size:22px;display:block;margin-bottom:5px}
+  .muz-text{font-size:12px;color:var(--text-secondary);font-family:'Noto Sans Devanagari',sans-serif}
+  .model-preview{display:none;align-items:center;gap:8px;margin-top:10px;background:rgba(34,197,94,0.08);border:0.5px solid rgba(34,197,94,0.2);border-radius:8px;padding:8px 12px}
+  .model-preview.show{display:flex}
+  .model-preview-name{font-size:12px;color:#86EFAC;flex:1}
+  .model-upload-btn{width:100%;background:rgba(34,197,94,0.15);color:#86EFAC;border:0.5px solid rgba(34,197,94,0.3);border-radius:10px;padding:11px;font-size:13px;font-weight:500;cursor:pointer;margin-top:12px;transition:all 0.2s;font-family:'Noto Sans Devanagari',sans-serif}
+  .model-upload-btn:hover{background:rgba(34,197,94,0.25)}
+  .model-upload-btn:disabled{opacity:0.5;cursor:not-allowed}
+
+  /* Answer cards */
+  .answer-card{background:var(--card-bg);border:0.5px solid var(--border);border-radius:16px;padding:16px 18px;margin-bottom:12px;transition:border-color 0.2s}
+  .answer-card.evaluated{border-color:rgba(34,197,94,0.3)}
+  .answer-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;gap:10px}
+  .student-info{}
+  .student-name{font-size:14px;font-weight:500;color:var(--text-primary)}
+  .student-meta{font-size:11px;color:var(--text-muted);margin-top:3px}
+  .eval-badge{font-size:10px;padding:2px 8px;border-radius:20px;font-weight:500;white-space:nowrap;flex-shrink:0}
+  .badge-pending{background:rgba(249,115,22,0.15);color:#FED7AA}
+  .badge-done{background:rgba(34,197,94,0.15);color:#86EFAC}
+
+  .answer-btns{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+  .btn-view{flex:1;background:rgba(249,115,22,0.1);color:#FED7AA;border:0.5px solid rgba(249,115,22,0.25);border-radius:9px;padding:9px 12px;font-size:12px;cursor:pointer;text-align:center;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:5px;transition:all 0.2s}
+  .btn-view:hover{background:rgba(249,115,22,0.2)}
+  .btn-dl{flex:1;background:rgba(99,102,241,0.1);color:#A5B4FC;border:0.5px solid rgba(99,102,241,0.25);border-radius:9px;padding:9px 12px;font-size:12px;cursor:pointer;text-align:center;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:5px;transition:all 0.2s}
+  .btn-dl:hover{background:rgba(99,102,241,0.2)}
+
+  /* Marking section */
+  .marking-section{}
+  .marks-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:12px}
+  .mark-field label{font-size:10px;color:var(--text-muted);letter-spacing:0.8px;text-transform:uppercase;display:block;margin-bottom:5px}
+  .mark-field input, .mark-field select, .mark-field textarea{width:100%;background:rgba(255,255,255,0.05);border:0.5px solid var(--border);border-radius:8px;padding:9px 11px;color:var(--text-primary);font-size:13px;font-family:'Noto Sans Devanagari',sans-serif;outline:none;transition:border-color 0.2s;-webkit-appearance:none}
+  .mark-field input:focus, .mark-field select:focus, .mark-field textarea:focus{border-color:var(--saffron)}
+  .mark-field select option{background:#162236;color:var(--text-primary)}
+  .mark-field textarea{resize:vertical;min-height:70px}
+  .feedback-field{margin-bottom:12px}
+  .points-row{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap}
+  .point-chip{background:rgba(255,255,255,0.05);border:0.5px solid var(--border);border-radius:8px;padding:5px 10px;font-size:11px;color:var(--text-secondary);cursor:pointer;transition:all 0.2s;font-family:'Noto Sans Devanagari',sans-serif}
+  .point-chip:hover,.point-chip.active{background:rgba(249,115,22,0.15);border-color:rgba(249,115,22,0.4);color:#FED7AA}
+  .save-btn{width:100%;background:var(--saffron);color:white;border:none;border-radius:10px;padding:12px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Noto Sans Devanagari',sans-serif;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:6px}
+  .save-btn:hover{background:#EA6C0A}
+  .save-btn:disabled{background:var(--text-muted);cursor:not-allowed}
+  .save-success{display:none;font-size:12px;color:#86EFAC;text-align:center;margin-top:8px;font-family:'Noto Sans Devanagari',sans-serif}
+  .save-success.show{display:block}
+
+  .spinner{width:14px;height:14px;border:2px solid rgba(255,255,255,0.3);border-top-color:white;border-radius:50%;animation:spin 0.8s linear infinite;display:none}
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  .empty-state{text-align:center;padding:32px;color:var(--text-muted);font-size:13px;font-family:'Noto Sans Devanagari',sans-serif}
+  .loading-state{text-align:center;padding:32px;color:var(--text-muted);font-size:13px}
+
+  .refresh-btn{display:flex;align-items:center;gap:6px;background:var(--card-bg);border:0.5px solid var(--border);border-radius:9px;padding:8px 14px;font-size:12px;color:var(--text-secondary);cursor:pointer;margin-bottom:14px;transition:all 0.2s}
+  .refresh-btn:hover{border-color:var(--saffron);color:var(--saffron)}
+
+  .day-strip{display:flex;align-items:center;justify-content:space-between;background:var(--card-bg);border:0.5px solid var(--border);border-radius:12px;padding:10px 14px;margin-bottom:14px;flex-wrap:wrap;gap:6px}
+  .day-badge{background:var(--saffron);color:white;font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px}
+  .day-date{font-size:12px;color:var(--text-secondary);font-family:'Noto Sans Devanagari',sans-serif}
+</style>
+</head>
+<body>
+
+<!-- Login Screen -->
+<div class="login-screen" id="loginScreen">
+  <div class="login-box">
+    <div class="login-logo">VOXA</div>
+    <div class="login-sub">Admin Access</div>
+    <label class="login-label">Password</label>
+    <input type="password" class="login-input" id="pwInput" placeholder="••••••" onkeydown="if(event.key==='Enter')doLogin()">
+    <button class="login-btn" onclick="doLogin()">Login</button>
+    <div class="login-err" id="loginErr">गलत password। पुनः प्रयास करें।</div>
+  </div>
+</div>
+
+<!-- Admin Panel -->
+<div class="container" id="adminPanel" style="display:none">
+
+  <div class="header">
+    <div class="logo-wrap">
+      <div class="logo-icon">V</div>
+      <div class="logo-text">VOXA</div>
+    </div>
+    <div><span class="admin-badge">ADMIN PANEL</span></div>
+  </div>
+
+  <div class="day-strip">
+    <span class="day-badge">DAY 1</span>
+    <span class="day-date">11 जुलाई 2026, शनिवार</span>
+    <span style="font-size:11px;color:var(--saffron)">Phase 1 · Paper-III</span>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-row" id="statsRow">
+    <div class="stat-card"><div class="stat-val" id="statTotal">—</div><div class="stat-lbl">कुल उत्तर</div></div>
+    <div class="stat-card"><div class="stat-val" id="statEval" style="color:#22C55E">—</div><div class="stat-lbl">मूल्यांकित</div></div>
+    <div class="stat-card"><div class="stat-val" id="statPending" style="color:#F97316">—</div><div class="stat-lbl">शेष</div></div>
+  </div>
+
+  <!-- Model Answer Upload -->
+  <div class="model-card" style="margin-bottom:16px">
+    <div class="sec-title" style="margin-bottom:12px">📋 आदर्श उत्तर अपलोड करें</div>
+    <div class="model-upload-zone" id="modelZone">
+      <input type="file" id="modelFile" accept="image/*,.pdf" onchange="handleModelFile(this)">
+      <span class="muz-icon">📄</span>
+      <div class="muz-text">आदर्श उत्तर की फोटो या PDF</div>
+    </div>
+    <div class="model-preview" id="modelPreview">
+      <span class="model-preview-name" id="modelPreviewName"></span>
+      <button style="background:none;border:none;color:#FCA5A5;cursor:pointer;font-size:12px" onclick="removeModelFile()">✕</button>
+    </div>
+    <button class="model-upload-btn" id="modelUploadBtn" onclick="uploadModelAnswer()" disabled>
+      ⬆️ आदर्श उत्तर अपलोड करें
+    </button>
+    <div id="modelStatus" style="font-size:12px;text-align:center;margin-top:8px;color:#86EFAC;display:none;font-family:'Noto Sans Devanagari',sans-serif"></div>
+  </div>
+
+  <!-- Answers List -->
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+    <div class="sec-title" style="margin-bottom:0">📥 प्राप्त उत्तर</div>
+    <button class="refresh-btn" onclick="loadAnswers()">🔄 Refresh</button>
+  </div>
+
+  <div id="answersList">
+    <div class="loading-state">उत्तर लोड हो रहे हैं...</div>
+  </div>
+
+</div>
+
+<script type="module">
+  // ─── Firebase Config ───
+  const firebaseConfig = {
+    apiKey: "AIzaSyAAHBW8wpmbFzR9f27eFbiQwcomoY8ObM8",
+    authDomain: "voxa-5ef9a.firebaseapp.com",
+    projectId: "voxa-5ef9a",
+    storageBucket: "voxa-5ef9a.firebasestorage.app",
+    messagingSenderId: "464073305073",
+    appId: "1:464073305073:web:5a003912c015827fdfb250"
+  };
+
+  // ─── Admin Password ─── (yahan apna password set karein)
+  const ADMIN_PASSWORD = "voxa@admin2026";
+
+  // ─── Login ───
+  window.doLogin = function() {
+    const pw = document.getElementById('pwInput').value;
+    if (pw === ADMIN_PASSWORD) {
+      document.getElementById('loginScreen').style.display = 'none';
+      document.getElementById('adminPanel').style.display = 'block';
+      initFirebase();
+    } else {
+      document.getElementById('loginErr').style.display = 'block';
+      document.getElementById('pwInput').value = '';
+    }
+  };
+
+  let db, storage;
+
+  async function initFirebase() {
+    const { initializeApp } = await import('https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js');
+    const { getFirestore, collection, getDocs, doc, updateDoc, query, orderBy } = await import('https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js');
+    const { getStorage, ref, uploadBytes, getDownloadURL } = await import('https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js');
+
+    const app = initializeApp(firebaseConfig);
+    db = getFirestore(app);
+    storage = getStorage(app);
+
+    window._firebase = { db, storage, collection, getDocs, doc, updateDoc, query, orderBy, ref, uploadBytes, getDownloadURL };
+    loadAnswers();
+  }
+
+  // ─── Load Answers ───
+  window.loadAnswers = async function() {
+    const { db, collection, getDocs, query, orderBy } = window._firebase;
+    const list = document.getElementById('answersList');
+    list.innerHTML = '<div class="loading-state">लोड हो रहा है...</div>';
+
+    try {
+      const q = query(collection(db, 'voxa_answers'), orderBy('submittedAt', 'desc'));
+      const snap = await getDocs(q);
+      const docs = [];
+      snap.forEach(d => docs.push({ id: d.id, ...d.data() }));
+
+      // Stats
+      const total = docs.length;
+      const evalCount = docs.filter(d => d.evaluated).length;
+      document.getElementById('statTotal').textContent = total;
+      document.getElementById('statEval').textContent = evalCount;
+      document.getElementById('statPending').textContent = total - evalCount;
+
+      if (total === 0) {
+        list.innerHTML = '<div class="empty-state">अभी तक कोई उत्तर प्राप्त नहीं हुआ।</div>';
+        return;
+      }
+
+      list.innerHTML = docs.map((d, i) => renderCard(d, i)).join('');
+
+    } catch(e) {
+      console.error(e);
+      list.innerHTML = '<div class="empty-state" style="color:#FCA5A5">लोड करने में त्रुटि हुई।</div>';
+    }
+  };
+
+  function renderCard(d, i) {
+    const time = d.submittedAt?.toDate ? d.submittedAt.toDate().toLocaleTimeString('hi-IN', {hour:'2-digit',minute:'2-digit'}) : '—';
+    const isEval = d.evaluated;
+    return `
+    <div class="answer-card ${isEval ? 'evaluated' : ''}" id="card-${d.id}">
+      <div class="answer-header">
+        <div class="student-info">
+          <div class="student-name">${d.displayName || 'Unknown'}</div>
+          <div class="student-meta">WhatsApp: ••••${d.last4 || '????'} &nbsp;|&nbsp; ${time} &nbsp;${d.timeTaken ? '|&nbsp; ⏱ '+d.timeTaken+' मिनट' : ''}</div>
+        </div>
+        <span class="eval-badge ${isEval ? 'badge-done' : 'badge-pending'}">${isEval ? '✓ मूल्यांकित' : '⏳ शेष'}</span>
+      </div>
+
+      <div class="answer-btns">
+        <a href="${d.fileURL}" target="_blank" class="btn-view">👁 उत्तर देखें</a>
+        <a href="${d.fileURL}" download class="btn-dl">⬇️ डाउनलोड</a>
+      </div>
+
+      <div class="marking-section">
+        <div class="marks-grid">
+          <div class="mark-field">
+            <label>अंक (5 में से)</label>
+            <select id="marks-${d.id}">
+              <option value="">— चुनें —</option>
+              ${[0,1,2,3,4,5].map(n => `<option value="${n}" ${d.marks==n?'selected':''}>${n}</option>`).join('')}
+            </select>
+          </div>
+          <div class="mark-field">
+            <label>श्रेणी</label>
+            <select id="grade-${d.id}">
+              <option value="">— चुनें —</option>
+              <option value="उत्कृष्ट" ${d.grade=='उत्कृष्ट'?'selected':''}>⭐ उत्कृष्ट (5/5)</option>
+              <option value="बहुत अच्छा" ${d.grade=='बहुत अच्छा'?'selected':''}>✅ बहुत अच्छा (4/5)</option>
+              <option value="अच्छा" ${d.grade=='अच्छा'?'selected':''}>👍 अच्छा (3/5)</option>
+              <option value="औसत" ${d.grade=='औसत'?'selected':''}>📝 औसत (2/5)</option>
+              <option value="सुधार आवश्यक" ${d.grade=='सुधार आवश्यक'?'selected':''}>⚠️ सुधार आवश्यक</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="margin-bottom:8px">
+          <div style="font-size:10px;color:var(--text-muted);letter-spacing:0.8px;text-transform:uppercase;margin-bottom:6px">त्वरित टिप्पणी</div>
+          <div class="points-row" id="chips-${d.id}">
+            ${['परिभाषा अनुपस्थित','निष्कर्ष नहीं लिखा','शब्द सीमा पार','Keywords छूटे','संरचना अच्छी','उत्कृष्ट लेखन'].map(c =>
+              `<span class="point-chip" onclick="toggleChip(this,'${d.id}')">${c}</span>`
+            ).join('')}
+          </div>
+        </div>
+
+        <div class="feedback-field mark-field">
+          <label>विस्तृत फीडबैक</label>
+          <textarea id="feedback-${d.id}" placeholder="यहाँ विस्तृत फीडबैक लिखें...">${d.feedback || ''}</textarea>
+        </div>
+
+        <button class="save-btn" id="savebtn-${d.id}" onclick="saveEvaluation('${d.id}')">
+          <div class="spinner" id="spin-${d.id}"></div>
+          <span id="saveTxt-${d.id}">💾 मूल्यांकन सहेजें</span>
+        </button>
+        <div class="save-success" id="saveOk-${d.id}">✅ सफलतापूर्वक सहेजा गया!</div>
+      </div>
+    </div>`;
+  }
+
+  // ─── Toggle quick chips ───
+  window.toggleChip = function(el, id) {
+    el.classList.toggle('active');
+    const active = [...document.querySelectorAll(`#chips-${id} .point-chip.active`)].map(c => c.textContent);
+    const fb = document.getElementById(`feedback-${id}`);
+    const existing = fb.value.split('\n').filter(l => !['परिभाषा अनुपस्थित','निष्कर्ष नहीं लिखा','शब्द सीमा पार','Keywords छूटे','संरचना अच्छी','उत्कृष्ट लेखन'].includes(l.trim())).join('\n');
+    fb.value = (active.length ? active.join('\n') + (existing.trim() ? '\n' + existing.trim() : '') : existing.trim());
+  };
+
+  // ─── Save Evaluation ───
+  window.saveEvaluation = async function(docId) {
+    const { db, doc, updateDoc } = window._firebase;
+    const marks    = document.getElementById(`marks-${docId}`).value;
+    const grade    = document.getElementById(`grade-${docId}`).value;
+    const feedback = document.getElementById(`feedback-${docId}`).value.trim();
+    const btn      = document.getElementById(`savebtn-${docId}`);
+    const spin     = document.getElementById(`spin-${docId}`);
+    const txt      = document.getElementById(`saveTxt-${docId}`);
+    const ok       = document.getElementById(`saveOk-${docId}`);
+
+    if (!marks) { alert('कृपया अंक चुनें।'); return; }
+
+    btn.disabled = true; spin.style.display = 'block'; txt.textContent = 'सहेजा जा रहा है...';
+    ok.classList.remove('show');
+
+    try {
+      await updateDoc(doc(db, 'voxa_answers', docId), {
+        evaluated: true,
+        marks: parseInt(marks),
+        grade,
+        feedback,
+        evaluatedAt: new Date()
+      });
+      document.getElementById(`card-${docId}`).classList.add('evaluated');
+      document.querySelector(`#card-${docId} .eval-badge`).textContent = '✓ मूल्यांकित';
+      document.querySelector(`#card-${docId} .eval-badge`).className = 'eval-badge badge-done';
+      ok.classList.add('show');
+      // Update stats
+      const ev = parseInt(document.getElementById('statEval').textContent || 0) + 1;
+      const pe = parseInt(document.getElementById('statPending').textContent || 1) - 1;
+      document.getElementById('statEval').textContent = ev;
+      document.getElementById('statPending').textContent = Math.max(0, pe);
+    } catch(e) {
+      console.error(e); alert('त्रुटि हुई। पुनः प्रयास करें।');
+    }
+    btn.disabled = false; spin.style.display = 'none'; txt.textContent = '💾 मूल्यांकन सहेजें';
+  };
+
+  // ─── Model Answer Upload ───
+  window.handleModelFile = function(input) {
+    if (!input.files || !input.files[0]) return;
+    const file = input.files[0];
+    document.getElementById('modelPreviewName').textContent = '✓ ' + file.name;
+    document.getElementById('modelPreview').classList.add('show');
+    document.getElementById('modelUploadBtn').disabled = false;
+  };
+
+  window.removeModelFile = function() {
+    document.getElementById('modelFile').value = '';
+    document.getElementById('modelPreview').classList.remove('show');
+    document.getElementById('modelUploadBtn').disabled = true;
+  };
+
+  window.uploadModelAnswer = async function() {
+    const { storage, ref, uploadBytes, getDownloadURL, db, doc, updateDoc, collection, getDocs } = window._firebase;
+    const file = document.getElementById('modelFile').files[0];
+    if (!file) return;
+    const btn = document.getElementById('modelUploadBtn');
+    const status = document.getElementById('modelStatus');
+    btn.disabled = true; btn.textContent = '⬆️ अपलोड हो रहा है...';
+    status.style.display = 'none';
+    try {
+      const ext = file.name.split('.').pop();
+      const storageRef = ref(storage, `model_answers/Day1_model.${ext}`);
+      await uploadBytes(storageRef, file);
+      const url = await getDownloadURL(storageRef);
+      // Save URL to a config doc
+      const { setDoc } = await import('https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js');
+      await setDoc(doc(db, 'voxa_config', 'Day1'), { modelAnswerURL: url, updatedAt: new Date() });
+      status.textContent = '✅ आदर्श उत्तर सफलतापूर्वक अपलोड हो गया!';
+      status.style.display = 'block';
+    } catch(e) {
+      console.error(e);
+      status.textContent = '❌ त्रुटि हुई। पुनः प्रयास करें।';
+      status.style.color = '#FCA5A5';
+      status.style.display = 'block';
+    }
+    btn.disabled = false; btn.textContent = '⬆️ आदर्श उत्तर अपलोड करें';
+  };
+</script>
+</body>
+</html>
