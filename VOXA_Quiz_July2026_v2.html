@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VOXA — Current Affairs Quiz | July 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:         #0F1B2D;
+  --navy-mid:     #162236;
+  --navy-light:   #1E3050;
+  --saffron:      #F97316;
+  --saffron-d:    #EA6C0A;
+  --saffron-glow: rgba(249,115,22,0.12);
+  --white:        #FFFFFF;
+  --text-primary: #F1F5F9;
+  --text-secondary:#94A3B8;
+  --text-muted:   #64748B;
+  --border:       rgba(255,255,255,0.08);
+  --card-bg:      rgba(255,255,255,0.04);
+  --success:      #22C55E;
+  --success-bg:   rgba(34,197,94,0.1);
+  --error:        #EF4444;
+  --error-bg:     rgba(239,68,68,0.1);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  background:var(--navy);color:var(--text-primary);
+  font-family:'Inter','Noto Sans Devanagari',sans-serif;min-height:100vh;
+}
+body::before{
+  content:'';position:fixed;inset:0;
+  background:
+    radial-gradient(ellipse at 15% 15%,rgba(249,115,22,0.07) 0%,transparent 55%),
+    radial-gradient(ellipse at 85% 85%,rgba(249,115,22,0.04) 0%,transparent 50%);
+  pointer-events:none;z-index:0;
+}
+.container{max-width:560px;margin:0 auto;padding:0 16px 60px;position:relative;z-index:1;}
+
+/* HEADER */
+.header{text-align:center;padding:28px 0 22px;}
+.logo-wrap{display:inline-flex;align-items:center;gap:10px;margin-bottom:5px;}
+.logo-icon{width:38px;height:38px;background:var(--saffron);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:#fff;}
+.logo-text{font-size:22px;font-weight:700;letter-spacing:4px;color:var(--white);}
+.header-sub{font-size:11px;color:var(--text-muted);letter-spacing:1.2px;text-transform:uppercase;margin-top:2px;}
+
+/* INFO STRIP */
+.info-strip{display:flex;align-items:center;justify-content:space-between;background:var(--card-bg);border:0.5px solid var(--border);border-radius:12px;padding:10px 14px;margin-bottom:18px;flex-wrap:wrap;gap:6px;}
+.badge{background:var(--saffron);color:#fff;font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;}
+.strip-mid{font-size:12px;color:var(--text-secondary);font-family:'Noto Sans Devanagari',sans-serif;}
+.strip-right{font-size:11px;color:var(--saffron);font-weight:500;}
+
+/* SCREENS */
+.screen{display:none;}
+.screen.active{display:block;}
+
+/* LOADING */
+.loading-wrap{text-align:center;padding:60px 20px;}
+.spinner{width:40px;height:40px;border:3px solid var(--border);border-top-color:var(--saffron);border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 16px;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.loading-text{font-size:14px;color:var(--text-muted);font-family:'Noto Sans Devanagari',sans-serif;}
+
+/* SIGN IN */
+.signin-card{background:var(--card-bg);border:0.5px solid var(--border);border-radius:16px;padding:32px 24px;text-align:center;margin-bottom:16px;}
+.signin-title{font-size:18px;font-weight:600;color:var(--text-primary);margin-bottom:8px;font-family:'Noto Sans Devanagari',sans-serif;}
+.signin-sub{font-size:13px;color:var(--text-muted);margin-bottom:28px;font-family:'Noto Sans Devanagari',sans-serif;line-height:1.6;}
+.btn-google{
+  display:inline-flex;align-items:center;gap:12px;
+  background:#fff;color:#1F2937;
+  border:none;border-radius:12px;padding:13px 24px;
+  font-size:14px;font-weight:600;cursor:pointer;
+  transition:all 0.2s;width:100%;justify-content:center;
+}
+.btn-google:hover{background:#F9FAFB;box-shadow:0 4px 20px rgba(0,0,0,0.3);}
+.btn-google svg{flex-shrink:0;}
+.quiz-info-box{background:rgba(249,115,22,0.06);border:0.5px solid rgba(249,115,22,0.2);border-radius:12px;padding:14px 16px;margin-top:16px;}
+.quiz-info-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
+.quiz-info-row:last-child{margin-bottom:0;}
+.qi-label{font-size:12px;color:var(--text-muted);}
+.qi-val{font-size:12px;font-weight:600;color:var(--saffron);}
+
+/* USER BAR */
+.user-bar{display:flex;align-items:center;gap:10px;background:var(--card-bg);border:0.5px solid var(--border);border-radius:12px;padding:8px 12px;margin-bottom:14px;}
+.user-avatar{width:32px;height:32px;border-radius:50%;object-fit:cover;border:1.5px solid var(--saffron);}
+.user-avatar-placeholder{width:32px;height:32px;border-radius:50%;background:var(--saffron);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff;flex-shrink:0;}
+.user-name{font-size:13px;font-weight:500;color:var(--text-primary);flex:1;}
+.user-exam{font-size:11px;color:var(--text-muted);}
+
+/* TIMER */
+.timer-bar{display:flex;align-items:center;justify-content:space-between;background:rgba(249,115,22,0.07);border:0.5px solid rgba(249,115,22,0.2);border-radius:10px;padding:9px 14px;margin-bottom:14px;}
+.timer-label{font-size:11px;color:var(--text-muted);font-family:'Noto Sans Devanagari',sans-serif;}
+.timer-val{font-size:18px;font-weight:700;color:var(--saffron);font-variant-numeric:tabular-nums;letter-spacing:1px;}
+.timer-val.warning{color:#EF4444;animation:pulse 1s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.6;}}
+.timer-right{font-size:11px;color:var(--text-muted);}
+
+/* PROGRESS */
+.progress-wrap{margin-bottom:14px;}
+.progress-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;}
+.progress-label{font-size:11px;color:var(--text-muted);}
+.progress-count{font-size:13px;font-weight:600;color:var(--saffron);}
+.progress-bar{height:4px;background:rgba(255,255,255,0.08);border-radius:4px;overflow:hidden;}
+.progress-fill{height:100%;background:var(--saffron);border-radius:4px;transition:width 0.4s ease;}
+
+/* QUESTION DOTS */
+.q-dots{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:14px;}
+.q-dot{
+  width:22px;height:22px;border-radius:6px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:9px;font-weight:600;cursor:pointer;
+  transition:all 0.15s;
+  background:rgba(255,255,255,0.06);
+  border:0.5px solid var(--border);
+  color:var(--text-muted);
+}
+.q-dot.answered{background:rgba(249,115,22,0.2);border-color:rgba(249,115,22,0.4);color:var(--saffron);}
+.q-dot.current{background:var(--saffron);color:#fff;border-color:var(--saffron);}
+.q-dot.skipped{background:rgba(148,163,184,0.15);border-color:rgba(148,163,184,0.3);color:var(--text-muted);}
+
+/* QUESTION CARD */
+.q-card{background:var(--navy-light);border:1px solid var(--saffron-glow);border-left:3px solid var(--saffron);border-radius:16px;padding:20px 18px 18px;margin-bottom:14px;position:relative;overflow:hidden;}
+.q-card::after{content:'?';position:absolute;right:-6px;top:-14px;font-size:110px;font-weight:700;color:rgba(249,115,22,0.05);line-height:1;pointer-events:none;}
+.q-chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;}
+.chip{font-size:10px;padding:2px 8px;border-radius:20px;font-weight:500;}
+.chip-num{background:rgba(249,115,22,0.2);color:#FED7AA;}
+.chip-topic{background:rgba(20,184,166,0.2);color:#5EEAD4;}
+.q-text{font-size:15px;color:var(--text-primary);line-height:1.8;font-family:'Noto Sans Devanagari',sans-serif;font-weight:500;}
+.q-sublines{margin-top:10px;padding-left:14px;border-left:2px solid rgba(249,115,22,0.25);}
+.q-subline{font-size:14px;color:var(--text-secondary);font-family:'Noto Sans Devanagari',sans-serif;line-height:1.7;margin-bottom:3px;}
+
+/* OPTIONS */
+.options-wrap{margin-bottom:16px;}
+.option{
+  display:flex;align-items:flex-start;gap:12px;
+  background:rgba(255,255,255,0.03);border:0.5px solid var(--border);
+  border-radius:12px;padding:13px 14px;margin-bottom:9px;cursor:pointer;
+  transition:all 0.2s;font-family:'Noto Sans Devanagari',sans-serif;
+  font-size:14px;color:var(--text-secondary);line-height:1.6;
+}
+.option:hover{border-color:rgba(249,115,22,0.4);background:rgba(249,115,22,0.05);color:var(--text-primary);}
+.option.selected{border-color:var(--saffron);background:rgba(249,115,22,0.1);color:var(--text-primary);}
+.option.correct{border-color:var(--success);background:var(--success-bg);color:#86EFAC;}
+.option.wrong{border-color:var(--error);background:var(--error-bg);color:#FCA5A5;}
+.option.show-correct{border-color:var(--success);background:var(--success-bg);color:#86EFAC;}
+.opt-key{min-width:26px;height:26px;border:1px solid currentColor;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;font-family:'Inter',sans-serif;flex-shrink:0;margin-top:1px;}
+.opt-text{flex:1;}
+
+/* NAV */
+.nav-wrap{display:flex;gap:10px;margin-bottom:10px;}
+.btn-nav{flex:1;padding:13px;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer;border:none;transition:all 0.2s;font-family:'Noto Sans Devanagari',sans-serif;}
+.btn-prev{background:var(--card-bg);color:var(--text-secondary);border:0.5px solid var(--border);}
+.btn-prev:hover{border-color:var(--saffron);color:var(--saffron);}
+.btn-next{background:var(--saffron);color:#fff;}
+.btn-next:hover{background:var(--saffron-d);}
+.btn-skip{background:rgba(148,163,184,0.1);color:var(--text-muted);border:0.5px solid var(--border);}
+.btn-skip:hover{border-color:var(--text-muted);color:var(--text-secondary);}
+
+.submit-wrap{margin-top:6px;}
+.btn-primary{width:100%;padding:14px;background:var(--saffron);color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:600;cursor:pointer;font-family:'Noto Sans Devanagari',sans-serif;transition:background 0.2s;}
+.btn-primary:hover{background:var(--saffron-d);}
+
+/* ANSWER BOX (result screen only) */
+.answer-box{border-radius:12px;padding:14px 16px;margin-top:8px;}
+.answer-box.correct-ans{background:rgba(34,197,94,0.07);border:0.5px solid rgba(34,197,94,0.25);}
+.answer-box.wrong-ans{background:rgba(239,68,68,0.07);border:0.5px solid rgba(239,68,68,0.25);}
+.answer-box.skipped-ans{background:rgba(148,163,184,0.07);border:0.5px solid rgba(148,163,184,0.2);}
+.ans-header{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
+.ans-icon{font-size:16px;}
+.ans-label{font-size:13px;font-weight:600;}
+.ans-result-correct{color:#4ADE80;}
+.ans-result-wrong{color:#F87171;}
+.ans-result-skip{color:#94A3B8;}
+.vyakhya-title{font-size:11px;color:var(--saffron);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:6px;font-weight:500;}
+.vyakhya-text{font-size:13px;color:var(--text-secondary);font-family:'Noto Sans Devanagari',sans-serif;line-height:1.75;margin-bottom:12px;}
+.keyfact-row{display:flex;gap:8px;align-items:flex-start;background:rgba(249,115,22,0.06);border:0.5px solid rgba(249,115,22,0.15);border-radius:8px;padding:10px 12px;margin-bottom:10px;}
+.keyfact-label{font-size:10px;font-weight:600;color:var(--saffron);text-transform:uppercase;letter-spacing:0.6px;white-space:nowrap;margin-top:2px;}
+.keyfact-text{font-size:12px;color:var(--text-secondary);font-family:'Noto Sans Devanagari',sans-serif;line-height:1.6;}
+.insight-wrap{background:rgba(255,255,255,0.03);border:0.5px solid var(--border);border-radius:10px;padding:12px 14px;}
+.insight-title{font-size:11px;color:var(--saffron);font-weight:500;margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+.insight-dot{width:6px;height:6px;border-radius:50%;background:var(--saffron);flex-shrink:0;}
+.insight-line{font-size:12px;color:var(--text-muted);font-family:'Noto Sans Devanagari',sans-serif;line-height:1.65;margin-bottom:4px;padding-left:12px;}
+.insight-line:last-child{margin-bottom:0;}
+
+/* RESULT */
+.result-header{text-align:center;padding:24px 0 20px;}
+.result-score-ring{width:110px;height:110px;border-radius:50%;border:4px solid var(--saffron);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 14px;background:rgba(249,115,22,0.05);}
+.score-big{font-size:32px;font-weight:700;color:var(--saffron);}
+.score-total{font-size:12px;color:var(--text-muted);}
+.result-msg{font-size:16px;font-weight:600;color:var(--text-primary);font-family:'Noto Sans Devanagari',sans-serif;margin-bottom:4px;}
+.result-pct{font-size:13px;color:var(--text-muted);}
+.result-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px;}
+.stat-card{background:var(--card-bg);border:0.5px solid var(--border);border-radius:12px;padding:14px 10px;text-align:center;}
+.stat-num{font-size:22px;font-weight:700;margin-bottom:3px;}
+.stat-num.green{color:var(--success);}
+.stat-num.red{color:var(--error);}
+.stat-num.grey{color:var(--text-muted);}
+.stat-label{font-size:11px;color:var(--text-muted);font-family:'Noto Sans Devanagari',sans-serif;}
+
+.review-title{font-size:13px;font-weight:600;color:var(--text-primary);margin-bottom:12px;padding-left:10px;border-left:3px solid var(--saffron);font-family:'Noto Sans Devanagari',sans-serif;}
+.review-item{background:var(--card-bg);border:0.5px solid var(--border);border-radius:12px;padding:14px 16px;margin-bottom:10px;}
+.review-item.r-correct{border-left:3px solid var(--success);}
+.review-item.r-wrong{border-left:3px solid var(--error);}
+.review-item.r-skip{border-left:3px solid var(--text-muted);}
+.review-q-num{font-size:11px;color:var(--text-muted);margin-bottom:5px;text-transform:uppercase;letter-spacing:0.6px;}
+.review-q-text{font-size:13px;color:var(--text-primary);font-family:'Noto Sans Devanagari',sans-serif;line-height:1.65;margin-bottom:8px;}
+
+.btn-retake{width:100%;padding:14px;margin-top:16px;background:transparent;color:var(--saffron);border:1px solid var(--saffron);border-radius:12px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Noto Sans Devanagari',sans-serif;transition:all 0.2s;}
+.btn-retake:hover{background:var(--saffron);color:#fff;}
+.btn-signout{width:100%;padding:11px;margin-top:10px;background:transparent;color:var(--text-muted);border:0.5px solid var(--border);border-radius:12px;font-size:13px;cursor:pointer;font-family:'Noto Sans Devanagari',sans-serif;transition:all 0.2s;}
+.btn-signout:hover{border-color:var(--error);color:#F87171;}
+
+/* FOOTER */
+.voxa-footer{text-align:center;padding:24px 0 0;border-top:0.5px solid var(--border);margin-top:16px;}
+.vf-brand{font-size:13px;font-weight:600;letter-spacing:3px;color:var(--text-muted);margin-bottom:3px;}
+.vf-tag{font-size:11px;color:var(--text-muted);font-style:italic;}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:100;display:flex;align-items:center;justify-content:center;padding:16px;}
+.modal-overlay.hidden{display:none;}
+.modal-box{background:var(--navy-mid);border:0.5px solid var(--border);border-radius:16px;padding:24px 20px;max-width:380px;width:100%;text-align:center;}
+.modal-title{font-size:16px;font-weight:600;color:var(--text-primary);margin-bottom:8px;font-family:'Noto Sans Devanagari',sans-serif;}
+.modal-sub{font-size:13px;color:var(--text-muted);margin-bottom:20px;font-family:'Noto Sans Devanagari',sans-serif;line-height:1.6;}
+.modal-btns{display:flex;gap:10px;}
+.modal-btn-cancel{flex:1;padding:12px;background:var(--card-bg);color:var(--text-secondary);border:0.5px solid var(--border);border-radius:10px;font-size:13px;cursor:pointer;font-family:'Noto Sans Devanagari',sans-serif;}
+.modal-btn-confirm{flex:1;padding:12px;background:var(--saffron);color:#fff;border:none;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Noto Sans Devanagari',sans-serif;}
+
+@media(max-width:380px){
+  .q-text{font-size:14px;}
+  .option{font-size:13px;padding:11px 12px;}
+  .result-stats{gap:7px;}
+  .stat-num{font-size:18px;}
+  .q-dot{width:19px;height:19px;font-size:8px;}
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="logo-wrap">
+      <div class="logo-icon">V</div>
+      <div class="logo-text">VOXA</div>
+    </div>
+    <div class="header-sub">Learn Better. Perform Better.</div>
+  </div>
+
+  <!-- INFO STRIP -->
+  <div class="info-strip">
+    <span class="badge">समसामयिकी</span>
+    <span class="strip-mid">जुलाई 2026 | 50 प्रश्न</span>
+    <span class="strip-right">RAS • SI • CET • RPSC</span>
+  </div>
+
+  <!-- LOADING -->
+  <div class="screen active" id="screen-loading">
+    <div class="loading-wrap">
+      <div class="spinner"></div>
+      <div class="loading-text">कृपया प्रतीक्षा करें...</div>
+    </div>
+  </div>
+
+  <!-- SIGN IN -->
+  <div class="screen" id="screen-signin">
+    <div class="signin-card">
+      <div class="signin-title">Quiz में प्रवेश करें</div>
+      <div class="signin-sub">Google अकाउंट से साइन इन करें और अपना प्रदर्शन ट्रैक करें।</div>
+      <button class="btn-google" onclick="signInWithGoogle()">
+        <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+        Google से साइन इन करें
+      </button>
+      <div class="quiz-info-box">
+        <div class="quiz-info-row"><span class="qi-label">कुल प्रश्न</span><span class="qi-val">50</span></div>
+        <div class="quiz-info-row"><span class="qi-label">समय सीमा</span><span class="qi-val">2 घंटे</span></div>
+        <div class="quiz-info-row"><span class="qi-label">विषय</span><span class="qi-val">समसामयिकी — जुलाई 2026</span></div>
+        <div class="quiz-info-row"><span class="qi-label">परिणाम</span><span class="qi-val">Submit के बाद</span></div>
+        <div class="quiz-info-row"><span class="qi-label">Skip</span><span class="qi-val">अनुमति है</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="screen" id="screen-quiz">
+    <!-- User bar -->
+    <div class="user-bar" id="user-bar">
+      <div class="user-avatar-placeholder" id="user-avatar-ph">V</div>
+      <div>
+        <div class="user-name" id="user-name-lbl">—</div>
+        <div class="user-exam" id="user-email-lbl">—</div>
+      </div>
+    </div>
+
+    <!-- Timer -->
+    <div class="timer-bar">
+      <span class="timer-label">शेष समय</span>
+      <span class="timer-val" id="timer-val">2:00:00</span>
+      <span class="timer-right">120 मिनट</span>
+    </div>
+
+    <!-- Progress -->
+    <div class="progress-wrap">
+      <div class="progress-meta">
+        <span class="progress-label">प्रगति</span>
+        <span class="progress-count" id="prog-count">1 / 50</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="prog-fill" style="width:2%"></div></div>
+    </div>
+
+    <!-- Question dots -->
+    <div class="q-dots" id="q-dots"></div>
+
+    <!-- Question card -->
+    <div class="q-card">
+      <div class="q-chips">
+        <span class="chip chip-num" id="q-num-chip">Q 1</span>
+        <span class="chip chip-topic" id="q-topic-chip">विषय</span>
+      </div>
+      <div class="q-text" id="q-main-text"></div>
+      <div class="q-sublines" id="q-sublines" style="display:none;"></div>
+    </div>
+
+    <!-- Options -->
+    <div class="options-wrap" id="options-wrap"></div>
+
+    <!-- Nav -->
+    <div class="nav-wrap">
+      <button class="btn-nav btn-prev" id="btn-prev" onclick="prevQ()">&#8592; पिछला</button>
+      <button class="btn-nav btn-skip" onclick="skipQ()">छोड़ें</button>
+      <button class="btn-nav btn-next" id="btn-next" onclick="nextQ()">अगला &#8594;</button>
+    </div>
+    <div class="submit-wrap" id="submit-wrap" style="display:none;">
+      <button class="btn-primary" onclick="confirmSubmit()">परिणाम देखें</button>
+    </div>
+    <div id="submit-always" style="margin-top:10px;">
+      <button class="btn-primary" style="background:transparent;border:1px solid var(--saffron);color:var(--saffron);" onclick="confirmSubmit()">अभी Submit करें</button>
+    </div>
+  </div>
+
+  <!-- RESULT -->
+  <div class="screen" id="screen-result">
+    <div class="result-header">
+      <div class="result-score-ring">
+        <div class="score-big" id="score-big">0</div>
+        <div class="score-total">/ 50</div>
+      </div>
+      <div class="result-msg" id="result-msg"></div>
+      <div class="result-pct" id="result-pct"></div>
+    </div>
+    <div class="result-stats">
+      <div class="stat-card"><div class="stat-num green" id="st-correct">0</div><div class="stat-label">सही</div></div>
+      <div class="stat-card"><div class="stat-num red" id="st-wrong">0</div><div class="stat-label">गलत</div></div>
+      <div class="stat-card"><div class="stat-num grey" id="st-skip">0</div><div class="stat-label">छोड़े</div></div>
+    </div>
+    <div class="review-title">प्रश्नवार समीक्षा — सही उत्तर एवं व्याख्या</div>
+    <div id="review-list"></div>
+    <button class="btn-retake" onclick="retakeQuiz()">पुनः प्रयास करें</button>
+    <button class="btn-signout" onclick="doSignOut()">Sign Out</button>
+    <div class="voxa-footer">
+      <div class="vf-brand">VOXA</div>
+      <div class="vf-tag">Learn Better. Perform Better.</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- SUBMIT CONFIRM MODAL -->
+<div class="modal-overlay hidden" id="modal-submit">
+  <div class="modal-box">
+    <div class="modal-title" id="modal-title">Quiz Submit करें?</div>
+    <div class="modal-sub" id="modal-sub">क्या आप सुनिश्चित हैं? Submit के बाद परिणाम दिखेगा।</div>
+    <div class="modal-btns">
+      <button class="modal-btn-cancel" onclick="closeModal()">रद्द करें</button>
+      <button class="modal-btn-confirm" onclick="submitQuiz()">हाँ, Submit करें</button>
+    </div>
+  </div>
+</div>
+
+<!-- Firebase SDKs -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged }
+  from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getFirestore, doc, setDoc, getDoc, serverTimestamp }
+  from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAAHBW8wpmbFzR9f27eFbiQwcomoY8ObM8",
+  authDomain: "voxa-5ef9a.firebaseapp.com",
+  projectId: "voxa-5ef9a",
+  storageBucket: "voxa-5ef9a.firebasestorage.app",
+  messagingSenderId: "464073305073",
+  appId: "1:464073305073:web:5a003912c015827fdfb250",
+  measurementId: "G-HTX7MKG4EK"
+};
+
+const app  = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db   = getFirestore(app);
+const provider = new GoogleAuthProvider();
+
+// ── expose to global ──
+window._auth     = auth;
+window._db       = db;
+window._provider = provider;
+window._signInWithPopup  = signInWithPopup;
+window._signOut          = signOut;
+window._onAuthStateChanged = onAuthStateChanged;
+window._doc       = doc;
+window._setDoc    = setDoc;
+window._getDoc    = getDoc;
+window._serverTimestamp = serverTimestamp;
+
+// Auth listener
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    window._currentUser = user;
+    showScreen('screen-quiz');
+    setupUserBar(user);
+    if (!window._timerStarted) startTimer();
+    renderQuestion();
+    buildDots();
+  } else {
+    window._currentUser = null;
+    showScreen('screen-signin');
+  }
+});
+</script>
+
+<script>
+// ══════════════════════════════════════════════════════════
+//  QUESTIONS DATA
+// ══════════════════════════════════════════════════════════
+const QUESTIONS = [
+  { num:1, topic:"भारतीय नौसेना", main:"भारतीय नौसेना की अग्रिम पंक्ति की प्रणालियों के संदर्भ में निम्नलिखित युग्मों पर विचार कीजिए:", sub:["1. संशोधक — सर्वेक्षण पोत (Survey Vessel)","2. दूनागिरि — प्रोजेक्ट 17A स्टील्थ फ्रिगेट","3. अग्रय — शैलो वाटर क्राफ्ट (ASW SWC)","उपर्युक्त में से कौन-से युग्म सही सुमेलित हैं?"], opts:["केवल 1 और 2","केवल 2 और 3","केवल 1 और 3","1, 2 और 3 सभी"], ans:3, exp:"सभी तीनों युग्म सही सुमेलित हैं। संशोधक hydrographic डेटा एकत्र करने वाला चौथा बड़ा सर्वेक्षण पोत है। दूनागिरि प्रोजेक्ट 17A श्रृंखला का पांचवां स्टील्थ फ्रिगेट है। अग्रय अर्नाला श्रेणी का ASW SWC है।", kf:"संशोधक: Survey Vessel | दूनागिरि: Project 17A Frigate | अग्रय: ASW SWC", insight:["प्रोजेक्ट 17A: गाइडेड मिसाइल स्टील्थ फ्रिगेट","अर्नाला श्रेणी: ASW शैलो वाटर क्राफ्ट (तटीय सुरक्षा)","परीक्षा टिप: रक्षा पोतों की श्रेणियों पर सुमेलन प्रश्न पूछे जाते हैं।"] },
+  { num:2, topic:"डिजिटल प्लेटफॉर्म", main:"एयर सुविधा 2.0 डिजिटल प्लेटफॉर्म का मुख्य उद्देश्य क्या है?", sub:[], opts:["भारत से बाहर जाने वाले यात्रियों का ई-पासपोर्ट सत्यापन करना","भारत आने वाले अंतर्राष्ट्रीय यात्रियों का ऑनलाइन स्वास्थ्य स्व-घोषणा पत्र दर्ज करना","घरेलू उड़ानों के लिए संपर्क रहित बोर्डिंग पास जारी करना","नागरिक उड्डयन मंत्रालय द्वारा ई-वीजा स्वीकृत करना"], ans:1, exp:"एयर सुविधा 2.0 भारत में आगमन करने वाले अंतर्राष्ट्रीय यात्रियों के लिए संपर्क रहित स्वास्थ्य स्व-घोषणा पत्र जमा करने का डिजिटल प्लेटफॉर्म है। यह Incoming यात्रियों के लिए है, Outgoing के लिए नहीं।", kf:"लक्षित: Incoming अंतर्राष्ट्रीय यात्री | स्वास्थ्य स्व-घोषणा | संपर्क रहित प्रक्रिया", insight:["लक्षित वर्ग: भारत में आने वाले यात्री (प्रस्थान करने वाले नहीं)","परीक्षा टिप: नीतिगत पोर्टलों के Target Audience पर भ्रमित करने वाले विकल्प बनाए जाते हैं।"] },
+  { num:3, topic:"कोयला खनन", main:"हाल ही में चर्चा में रहा 'केन्ते विस्तार एकीकृत कोयला खदान' (Kente Extension) किस क्षेत्र में स्थित है?", sub:[], opts:["झरिया कोयला क्षेत्र, झारखंड","हसदेव-अरण्य वन क्षेत्र, छत्तीसगढ़","तालचेर कोयला क्षेत्र, ओडिशा","सिंगरेनी कोयला क्षेत्र, तेलंगाना"], ans:1, exp:"केन्ते विस्तार कोयला ब्लॉक छत्तीसगढ़ के सरगुजा/सूरजपुर जिलों में हसदेव-अरण्य (Hasdeo-Arand) वन क्षेत्र में स्थित है। यह क्षेत्र घने वनों और जैव विविधता को लेकर चर्चा में रहा है।", kf:"स्थान: हसदेव-अरण्य (छत्तीसगढ़) | मुद्दा: जैव विविधता व खनन", insight:["हसदेव-अरण्य: छत्तीसगढ़ का घना वन क्षेत्र","परीक्षा टिप: चर्चित खनन ब्लॉकों और उनके राज्यों पर प्रश्न बनते हैं।"] },
+  { num:4, topic:"विज्ञान-प्रौद्योगिकी", main:"इलेक्ट्रिक वाहनों में 'बैटरी प्रबंधन प्रणाली' (BMS) के बारे में कौन-सा कथन असत्य है?", sub:[], opts:["यह बैटरी पैक के तापमान और चार्ज स्थिति की निरंतर निगरानी करती है।","यह बैटरी पैक में सभी सेलों के प्रदर्शन को संतुलित करती है।","यह प्रणाली स्वयं विद्युत ऊर्जा का प्राथमिक भंडारण केंद्र होती है।","यह बैटरी की सुरक्षा और परिचालन अवधि बढ़ाने में मुख्य भूमिका निभाती है।"], ans:2, exp:"कथन (c) असत्य है। विद्युत ऊर्जा का भंडारण लिथियम-आयन बैटरी पैक द्वारा किया जाता है, BMS द्वारा नहीं। BMS केवल निगरानी, सेल बैलेंसिंग और सुरक्षा प्रबंधन करती है।", kf:"BMS: इलेक्ट्रॉनिक कंट्रोल सिस्टम (नियंत्रण) | बैटरी पैक: ऊर्जा भंडारण इकाई", insight:["लिथियम-आयन बैटरी पैक: ऊर्जा भंडारण (Storage Unit)","BMS: नियंत्रक व मॉनिटरिंग (Control Unit)","परीक्षा टिप: उपकरण की भौतिक इकाई और नियंत्रक के बीच अंतर पूछा जाता है।"] },
+  { num:5, topic:"अंतर्राष्ट्रीय संगठन", main:"नई दिल्ली में आयोजित 16वें ब्रिक्स राष्ट्रीय सुरक्षा सलाहकारों के सम्मेलन का मुख्य विषय क्या था?", sub:[], opts:["अंतर्राष्ट्रीय व्यापार एवं वित्तीय संस्थागत सुधार","आज दुनिया के सामने मौजूद गैर-पारंपरिक सुरक्षा चुनौतियाँ","वैश्विक जलवायु परिवर्तन और संधारणीय विकास","इंडो-पैसिफिक में समुद्री सुरक्षा ढांचा"], ans:1, exp:"16वें BRICS NSA सम्मेलन (नई दिल्ली) का मुख्य विषय 'Non-traditional security challenges confronting the world today' था।", kf:"16वां BRICS NSA सम्मेलन | स्थान: नई दिल्ली | थीम: गैर-पारंपरिक सुरक्षा चुनौतियाँ", insight:["मुख्य फोकस: साइबर सुरक्षा, ऊर्जा सुरक्षा, आतंकवाद","परीक्षा टिप: सम्मेलनों में संस्करण, मेजबान शहर और थीम पूछे जाते हैं।"] },
+  { num:6, topic:"FATF", main:"FATF के बारे में निम्नलिखित कथनों पर विचार कीजिए:", sub:["1. इसके उपाध्यक्ष का चुनाव FATF प्लेनरी द्वारा 2 वर्ष के कार्यकाल के लिए किया जाता है।","2. इसके पास वित्तीय अपराधों में लिप्त व्यक्तियों पर सीधे कानूनी मुकदमा चलाने का अधिकार है।","उपर्युक्त में से कौन-सा/से कथन सत्य है/हैं?"], opts:["केवल 1","केवल 2","1 और 2 दोनों","न तो 1 और न ही 2"], ans:0, exp:"केवल कथन 1 सत्य है। FATF केवल मानक-निर्धारक निकाय है; इसके पास किसी पर मुकदमा चलाने की कोई दंडात्मक शक्ति नहीं है।", kf:"FATF: मानक-निर्धारक निकाय | मुख्यालय: पेरिस | उपाध्यक्ष: 2 वर्ष कार्यकाल", insight:["FATF: No Prosecutorial Power — केवल मानकीकरण","सदस्य: संप्रभु राष्ट्र + यूरोपीय आयोग, GCC","परीक्षा टिप: अंतर्राष्ट्रीय संस्थाओं के कानूनी अधिकारों पर प्रश्न पूछे जाते हैं।"] },
+  { num:7, topic:"रक्षा नीति", main:"'रक्षा अधिग्रहण परिषद' (DAC) की अध्यक्षता कौन करता है?", sub:[], opts:["भारत के प्रधानमंत्री","केंद्रीय रक्षा मंत्री","चीफ ऑफ डिफेंस स्टाफ","केंद्रीय रक्षा सचिव"], ans:1, exp:"DAC की अध्यक्षता केंद्रीय रक्षा मंत्री करते हैं। यह सशस्त्र बलों के पूंजीगत अधिग्रहण प्रस्तावों को 'आवश्यकता की स्वीकृति' (AoN) देती है।", kf:"DAC अध्यक्ष: केंद्रीय रक्षा मंत्री | AoN: रक्षा खरीद का पहला चरण", insight:["DAC: रक्षा मंत्री (प्रधानमंत्री नहीं)","परीक्षा टिप: रक्षा मंत्रालय की समितियों के अध्यक्षों में भ्रम उत्पन्न किया जाता है।"] },
+  { num:8, topic:"पर्यावरण", main:"'बॉन चैलेंज' (Bonn Challenge) पहल का प्राथमिक संबंध किससे है?", sub:[], opts:["वैश्विक समुद्र तटों की सफाई","क्षरित भूमि की वन परिदृश्य पुनर्बहाली (FLR)","अंतर्राष्ट्रीय ई-अपशिष्ट निपटान","शहरी वायु प्रदूषण नियंत्रण"], ans:1, exp:"बॉन चैलेंज 2011 में जर्मनी और IUCN द्वारा शुरू की गई वन परिदृश्य पुनर्बहाली (FLR) पहल है। भारत का लक्ष्य 2030 तक 26 मिलियन हेक्टेयर भूमि की बहाली है।", kf:"शुरुआत: 2011 (जर्मनी + IUCN) | FLR | भारत लक्ष्य: 26 मिलियन हेक्टेयर (2030)", insight:["बॉन चैलेंज: संयुक्त राष्ट्र नहीं — जर्मनी + IUCN","परीक्षा टिप: अंतर्राष्ट्रीय पहलों के संस्थापक संगठन पर प्रश्न पूछे जाते हैं।"] },
+  { num:9, topic:"रक्षा प्रौद्योगिकी", main:"'AH-64 अपाचे' के बारे में कौन-सा कथन सत्य है?", sub:[], opts:["रूस द्वारा निर्मित परिवहन हेलीकॉप्टर","अमरीकी कंपनी बोइंग द्वारा निर्मित उन्नत अटैक हेलीकॉप्टर","स्वदेशी एकल-चालक लड़ाकू विमान","फ्रांस द्वारा निर्मित Reconnaissance हेलीकॉप्टर"], ans:1, exp:"AH-64 अपाचे बोइंग (अमरीका) द्वारा निर्मित 2-सीटर अटैक हेलीकॉप्टर है जिसमें पायलट और गनर दोनों होते हैं।", kf:"निर्माता: बोइंग (अमरीका) | 2-सीटर | भूमिका: आक्रामक हवाई सहायता", insight:["AH-64 अपाचे: अमरीकी (आयातित)","प्रचंड/ध्रुव: स्वदेशी — HAL निर्मित","परीक्षा टिप: आयातित और स्वदेशी सैन्य प्लेटफार्मों में अंतर पूछा जाता है।"] },
+  { num:10, topic:"प्राचीन इतिहास", main:"मोहनजोदड़ो की 'नर्तकी की मूर्ति' के बारे में कौन-सा कथन असत्य है?", sub:[], opts:["इसकी खोज 1926 में मोहनजोदड़ो से हुई थी।","इसका निर्माण 'लुप्त मोम ढलाई' (Lost-Wax Casting) विधि से हुआ था।","यह राष्ट्रीय संग्रहालय, नई दिल्ली में संरक्षित है।","यह चूना पत्थर से निर्मित एक विशाल प्रतिमा है।"], ans:3, exp:"कथन (d) असत्य है। यह कांस्य (Bronze) धातु से बनी 10.8 सेमी ऊँची लघु मूर्ति है, न कि चूना पत्थर की विशाल प्रतिमा।", kf:"मोहनजोदड़ो (1926) | कांस्य (10.8 सेमी) | लुप्त मोम विधि | राष्ट्रीय संग्रहालय, दिल्ली", insight:["नर्तकी की मूर्ति: कांस्य (लुप्त मोम विधि)","दाढ़ी वाले पुरोहित: स्टेअटाइट (पत्थर)","परीक्षा टिप: हड़प्पाकालीन कलाकृतियों के माध्यम पर प्रश्न आते हैं।"] },
+  { num:11, topic:"विधिक दस्तावेज", main:"भारतीय पासपोर्ट की विधिक स्थिति के बारे में कौन-सा कथन सही है?", sub:[], opts:["यह भारतीय नागरिकता प्रदान करने वाला दस्तावेज है।","यह मुख्यतः यात्रा दस्तावेज है जो राष्ट्रीयता और सरकारी सत्यापन प्रमाणित करता है।","यह केवल विदेशियों को भारत प्रवेश देता है।","यह आधार कार्ड का विकल्प है।"], ans:1, exp:"पासपोर्ट एक यात्रा दस्तावेज (Travel Document) है। यह नागरिकता प्रदान नहीं करता। यह केवल यह प्रमाणित करता है कि धारक भारतीय राष्ट्रीयता के तहत यात्रा कर रहा है।", kf:"पासपोर्ट: यात्रा दस्तावेज | नागरिकता प्रदान नहीं करता | राष्ट्रीयता प्रमाण", insight:["पासपोर्ट ≠ नागरिकता प्रमाण पत्र","परीक्षा टिप: दस्तावेजों की विधिक स्थिति पर प्रश्न पूछे जाते हैं।"] },
+  { num:12, topic:"स्वर्ण खनन", main:"जोन्नागिरी स्वर्ण परियोजना के बारे में निम्नलिखित कथनों पर विचार कीजिए:", sub:["1. यह पूर्वी धारवाड़ क्रेटन का हिस्सा है।","2. समीप एरागुड़ी में अशोक के शिलालेख मिले हैं।","उपर्युक्त में से कौन-सा/से कथन सत्य है/हैं?"], opts:["केवल 1","केवल 2","1 और 2 दोनों","न तो 1 और न ही 2"], ans:2, exp:"दोनों कथन सत्य हैं। जोन्नागिरी (कुरनूल, आंध्र प्रदेश) भारत की सबसे बड़ी निजी स्वर्ण खनन परियोजना का स्थल है। यह पूर्वी धारवाड़ क्रेटन का हिस्सा है और प्राचीन काल में 'स्वर्णगिरि' कहलाता था।", kf:"स्थान: कुरनूल, आंध्र प्रदेश | पूर्वी धारवाड़ क्रेटन | ऐतिहासिक नाम: स्वर्णगिरि", insight:["जोन्नागिरी: भारत की सबसे बड़ी निजी स्वर्ण खनन परियोजना","एरागुड़ी: अशोक के शिलालेखों का स्थान","परीक्षा टिप: स्वर्ण खनन स्थलों के ऐतिहासिक महत्व पर प्रश्न बनते हैं।"] },
+  { num:13, topic:"बैंकिंग विनियमन", main:"RBI के SBR ढांचे के तहत NBFC-UL के बारे में निम्नलिखित कथनों पर विचार कीजिए:", sub:["1. NBFC-UL को अधिसूचित होने के 3 वर्षों में शेयर बाजार में सूचीबद्ध होना अनिवार्य है।","2. 1 लाख करोड़ रुपये+ संपत्ति वाली NBFCs को NBFC-UL वर्गीकृत किया जाता है।","उपर्युक्त में से कौन-सा/से कथन सत्य है/हैं?"], opts:["केवल 1","केवल 2","1 और 2 दोनों","न तो 1 और न ही 2"], ans:2, exp:"दोनों कथन सत्य हैं। NBFC-UL को 3 वर्ष में Stock Exchange listing अनिवार्य है और 1 लाख करोड़+ संपत्ति वाली NBFCs इस श्रेणी में आती हैं।", kf:"NBFC-UL: 1 लाख करोड़+ | Stock Exchange listing: 3 वर्ष अनिवार्य", insight:["NBFC-UL: RBI SBR ढांचे की सर्वोच्च श्रेणी","परीक्षा टिप: NBFC विनियमन श्रेणियों पर प्रश्न बनते हैं।"] },
+  { num:14, topic:"चुनाव प्रक्रिया", main:"'विशेष गहन पुनरीक्षण' (SIR) का प्राथमिक उद्देश्य क्या है?", sub:[], opts:["संसदीय क्षेत्रों का परिसीमन","घर-घर सत्यापन द्वारा मतदाता सूचियों को त्रुटिरहित बनाना","राष्ट्रीय दलों के खातों का ऑडिट","विदेशियों के लिए मताधिकार नियम बनाना"], ans:1, exp:"SIR में BLO अधिकारी घर-घर जाकर मतदाता विवरणों का भौतिक सत्यापन करते हैं ताकि मतदाता सूची में फर्जी या दोहरी प्रविष्टियों को हटाया जा सके।", kf:"SIR: BLO द्वारा घर-घर सत्यापन | लक्ष्य: मतदाता सूची शुद्धिकरण", insight:["SIR: मतदाता सूची शुद्धीकरण","परिसीमन: निर्वाचन क्षेत्र सीमाओं का पुनर्निर्धारण — अलग प्रक्रिया","परीक्षा टिप: चुनावी प्रशासनिक शब्दावलियों को ध्यान से पढ़ें।"] },
+  { num:15, topic:"विज्ञान", main:"अमोनिया (NH3) गैस के अत्यधिक संपर्क से मानव शरीर पर क्या प्रभाव पड़ सकते हैं?", sub:[], opts:["केवल आँखों में जलन","केवल श्वास मार्ग में सूजन","केवल त्वचा पर छाले","उपर्युक्त सभी (आँखें, श्वास मार्ग, त्वचा)"], ans:3, exp:"अमोनिया एक तीक्ष्ण संक्षारक गैस है। इसके उच्च संपर्क से आँखों में जलन, श्वसन नली में सूजन तथा त्वचा पर रासायनिक छाले पड़ते हैं। यह मुख्यतः श्लेष्मा झिल्ली और श्वसन प्रणाली को क्षति पहुँचाती है।", kf:"अमोनिया: तीक्ष्ण व संक्षारक | प्रभावित: आँखें, श्वास नली, त्वचा", insight:["अमोनिया: अस्थि मज्जा को सीधे प्रभावित नहीं करती","परीक्षा टिप: विषैले रसायनों के जैविक प्रभावों पर प्रश्न पूछे जाते हैं।"] },
+  { num:16, topic:"साइबर सुरक्षा", main:"'ज़ीरो-क्लिक' (Zero-Click) एक्सप्लॉइट की क्या विशेषता है?", sub:[], opts:["उपयोगकर्ता को बार-बार लिंक पर क्लिक करना पड़ता है।","बिना किसी उपयोगकर्ता-क्रिया के स्वतः डिवाइस संक्रमित होता है।","केवल कंप्यूटर हार्डवेयर की भौतिक चोरी से संबंधित है।","यह एक मुफ़्त एंटी-वायरस सॉफ़्टवेयर है।"], ans:1, exp:"ज़ीरो-क्लिक में बिना किसी लिंक पर क्लिक किए भी स्पाइवेयर (जैसे पेगासस) स्वतः OS की कमियों का लाभ उठाकर डिवाइस को संक्रमित कर देता है।", kf:"ज़ीरो-क्लिक: बिना यूजर-क्रिया के डिवाइस संक्रमण | उदाहरण: पेगासस", insight:["फिशिंग: लिंक क्लिक आवश्यक | ज़ीरो-क्लिक: बिना क्लिक OS कमियों से निष्पादित","परीक्षा टिप: साइबर हमलों के प्रकारों में अंतर पूछा जाता है।"] },
+  { num:17, topic:"शेयर बाजार", main:"एशियाई शेयर बाजार सूचकांकों के बारे में युग्मों पर विचार कीजिए:", sub:["1. Kospi Index — दक्षिण कोरिया","2. Nikkei 225 — जापान","3. Taiex — ताइवान","उपर्युक्त में से कितने युग्म सही हैं?"], opts:["केवल एक","केवल दो","सभी तीन","कोई भी नहीं"], ans:2, exp:"सभी तीनों युग्म सही हैं। Kospi: दक्षिण कोरिया, Nikkei 225: जापान, Taiex: ताइवान।", kf:"Kospi: दक्षिण कोरिया | Nikkei 225: जापान | Taiex: ताइवान", insight:["अन्य: Hang Seng (हांगकांग), Shanghai (चीन), Sensex/Nifty (भारत)","परीक्षा टिप: अंतर्राष्ट्रीय शेयर बाजार सूचकांकों पर सुमेलन प्रश्न पूछे जाते हैं।"] },
+  { num:18, topic:"साइबर सुरक्षा", main:"BGP (Border Gateway Protocol) हैकिंग तकनीक में क्या होता है?", sub:[], opts:["फाइलों को एन्क्रिप्ट कर फिरौती मांगी जाती है।","वाई-फाई कमजोरियों का लाभ उठाया जाता है।","इंटरनेट रूटिंग में झूठे विज्ञापन से ट्रैफिक गलत दिशा में मोड़ा जाता है।","सर्वर पर अत्यधिक अनुरोध से उसे अनुपलब्ध किया जाता है।"], ans:2, exp:"BGP हायजैकिंग में इंटरनेट रूटिंग सिस्टम में गलत घोषणा करके ट्रैफिक को इंटरसेप्ट या गलत दिशा में मोड़ा जाता है।", kf:"BGP Hijacking: इंटरनेट ट्रैफिक की दिशा बदलना | रूटिंग प्रोटोकॉल का दुरुपयोग", insight:["Ransomware: एन्क्रिप्शन+फिरौती | DDoS: सर्वर ओवरलोड | BGP: रूटिंग हेरफेर","परीक्षा टिप: साइबर खतरों के प्रकारों में अंतर पूछा जाता है।"] },
+  { num:19, topic:"ऊर्जा नीति", main:"भारत में इथेनॉल-मिश्रित पेट्रोल की वर्तमान व्यावसायिक स्थिति क्या है?", sub:[], opts:["केवल E20 वाणिज्यिक रूप से उपलब्ध है।","E22, E27, E30 सभी पंपों पर उपलब्ध हैं।","सरकार ने इथेनॉल सम्मिश्रण बंद कर दिया है।","केवल E100 वैध ईंधन है।"], ans:0, exp:"वर्तमान में केवल E20 व्यावसायिक रूप से बिक रहा है। E22, E27, E30 के मानक अधिसूचित हैं लेकिन बाजार में अभी उपलब्ध नहीं हैं।", kf:"उपलब्ध: E20 | केवल मानक अधिसूचित: E22, E27, E30 | नोडल: MoPNG", insight:["E20: उपलब्ध | E22-E30: केवल मानक","परीक्षा टिप: हरित ऊर्जा नीति के कार्यान्वयन के सटीक स्तर पर प्रश्न पूछे जाते हैं।"] },
+  { num:20, topic:"कृषि नीति", main:"एकीकृत बागवानी विकास मिशन (MIDH) के लाभार्थियों के बारे में कौन-सा सही है?", sub:[], opts:["केवल बड़े कृषि निगम","SHGs, FPOs, APMCs, राज्य कृषि विश्वविद्यालय सभी लाभार्थी हो सकते हैं।","केवल जैविक किसानों के लिए।","केवल राजस्थान के किसानों के लिए।"], ans:1, exp:"MIDH कृषि एवं किसान कल्याण मंत्रालय की योजना है। इसमें SHGs, FPOs, APMCs, राज्य कृषि विश्वविद्यालय और R&D संगठन सभी लाभार्थी हैं।", kf:"MIDH: कृषि एवं किसान कल्याण मंत्रालय | लाभार्थी: SHGs, FPOs, APMCs, विश्वविद्यालय", insight:["MIDH: बागवानी फसलों का समग्र विकास","परीक्षा टिप: केंद्रीय कृषि योजनाओं के लाभार्थी वर्गों पर प्रश्न पूछे जाते हैं।"] },
+  { num:21, topic:"पुरातत्व", main:"ASI द्वारा हाल ही में किस हड़प्पाकालीन स्थल से 8 मानव शवाधान (Burials) उत्खनित किए गए?", sub:[], opts:["बनावली","राखीगढ़ी","कालीबंगा","कुणाल"], ans:1, exp:"ASI द्वारा हरियाणा के हिसार जिले में राखीगढ़ी से 8 मानव शवाधानों की खोज की गई। इन्हें AnSI को सौंपा गया है।", kf:"राखीगढ़ी (हिसार, हरियाणा) | ASI उत्खनन | AnSI: DNA विश्लेषण", insight:["राखीगढ़ी: भारत का सबसे बड़ा हड़प्पाकालीन स्थल","कालीबंगा (राजस्थान): जोते खेत + अग्निकुंड","परीक्षा टिप: पुरातात्विक उत्खनन स्थलों पर RPSC प्रश्न पूछता है।"] },
+  { num:22, topic:"पर्यावरण-अर्थशास्त्र", main:"'ग्रीनहाउस गैस उत्सर्जन तीव्रता' (GEI) के संदर्भ में निम्नलिखित कथनों पर विचार कीजिए:", sub:["1. GEI = प्रति इकाई उत्पाद आउटपुट में उत्सर्जित ग्रीनहाउस गैसों की मात्रा।","2. CCTS के तहत GEI लक्ष्य केवल लोह और इस्पात क्षेत्र पर लागू होते हैं।","कौन-सा/से सत्य है/हैं?"], opts:["केवल 1","केवल 2","1 और 2 दोनों","न तो 1 और न ही 2"], ans:0, exp:"केवल कथन 1 सत्य है। GEI लक्ष्य केवल इस्पात तक सीमित नहीं — एल्युमिनियम, पेट्रोलियम रिफाइनरी, टेक्सटाइल पर भी लागू होते हैं।", kf:"GEI: GHG प्रति इकाई उत्पाद | बहु-क्षेत्रीय (इस्पात, एल्युमिनियम, रिफाइनरी)", insight:["GEI ≠ केवल इस्पात क्षेत्र","परीक्षा टिप: 'केवल' (Only) शब्द वाले कथनों की विशेष जांच करें।"] },
+  { num:23, topic:"पर्यावरण दिवस", main:"वर्ष 2026 के 'मरुस्थलीकरण और सूखा रोकथाम दिवस' की थीम किस पारिस्थितिकी तंत्र पर केंद्रित थी?", sub:[], opts:["तटीय मैंग्रोव और आर्द्रभूमि","रेंज़लैंड्स (चरागाह भूमि)","पर्वतीय हिमनद","उष्णकटिबंधीय वर्षावन"], ans:1, exp:"2026 थीम: 'Rangelands: Recognise. Respect. Restore.' चरागाह भूमि पृथ्वी के 50%+ भू-भाग को कवर करती है।", kf:"2026 थीम: Rangelands: Recognise. Respect. Restore. | 50%+ भू-भाग", insight:["Rangelands: खाद्य सुरक्षा और कार्बन संचयन का आधार","परीक्षा टिप: UNCCD की वार्षिक थीम्स पर प्रश्न पूछे जाते हैं।"] },
+  { num:24, topic:"संविधान", main:"अनुच्छेद 80 के अनुसार राज्य सभा के सदस्यों का निर्वाचन किसके द्वारा होता है?", sub:[], opts:["राज्यों की जनता द्वारा प्रत्यक्ष मतदान से","राज्य विधानसभाओं के निर्वाचित सदस्यों (MLAs) द्वारा","राज्य विधान परिषदों के सभी सदस्यों द्वारा","राज्यपाल द्वारा गठित निर्वाचक मंडल द्वारा"], ans:1, exp:"अनुच्छेद 80 के अनुसार राज्य विधानसभाओं के केवल निर्वाचित सदस्यों (MLAs) द्वारा एकल संक्रमणीय मत (STV) से राज्यसभा चुनाव होता है। विधान परिषद के सदस्य शामिल नहीं होते।", kf:"निर्वाचक: केवल MLAs | पद्धति: STV | विधान परिषद: शामिल नहीं", insight:["राज्य सभा: केवल MLAs | राष्ट्रपति: MP + MLA दोनों","परीक्षा टिप: 'विधान सभा' बनाम 'विधान परिषद' के अंतर पर ध्यान दें।"] },
+  { num:25, topic:"बैंकिंग", main:"निजी और सार्वजनिक क्षेत्र के बैंकों के अध्यक्षों की नियुक्ति प्रक्रिया के बारे में:", sub:["(a) निजी बैंकों के अध्यक्ष हेतु RBI की मंजूरी आवश्यक है।","(b) PSBs में FSIB की सिफारिश पर भारत सरकार नियुक्ति करती है।","कौन-सा/से सत्य है/हैं?"], opts:["केवल (a)","केवल (b)","(a) और (b) दोनों","न तो (a) और न ही (b)"], ans:2, exp:"दोनों सत्य हैं। निजी बैंकों में RBI अनुमोदन अनिवार्य है। PSBs में FSIB की सिफारिश पर केंद्र सरकार नियुक्ति करती है।", kf:"निजी बैंक: RBI अनुमोदन | PSB: FSIB सिफारिश → केंद्र सरकार", insight:["FSIB: PSBs में शीर्ष नेतृत्व चयन एजेंसी","परीक्षा टिप: बैंकिंग प्रशासन के नियामक अधिकारों पर प्रश्न पूछे जाते हैं।"] },
+  { num:26, topic:"आधुनिक इतिहास", main:"अक्टूबर 1943 की 'मॉस्को घोषणा' का मुख्य ऐतिहासिक योगदान क्या था?", sub:[], opts:["संयुक्त राष्ट्र जैसी संस्था हेतु मित्र राष्ट्रों की पहली औपचारिक प्रतिबद्धता","यूरोपीय संघ के साझा बाजार का निर्माण","परमाणु हथियारों पर प्रतिबंध","WTO के गठन का खाका तैयार करना"], ans:0, exp:"अक्टूबर 1943 में अमेरिका, ब्रिटेन, सोवियत संघ और चीन ने मॉस्को घोषणा में अंतर्राष्ट्रीय संगठन (जो बाद में UN बना) स्थापित करने की पहली प्रतिबद्धता जताई।", kf:"वर्ष: 1943 | प्रतिभागी: अमेरिका, ब्रिटेन, सोवियत संघ, चीन | UN की नींव", insight:["अटलांटिक चार्टर (1941) → मॉस्को घोषणा (1943) → सैन फ्रांसिस्को (1945) → UN","परीक्षा टिप: UN के ऐतिहासिक विकास क्रम पर प्रश्न बनते हैं।"] },
+  { num:27, topic:"औषधि विनियमन", main:"FDC दवाओं के संदर्भ में निम्नलिखित कथनों पर विचार कीजिए:", sub:["1. FDC में दो या अधिक सक्रिय सामग्रियाँ एक ही संयोजन में होती हैं।","2. FDC को 'नई दवा' माना जाता है; CDSCO से स्वतंत्र स्वीकृति अनिवार्य है।","कौन-सा/से सत्य है/हैं?"], opts:["केवल 1","केवल 2","1 और 2 दोनों","न तो 1 और न ही 2"], ans:2, exp:"दोनों सत्य हैं। FDC में दो या अधिक घटक होते हैं और इसे 'नई दवा' माना जाता है — घटक अलग-अलग स्वीकृत हों तो भी CDSCO से अलग मंजूरी अनिवार्य है।", kf:"FDC: दो या अधिक सक्रिय घटक | विधिक स्थिति: नई दवा | CDSCO स्वीकृति अनिवार्य", insight:["FDC: घटक पृथक स्वीकृत हों तो भी FDC हेतु अलग मंजूरी जरूरी","परीक्षा टिप: औषधि विनियमन के वैधानिक प्रावधानों पर प्रश्न पूछे जाते हैं।"] },
+  { num:28, topic:"श्रम नीति", main:"EPF योजना में 'मुख्य नियोक्ता' (Principal Employer) प्रावधान के बारे में कौन-सा सत्य है?", sub:[], opts:["ठेकेदार के PF न जमा करने पर अंतिम जिम्मेदारी मुख्य नियोक्ता की होगी।","मुख्य नियोक्ता संविदा श्रमिकों के अधिकारों से मुक्त होता है।","यह नियम केवल 10 से कम कर्मचारियों पर लागू होता है।","PF अंशदान ऐच्छिक हो जाता है।"], ans:0, exp:"EPF संशोधन नियमों के तहत यदि ठेकेदार PF जमा नहीं करता तो अंतिम कानूनी जिम्मेदारी मुख्य नियोक्ता की होगी।", kf:"EPF संशोधन | मुख्य नियोक्ता: PF की अंतिम जिम्मेदारी | लक्षित: संविदा श्रमिक", insight:["मुख्य नियोक्ता: जहाँ कार्य संचालित | ठेकेदार: मध्यस्थ एजेंसी","परीक्षा टिप: श्रम कल्याण सुधारों पर प्रश्न बनते हैं।"] },
+  { num:29, topic:"रक्षा प्रौद्योगिकी", main:"भारत की स्वदेशी 'बैलिस्टिक मिसाइल रक्षा' (BMD) प्रणाली का प्राथमिक कार्य क्या है?", sub:[], opts:["बैलिस्टिक मिसाइलों को बहुस्तरीय रक्षा द्वारा हवा में नष्ट करना","उथले जल में पनडुब्बी रोधी अभियान","उपग्रहों से सैन्य डेटा एकत्र करना","तटीय क्षेत्रों में रडार सिग्नल ब्लॉक करना"], ans:0, exp:"DRDO की BMD प्रणाली बहुस्तरीय (Multi-layered) रक्षा कवच है जो Endo और Exo-atmospheric इंटरसेप्टर मिसाइलों द्वारा दुश्मन बैलिस्टिक मिसाइलों को नष्ट करती है।", kf:"विकासकर्ता: DRDO | बहुस्तरीय BMD | Endo + Exo-atmospheric इंटरसेप्शन", insight:["Endo-atmospheric: वायुमंडल भीतर (कम ऊँचाई)","Exo-atmospheric: वायुमंडल बाहर (अधिक ऊँचाई)","परीक्षा टिप: मिसाइल रक्षा इंटरसेप्टर श्रेणियों के कार्य पर प्रश्न पूछे जाते हैं।"] },
+  { num:30, topic:"पर्यावरण प्रबंधन", main:"'फ्लाई एश' (Fly Ash) के बारे में निम्नलिखित कथनों पर विचार कीजिए:", sub:["(a) इसका उपयोग सड़क, ईंट और सीमेंट निर्माण में होता है।","(b) इसके सुरक्षित संधारणीय प्रबंधन की आवश्यकता होती है।","कौन-सा/से सत्य है/हैं?"], opts:["केवल (a)","केवल (b)","(a) और (b) दोनों","न तो (a) और न ही (b)"], ans:2, exp:"दोनों सत्य हैं। फ्लाई एश तापीय ऊर्जा संयंत्रों का उप-उत्पाद है। इसका उपयोग सड़क, ईंट और सीमेंट में होता है और इसके सुरक्षित प्रबंधन की आवश्यकता है।", kf:"स्रोत: थर्मल पावर प्लांट | उपयोग: सीमेंट, ईंटें, सड़क | पर्यावरणीय प्रबंधन जरूरी", insight:["घटक: सिलिका, एल्युमिना, आयरन ऑक्साइड","परीक्षा टिप: हरित अवसंरचना और औद्योगिक अपशिष्ट प्रबंधन पर प्रश्न बनते हैं।"] },
+  { num:31, topic:"रक्षा प्रौद्योगिकी", main:"भारतीय सशस्त्र बलों द्वारा प्रयुक्त 'AH-64 अपाचे' के बारे में कौन-सा सत्य है?", sub:[], opts:["रूस निर्मित परिवहन हेलीकॉप्टर","बोइंग (अमरीका) निर्मित उन्नत अटैक हेलीकॉप्टर","स्वदेशी एकल-चालक लड़ाकू विमान","फ्रांस निर्मित Reconnaissance हेलीकॉप्टर"], ans:1, exp:"AH-64 अपाचे बोइंग (अमरीका) का 2-सीटर अटैक हेलीकॉप्टर है जिसमें पायलट और गनर दोनों होते हैं।", kf:"निर्माता: बोइंग (अमरीका) | 2-सीटर | आक्रामक हवाई सहायता", insight:["AH-64: अमरीकी (आयातित) | प्रचंड/ध्रुव: स्वदेशी HAL","परीक्षा टिप: आयातित और स्वदेशी प्लेटफार्मों में अंतर पूछा जाता है।"] },
+  { num:32, topic:"स्वास्थ्य नीति", main:"'आयुष्मान भारत - PM-JAY' के तहत वित्तीय स्वास्थ्य सुरक्षा का मुख्य दायरा क्या है?", sub:[], opts:["प्रति परिवार प्रतिवर्ष ₹5,00,000 का कैशलेस अस्पतालीकरण कवरेज","केवल प्राथमिक OPD हेतु सहायता","केवल 60 वर्ष+ के नागरिकों हेतु पेंशन","केवल संक्रामक रोगों हेतु अनुदान"], ans:0, exp:"PM-JAY गरीब परिवारों को द्वितीयक और तृतीयक स्वास्थ्य देखभाल हेतु प्रति परिवार प्रति वर्ष ₹5 लाख का कैशलेस कवरेज प्रदान करती है।", kf:"PM-JAY | NHA | बीमा: ₹5 लाख/परिवार/वर्ष | द्वितीयक + तृतीयक कवरेज", insight:["PM-JAY: द्वितीयक + तृतीयक (प्राथमिक नहीं)","संचारी व गैर-संचारी दोनों रोग शामिल","परीक्षा टिप: प्रमुख स्वास्थ्य योजनाओं के बीमा मानकों पर प्रश्न पूछे जाते हैं।"] },
+  { num:33, topic:"चुनाव प्रक्रिया", main:"चुनाव चिन्ह आबंटन किस कानूनी आदेश के तहत होता है?", sub:[], opts:["जन प्रतिनिधित्व अधिनियम, 1951","चुनाव चिन्ह (आरक्षण एवं आबंटन) आदेश, 1968","परिसीमन अधिनियम, 2002","भारतीय संविधान अनुच्छेद 324"], ans:1, exp:"निर्वाचन आयोग 'चुनाव चिन्ह (आरक्षण एवं आबंटन) आदेश, 1968' के तहत प्रतीक आवंटित करता है। मान्यता प्राप्त दलों को आरक्षित और गैर-मान्यता प्राप्त को मुक्त प्रतीक दिए जाते हैं।", kf:"Election Symbols Order, 1968 | आरक्षित: मान्यता प्राप्त दल | मुक्त: गैर-मान्यता + निर्दलीय", insight:["आरक्षित प्रतीक: राष्ट्रीय/राज्यीय मान्यता प्राप्त दल","परीक्षा टिप: ECI की विधिक शक्तियों पर प्रश्न बनते हैं।"] },
+  { num:34, topic:"विदेशी मुद्रा", main:"RBI की FCNR(B) जमा योजना के बारे में निम्नलिखित कथनों पर विचार कीजिए:", sub:["(a) यह NRIs, PIOs और OCIs हेतु निश्चित अवधि की जमा योजना है।","(b) इसका उद्देश्य विदेशी मुद्रा अंतर्वाह बढ़ाना है।","कौन-सा/से सत्य है/हैं?"], opts:["केवल (a)","केवल (b)","(a) और (b) दोनों","न तो (a) और न ही (b)"], ans:2, exp:"दोनों सत्य हैं। FCNR(B) विदेशी मुद्रा में सावधि जमा योजना है जिसमें NRI, PIO और OCI — सभी पात्र हैं।", kf:"FCNR(B): NRI, PIO, OCI — विदेशी मुद्रा सावधि जमा | उद्देश्य: Foreign Inflows", insight:["OCI भी पात्र (केवल NRI नहीं)","परीक्षा टिप: विदेशी मुद्रा योजनाओं के पात्र समूहों पर प्रश्न पूछे जाते हैं।"] },
+  { num:35, topic:"ऊर्जा नीति", main:"भारत में इथेनॉल-मिश्रित पेट्रोल की वर्तमान स्थिति?", sub:[], opts:["केवल E20 वाणिज्यिक रूप से उपलब्ध।","E22, E27, E30 सभी पंपों पर उपलब्ध।","सरकार ने इथेनॉल सम्मिश्रण बंद किया।","केवल E100 वैध।"], ans:0, exp:"केवल E20 बाजार में बिक रहा है। E22, E27, E30 के मानक अधिसूचित हैं लेकिन अभी बाजार में नहीं हैं।", kf:"उपलब्ध: E20 | मानक अधिसूचित: E22, E27, E30 | MoPNG", insight:["E20: उपलब्ध | E22-E30: केवल मानक अधिसूचित","परीक्षा टिप: नीति के कार्यान्वयन के सटीक स्तर पर प्रश्न पूछे जाते हैं।"] },
+  { num:36, topic:"शासन संस्थाएं", main:"NITI आयोग की गवर्निंग काउंसिल के बारे में निम्नलिखित कथनों पर विचार कीजिए:", sub:["1. इसकी बैठकों की अध्यक्षता प्रधानमंत्री करते हैं।","2. सभी राज्यों के मुख्यमंत्री इसके अनिवार्य सदस्य होते हैं।","कौन-सा/से सत्य है/हैं?"], opts:["केवल 1","केवल 2","1 और 2 दोनों","न तो 1 और न ही 2"], ans:2, exp:"दोनों सत्य हैं। गवर्निंग काउंसिल के अध्यक्ष प्रधानमंत्री होते हैं और सभी राज्यों के मुख्यमंत्री सदस्य होते हैं।", kf:"अध्यक्ष: PM | 11वीं बैठक थीम: Inclusive Human Development for Viksit Bharat@2047", insight:["अध्यक्षता: PM (उपाध्यक्ष नहीं)","परीक्षा टिप: NITI आयोग की संगठनात्मक संरचना पर प्रश्न आते हैं।"] },
+  { num:37, topic:"शिक्षा नीति", main:"सरकारी कॉलेजों में मुफ्त उच्च शिक्षा की घोषणा करने वाला भारत का पहला राज्य कौन-सा है?", sub:[], opts:["कर्नाटक","ओडिशा","केरल","असम"], ans:1, exp:"ओडिशा सरकार ने राज्य के सरकारी कॉलेजों और विश्वविद्यालयों में सभी विद्यार्थियों के लिए उच्च शिक्षा पूर्णतः निःशुल्क करने की घोषणा की है।", kf:"ओडिशा: पहला राज्य — सरकारी उच्च शिक्षा निःशुल्क", insight:["परीक्षा टिप: 'पहला राज्य' श्रेणी की सामाजिक-कल्याणकारी योजनाओं पर RPSC में प्रश्न पूछे जाते हैं।"] },
+  { num:38, topic:"भारतीय नौसेना", main:"नौसेना स्टेशनों और उनकी भौगोलिक स्थिति के युग्मों पर विचार कीजिए:", sub:["1. INS राजाली — अराकोणम (तमिलनाडु)","2. INS डेगा — विशाखापट्टनम (आंध्र प्रदेश)","3. INS बाज़ — ग्रेट निकोबार","कितने सही सुमेलित हैं?"], opts:["केवल 1 और 2","केवल 2 और 3","केवल 1 और 3","1, 2 और 3 सभी"], ans:3, exp:"सभी तीनों युग्म सही हैं। INS राजाली: अराकोणम (TN), INS डेगा: विशाखापट्टनम (AP), INS बाज़: ग्रेट निकोबार।", kf:"INS राजाली: अराकोणम | INS डेगा: विशाखापट्टनम | INS बाज़: ग्रेट निकोबार", insight:["INS बाज़: अंडमान व निकोबार (अत्यंत रणनीतिक)","परीक्षा टिप: नौसेना स्टेशनों की भौगोलिक स्थिति पर सुमेलन प्रश्न पूछे जाते हैं।"] },
+  { num:39, topic:"मीडिया नीति", main:"मसौदा 'दूरसंचार (TV, Radio) नियम, 2026' के तहत प्रस्तावित दायित्व:", sub:["(a) TV चैनलों को प्रतिदिन कम से कम 30 मिनट राष्ट्रीय महत्व की सामग्री।","(b) लगातार 60 दिन से अधिक बंद रहने पर सरकार को सूचित करना।","(c) निजी FM को प्रतिदिन कम से कम 1 घंटे सामाजिक कार्यक्रम।","सभी सत्य हैं?"], opts:["केवल (a) सत्य","केवल (b) सत्य","केवल (a) और (b) सत्य","(a), (b) और (c) सभी सत्य"], ans:3, exp:"तीनों प्रस्तावित दायित्व सत्य हैं: TV को 30 मिनट राष्ट्रीय सामग्री, 60 दिन बंद पर सूचना, FM को 1 घंटे सामाजिक कार्यक्रम।", kf:"TV: 30 मिनट (60 नहीं) | 60 दिन बंद: सूचना अनिवार्य | FM: 1 घंटा सामाजिक", insight:["ध्यान: TV के लिए 30 मिनट है, 60 नहीं","परीक्षा टिप: नवीन मीडिया नियमों की समय-सीमाओं पर प्रश्न बनते हैं।"] },
+  { num:40, topic:"बौद्धिक संपदा", main:"GI Tag के कानूनी प्रावधानों के बारे में निम्नलिखित कथनों पर विचार कीजिए:", sub:["(a) यह GI Act, 1999 के तहत जारी होता है।","(b) प्रारंभिक वैधता 10 वर्ष है जिसे 10-10 वर्षों में नवीनीकृत करा सकते हैं।","कौन-सा/से सत्य है/हैं?"], opts:["केवल (a)","केवल (b)","(a) और (b) दोनों","न तो (a) और न ही (b)"], ans:2, exp:"दोनों सत्य हैं। GI Act 1999 के तहत वाणिज्य एवं उद्योग मंत्रालय की GI Registry द्वारा जारी। वैधता: 10 वर्ष (नवीनीकरण योग्य)।", kf:"GI Act 1999 | जारीकर्ता: GI Registry (वाणिज्य मंत्रालय) | वैधता: 10 वर्ष", insight:["GI Tag: गृह मंत्रालय नहीं — वाणिज्य एवं उद्योग मंत्रालय","परीक्षा टिप: IPR में GI टैग के विधिक आधार पर प्रश्न सीधे पूछे जाते हैं।"] },
+  { num:41, topic:"पर्यावरण संस्थाएं", main:"'ग्लोबल केमिकल्स मॉनिटरिंग प्रोग्राम' (GCMP) किनके संयुक्त प्रयास से शुरू हुआ?", sub:[], opts:["UNEP और GEF","विश्व बैंक और IMF","केवल WHO","नीति आयोग और CPCB"], ans:0, exp:"UNEP और GEF ने 23.5 मिलियन डॉलर से GCMP शुरू किया। इसका लक्ष्य स्टॉकहोम सम्मेलन (POPs) और मिनामाता सम्मेलन (Mercury) की प्रभावशीलता निगरानी है।", kf:"GCMP: UNEP + GEF | स्टॉकहोम: POPs | मिनामाता: Mercury", insight:["स्टॉकहोम: स्थायी जैविक प्रदूषक | मिनामाता: पारा","परीक्षा टिप: पर्यावरण समझौतों के नोडल संगठनों पर प्रश्न बनते हैं।"] },
+  { num:42, topic:"पर्यावरण दिवस", main:"2026 के 'मरुस्थलीकरण और सूखा रोकथाम दिवस' की थीम किस पर आधारित थी?", sub:[], opts:["तटीय मैंग्रोव वन","रेंज़लैंड्स (चरागाह भूमि)","पर्वतीय हिमनद","उष्णकटिबंधीय आर्द्रभूमि"], ans:1, exp:"2026 थीम: 'Rangelands: Recognise. Respect. Restore.' चरागाह भूमि पृथ्वी के 50%+ भू-भाग को आच्छादित करती है।", kf:"थीम: Rangelands: Recognise. Respect. Restore. | 50%+ भू-भाग", insight:["Rangelands: वैश्विक खाद्य सुरक्षा और कार्बन संचयन का आधार","परीक्षा टिप: UNCCD की वार्षिक थीम्स की सटीक शब्दावली याद रखें।"] },
+  { num:43, topic:"बैंकिंग", main:"निजी और PSB बैंकों के Chairman पद की नियुक्ति प्रक्रिया के बारे में कौन-सा सत्य है?", sub:[], opts:["केवल निजी बैंकों में RBI पूर्वानुमति अनिवार्य।","केवल PSBs में FSIB सिफारिश पर नियुक्ति।","दोनों (a) और (b) सत्य हैं।","न तो (a) और न ही (b) सत्य।"], ans:2, exp:"दोनों सत्य हैं। निजी बैंकों में RBI की पूर्व स्वीकृति अनिवार्य है। PSBs में FSIB की अनुशंसा पर केंद्र सरकार नियुक्ति करती है।", kf:"निजी बैंक: RBI अनुमोदन | PSB: FSIB → केंद्र सरकार", insight:["FSIB: PSBs में शीर्ष नेतृत्व की चयन एजेंसी","परीक्षा टिप: बैंकिंग शासन के प्रशासनिक अंतरों पर प्रश्न पूछे जाते हैं।"] },
+  { num:44, topic:"पर्यावरण-व्यापार", main:"EU की 'CBAM' नीति का भारतीय निर्यात पर मुख्य प्रभाव क्या होगा?", sub:[], opts:["लोहा, इस्पात, एल्युमिनियम पर अतिरिक्त कार्बन शुल्क लगेगा।","भारतीय IT सेवाओं पर पूर्ण प्रतिबंध।","वस्त्र उद्योग को शून्य सीमा शुल्क।","कृषि उत्पादों के लिए यूरोपीय बाजार बंद।"], ans:0, exp:"CBAM कार्बन-गहन वस्तुओं के आयात पर उनके उत्पादन में हुए कार्बन उत्सर्जन के आधार पर शुल्क लगाती है। भारत के लिए लोहा, इस्पात और एल्युमिनियम सर्वाधिक प्रभावित होंगे।", kf:"CBAM: EU नीति | सर्वाधिक प्रभावित: लोहा, इस्पात, एल्युमिनियम | Embedded Emissions", insight:["CBAM: Embedded Emissions पर प्रमाणपत्र जमा करना अनिवार्य","परीक्षा टिप: अंतर्राष्ट्रीय व्यापार व पर्यावरण करों के प्रभावों को समझें।"] },
+  { num:45, topic:"उपभोक्ता संरक्षण", main:"'उपभोक्ता संरक्षण अधिनियम, 2019' में 'भ्रामक विज्ञापन' की परिभाषा में क्या शामिल है?", sub:[], opts:["केवल उत्पाद की गुणवत्ता के बारे में गलत दावे","केवल झूठी गारंटी","केवल जानकारियाँ छिपाना","उपर्युक्त सभी"], ans:3, exp:"उपभोक्ता संरक्षण अधिनियम, 2019 में भ्रामक विज्ञापनों में झूठे दावे, भ्रामक वारंटी और महत्वपूर्ण तथ्यों को जानबूझकर छिपाना — सभी शामिल हैं।", kf:"कानून: उपभोक्ता संरक्षण अधिनियम, 2019 | नियामक: CCPA | दायरा: गलत दावे + तथ्य छिपाना", insight:["CCPA: भ्रामक विज्ञापन पर जुर्माना लगाने का अधिकार","परीक्षा टिप: उपभोक्ता अधिकारों के वैधानिक मानदंडों पर प्रश्न बनते हैं।"] },
+  { num:46, topic:"चुनाव प्रक्रिया", main:"'विशेष गहन पुनरीक्षण' (SIR) का प्राथमिक उद्देश्य क्या है?", sub:[], opts:["संसदीय क्षेत्रों का परिसीमन","घर-घर सत्यापन द्वारा मतदाता सूचियों को त्रुटिरहित बनाना","राष्ट्रीय दलों के वित्तीय खातों का ऑडिट","विदेशी नागरिकों के लिए मताधिकार नियम बनाना"], ans:1, exp:"SIR में BLO अधिकारी घर-घर जाकर मतदाता विवरणों का भौतिक सत्यापन करते हैं ताकि फर्जी प्रविष्टियाँ हटाई जा सकें।", kf:"SIR: BLO द्वारा घर-घर सत्यापन | मतदाता सूची शुद्धिकरण", insight:["SIR: मतदाता सूची शुद्धीकरण (परिसीमन से अलग)","परीक्षा टिप: चुनावी प्रशासनिक शब्दावलियों को ध्यान से पढ़ें।"] },
+  { num:47, topic:"विज्ञान", main:"अमोनिया गैस के अत्यधिक संपर्क से क्या प्रभाव पड़ सकते हैं?", sub:[], opts:["केवल आँखों में जलन","केवल श्वास मार्ग में सूजन","केवल त्वचा पर छाले","उपर्युक्त सभी"], ans:3, exp:"अमोनिया के उच्च संपर्क से आँखों में जलन, श्वसन नली में सूजन और त्वचा पर रासायनिक छाले — तीनों होते हैं।", kf:"अमोनिया (NH3): आँखें, श्वास नली, त्वचा — तीनों प्रभावित", insight:["अमोनिया: अस्थि मज्जा को सीधे प्रभावित नहीं करती","परीक्षा टिप: विषैले रसायनों के जैविक प्रभावों पर प्रश्न पूछे जाते हैं।"] },
+  { num:48, topic:"साइबर सुरक्षा", main:"'ज़ीरो-क्लिक' एक्सप्लॉइट की मुख्य विशेषता क्या है?", sub:[], opts:["बार-बार लिंक क्लिक आवश्यक।","बिना किसी उपयोगकर्ता-क्रिया के डिवाइस संक्रमित होता है।","केवल हार्डवेयर चोरी से संबंधित।","मुफ़्त एंटी-वायरस सॉफ़्टवेयर है।"], ans:1, exp:"ज़ीरो-क्लिक में बिना लिंक क्लिक किए OS की कमियों से स्पाइवेयर (पेगासस) स्वतः डिवाइस संक्रमित करता है।", kf:"ज़ीरो-क्लिक: बिना यूजर-क्रिया | उदाहरण: पेगासस स्पाइवेयर (NSO Group)", insight:["फिशिंग: लिंक क्लिक जरूरी | ज़ीरो-क्लिक: बिना क्लिक OS कमियों से","परीक्षा टिप: साइबर हमलों के प्रकारों में अंतर पूछा जाता है।"] },
+  { num:49, topic:"FATF संरचना", main:"FATF की संगठनात्मक संरचना के बारे में निम्नलिखित कथनों पर विचार कीजिए:", sub:["1. उपाध्यक्ष का चुनाव FATF प्लेनरी द्वारा 2 वर्ष के लिए।","2. यूरोपीय आयोग और GCC जैसे क्षेत्रीय संगठन भी सदस्य हैं।","कौन-सा/से सत्य है/हैं?"], opts:["केवल 1","केवल 2","1 और 2 दोनों","न तो 1 और न ही 2"], ans:2, exp:"दोनों सत्य हैं। FATF के 40 सदस्यों में संप्रभु देश + यूरोपीय आयोग और GCC जैसे क्षेत्रीय संगठन शामिल हैं।", kf:"FATF: पेरिस | उपाध्यक्ष: 2 वर्ष | 40 सदस्य (देश + क्षेत्रीय निकाय)", insight:["FATF: मानकीकरण निकाय (No Prosecutorial Power)","ग्रे/ब्लैक लिस्ट: AML/CFT में विफल देशों हेतु","परीक्षा टिप: अंतर्राष्ट्रीय वित्तीय निकायों के कानूनी अधिकारों पर प्रश्न महत्वपूर्ण हैं।"] },
+  { num:50, topic:"डिजिटल प्लेटफॉर्म", main:"'एयर सुविधा 2.0' किसके लिए अनिवार्य बनाया गया है?", sub:[], opts:["भारत से विदेश जाने वाले सभी नागरिक","भारत में आने वाले (Incoming) अंतर्राष्ट्रीय यात्रियों के स्वास्थ्य स्व-घोषणा हेतु","अंतर-राज्यीय बस यात्री","रेलवे ऑनलाइन टिकट आरक्षण"], ans:1, exp:"एयर सुविधा 2.0 भारत में आने वाले अंतर्राष्ट्रीय यात्रियों के लिए बोर्डिंग से पूर्व ऑनलाइन स्वास्थ्य स्व-घोषणा पत्र जमा करने का संपर्क रहित डिजिटल प्लेटफॉर्म है।", kf:"एयर सुविधा 2.0 | Incoming अंतर्राष्ट्रीय यात्री | स्वास्थ्य स्व-घोषणा", insight:["लक्षित: केवल Incoming यात्री (Outgoing नहीं)","परीक्षा टिप: सरकारी पोर्टलों के विशिष्ट उद्देश्यों को ध्यान से पढ़ें।"] }
+];
+
+// ══════════════════════════════════════════════════════════
+//  STATE
+// ══════════════════════════════════════════════════════════
+const KEYS = ['A','B','C','D'];
+let state = {
+  cur: 0,
+  answers: new Array(50).fill(-1),
+  timerSecs: 7200,
+  timerInterval: null,
+};
+window._timerStarted = false;
+
+// ══════════════════════════════════════════════════════════
+//  AUTH HELPERS
+// ══════════════════════════════════════════════════════════
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+async function signInWithGoogle() {
+  try {
+    await window._signInWithPopup(window._auth, window._provider);
+  } catch(e) {
+    console.error('Sign-in error:', e);
+    alert('Sign-in failed. Please try again.');
+  }
+}
+window.signInWithGoogle = signInWithGoogle;
+
+async function doSignOut() {
+  clearInterval(state.timerInterval);
+  window._timerStarted = false;
+  state = { cur:0, answers: new Array(50).fill(-1), timerSecs:7200, timerInterval:null };
+  await window._signOut(window._auth);
+}
+window.doSignOut = doSignOut;
+
+function setupUserBar(user) {
+  document.getElementById('user-name-lbl').textContent = user.displayName || 'Student';
+  document.getElementById('user-email-lbl').textContent = user.email || '';
+  const ph = document.getElementById('user-avatar-ph');
+  if (user.photoURL) {
+    ph.outerHTML = `<img class="user-avatar" src="${user.photoURL}" alt="avatar" id="user-avatar-ph">`;
+  } else {
+    ph.textContent = (user.displayName||'V')[0].toUpperCase();
+  }
+}
+
+// ══════════════════════════════════════════════════════════
+//  TIMER
+// ══════════════════════════════════════════════════════════
+function startTimer() {
+  window._timerStarted = true;
+  state.timerSecs = 7200;
+  updateTimerDisplay();
+  state.timerInterval = setInterval(() => {
+    state.timerSecs--;
+    updateTimerDisplay();
+    if (state.timerSecs <= 0) {
+      clearInterval(state.timerInterval);
+      autoSubmit();
+    }
+  }, 1000);
+}
+
+function updateTimerDisplay() {
+  const h = Math.floor(state.timerSecs / 3600);
+  const m = Math.floor((state.timerSecs % 3600) / 60);
+  const s = state.timerSecs % 60;
+  const str = `${h}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  const el = document.getElementById('timer-val');
+  el.textContent = str;
+  el.classList.toggle('warning', state.timerSecs <= 300);
+}
+
+function autoSubmit() {
+  document.getElementById('modal-title').textContent = 'समय समाप्त!';
+  document.getElementById('modal-sub').textContent = 'आपका समय समाप्त हो गया। Quiz अब Submit हो रही है।';
+  document.getElementById('modal-submit').classList.remove('hidden');
+  setTimeout(() => { submitQuiz(); }, 2000);
+}
+
+// ══════════════════════════════════════════════════════════
+//  QUIZ RENDER
+// ══════════════════════════════════════════════════════════
+function buildDots() {
+  const wrap = document.getElementById('q-dots');
+  wrap.innerHTML = '';
+  QUESTIONS.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'q-dot';
+    d.textContent = i + 1;
+    d.id = `dot-${i}`;
+    d.onclick = () => { state.cur = i; renderQuestion(); };
+    wrap.appendChild(d);
+  });
+  updateDots();
+}
+
+function updateDots() {
+  QUESTIONS.forEach((q, i) => {
+    const d = document.getElementById(`dot-${i}`);
+    if (!d) return;
+    d.className = 'q-dot';
+    if (i === state.cur) d.classList.add('current');
+    else if (state.answers[i] !== -1) d.classList.add('answered');
+  });
+}
+
+function renderQuestion() {
+  const q = QUESTIONS[state.cur];
+  const idx = state.cur;
+
+  document.getElementById('prog-count').textContent = `${idx+1} / 50`;
+  document.getElementById('prog-fill').style.width = `${((idx+1)/50)*100}%`;
+  document.getElementById('q-num-chip').textContent = `Q ${idx+1}`;
+  document.getElementById('q-topic-chip').textContent = q.topic;
+  document.getElementById('q-main-text').textContent = q.main;
+
+  const sublinesEl = document.getElementById('q-sublines');
+  if (q.sub && q.sub.length) {
+    sublinesEl.style.display = 'block';
+    sublinesEl.innerHTML = q.sub.map(s => `<div class="q-subline">${s}</div>`).join('');
+  } else {
+    sublinesEl.style.display = 'none';
+    sublinesEl.innerHTML = '';
+  }
+
+  const wrap = document.getElementById('options-wrap');
+  wrap.innerHTML = '';
+  q.opts.forEach((opt, i) => {
+    const div = document.createElement('div');
+    div.className = 'option';
+    if (state.answers[idx] === i) div.classList.add('selected');
+    div.innerHTML = `<span class="opt-key">${KEYS[i]}</span><span class="opt-text">${opt}</span>`;
+    div.onclick = () => selectOption(i);
+    wrap.appendChild(div);
+  });
+
+  // Nav
+  const prevBtn = document.getElementById('btn-prev');
+  prevBtn.style.opacity = idx === 0 ? '0.4' : '1';
+  prevBtn.disabled = idx === 0;
+
+  const nextBtn = document.getElementById('btn-next');
+  const submitWrap = document.getElementById('submit-wrap');
+  const submitAlways = document.getElementById('submit-always');
+
+  if (idx === 49) {
+    nextBtn.style.display = 'none';
+    submitWrap.style.display = 'block';
+    submitAlways.style.display = 'none';
+  } else {
+    nextBtn.style.display = 'block';
+    submitWrap.style.display = 'none';
+    submitAlways.style.display = 'block';
+  }
+
+  updateDots();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function selectOption(i) {
+  state.answers[state.cur] = i;
+  // Re-render options only
+  const opts = document.querySelectorAll('#options-wrap .option');
+  opts.forEach((el, idx) => {
+    el.classList.toggle('selected', idx === i);
+  });
+  updateDots();
+}
+
+function prevQ() {
+  if (state.cur > 0) { state.cur--; renderQuestion(); }
+}
+window.prevQ = prevQ;
+
+function nextQ() {
+  if (state.cur < 49) { state.cur++; renderQuestion(); }
+}
+window.nextQ = nextQ;
+
+function skipQ() {
+  // Move to next unanswered question
+  let next = state.cur + 1;
+  if (next >= 50) next = 0;
+  // Find next unanswered
+  for (let i = 1; i <= 50; i++) {
+    const idx = (state.cur + i) % 50;
+    if (state.answers[idx] === -1) { next = idx; break; }
+  }
+  state.cur = next;
+  renderQuestion();
+}
+window.skipQ = skipQ;
+
+// ══════════════════════════════════════════════════════════
+//  SUBMIT
+// ══════════════════════════════════════════════════════════
+function confirmSubmit() {
+  const unanswered = state.answers.filter(a => a === -1).length;
+  document.getElementById('modal-title').textContent = 'Quiz Submit करें?';
+  document.getElementById('modal-sub').textContent = unanswered > 0
+    ? `${unanswered} प्रश्न अभी भी छोड़े हुए हैं। क्या आप Submit करना चाहते हैं?`
+    : 'सभी प्रश्नों के उत्तर दिए जा चुके हैं। Submit करें?';
+  document.getElementById('modal-submit').classList.remove('hidden');
+}
+window.confirmSubmit = confirmSubmit;
+
+function closeModal() {
+  document.getElementById('modal-submit').classList.add('hidden');
+}
+window.closeModal = closeModal;
+
+async function submitQuiz() {
+  closeModal();
+  clearInterval(state.timerInterval);
+
+  let correct = 0, wrong = 0, skip = 0;
+  QUESTIONS.forEach((q, i) => {
+    if (state.answers[i] === -1) skip++;
+    else if (state.answers[i] === q.ans) correct++;
+    else wrong++;
+  });
+
+  // Save to Firestore
+  try {
+    if (window._currentUser && window._db) {
+      const uid = window._currentUser.uid;
+      const ref = window._doc(window._db, 'quiz_results', `${uid}_july2026`);
+      await window._setDoc(ref, {
+        uid,
+        name: window._currentUser.displayName,
+        email: window._currentUser.email,
+        score: correct,
+        wrong,
+        skipped: skip,
+        total: 50,
+        percentage: Math.round((correct/50)*100),
+        answers: state.answers,
+        submittedAt: window._serverTimestamp(),
+        quizId: 'current_affairs_july2026'
+      });
+    }
+  } catch(e) { console.log('Firestore save error:', e); }
+
+  // Build result UI
+  document.getElementById('score-big').textContent = correct;
+  document.getElementById('st-correct').textContent = correct;
+  document.getElementById('st-wrong').textContent = wrong;
+  document.getElementById('st-skip').textContent = skip;
+  const pct = Math.round((correct/50)*100);
+  document.getElementById('result-pct').textContent = `${pct}% सही`;
+  let msg = '';
+  if (pct >= 80) msg = 'शानदार प्रदर्शन!';
+  else if (pct >= 60) msg = 'अच्छा प्रयास! और मेहनत करें।';
+  else if (pct >= 40) msg = 'ठीक है। कमजोर विषयों पर ध्यान दें।';
+  else msg = 'निराश न हों। व्याख्याएं पढ़ें और पुनः प्रयास करें।';
+  document.getElementById('result-msg').textContent = msg;
+
+  // Review list
+  const list = document.getElementById('review-list');
+  list.innerHTML = '';
+  QUESTIONS.forEach((q, i) => {
+    const ua = state.answers[i];
+    const isCorrect = ua === q.ans;
+    const isSkip = ua === -1;
+    const div = document.createElement('div');
+    div.className = `review-item ${isSkip ? 'r-skip' : isCorrect ? 'r-correct' : 'r-wrong'}`;
+
+    let statusIcon = isSkip ? '—' : isCorrect ? '✓' : '✗';
+    let statusColor = isSkip ? '#94A3B8' : isCorrect ? '#4ADE80' : '#F87171';
+    let yourAns = isSkip
+      ? `<span style="color:#94A3B8;font-size:12px;">छोड़ा गया</span>`
+      : `<span style="color:${statusColor};font-size:12px;">आपका: (${KEYS[ua]}) ${q.opts[ua]}</span>`;
+    let correctAns = !isCorrect
+      ? `<div style="color:#4ADE80;font-size:12px;margin-top:4px;">सही: (${KEYS[q.ans]}) ${q.opts[q.ans]}</div>`
+      : '';
+
+    // Answer box
+    const boxClass = isSkip ? 'skipped-ans' : isCorrect ? 'correct-ans' : 'wrong-ans';
+    div.innerHTML = `
+      <div class="review-q-num">प्रश्न ${i+1} — ${q.topic} <span style="color:${statusColor};font-weight:700;">${statusIcon}</span></div>
+      <div class="review-q-text">${q.main}</div>
+      <div>${yourAns}${correctAns}</div>
+      <div class="answer-box ${boxClass}" style="display:block;">
+        <div class="vyakhya-title">व्याख्या</div>
+        <div class="vyakhya-text">${q.exp}</div>
+        <div class="keyfact-row">
+          <span class="keyfact-label">Key Fact</span>
+          <span class="keyfact-text">${q.kf}</span>
+        </div>
+        <div class="insight-wrap">
+          <div class="insight-title"><span class="insight-dot"></span>Voxa Exam Insight</div>
+          ${q.insight.map(l => `<div class="insight-line">${l}</div>`).join('')}
+        </div>
+      </div>
+    `;
+    list.appendChild(div);
+  });
+
+  showScreen('screen-result');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+window.submitQuiz = submitQuiz;
+
+function retakeQuiz() {
+  state.answers = new Array(50).fill(-1);
+  state.cur = 0;
+  window._timerStarted = false;
+  startTimer();
+  buildDots();
+  renderQuestion();
+  showScreen('screen-quiz');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+window.retakeQuiz = retakeQuiz;
+</script>
+</body>
+</html>
