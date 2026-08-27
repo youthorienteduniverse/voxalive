@@ -6,141 +6,80 @@
   <title>उपयोग की शर्तें — Voxa VMOU</title>
   <style>
     :root {
-      --primary:   #3D35C8;
+      --primary:       #3D35C8;
       --primary-light: #EEF2FF;
-      --accent:    #10B981;
-      --text:      #1A1A2E;
-      --muted:     #6B7280;
-      --border:    #E5E7EB;
-      --bg:        #F9FAFB;
-      --card:      #FFFFFF;
+      --accent:        #10B981;
+      --text:          #1A1A2E;
+      --muted:         #6B7280;
+      --border:        #E5E7EB;
+      --bg:            #F9FAFB;
+      --card:          #FFFFFF;
     }
-
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
                    'Noto Sans', 'Noto Sans Devanagari', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.8;
-      font-size: 15px;
+      background: var(--bg); color: var(--text);
+      line-height: 1.8; font-size: 15px;
     }
-
-    /* ── Header ── */
     header {
       background: var(--primary);
-      padding: 36px 24px 28px;
-      text-align: center;
+      padding: 36px 24px 28px; text-align: center;
     }
     header .logo {
       display: inline-block;
       background: rgba(255,255,255,0.15);
-      border-radius: 12px;
-      padding: 8px 20px;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      color: rgba(255,255,255,0.9);
-      text-transform: uppercase;
-      margin-bottom: 14px;
+      border-radius: 12px; padding: 8px 20px;
+      font-size: 13px; font-weight: 700;
+      letter-spacing: 0.06em; color: rgba(255,255,255,0.9);
+      text-transform: uppercase; margin-bottom: 14px;
     }
     header h1 {
       font-size: clamp(22px, 5vw, 30px);
-      font-weight: 800;
-      color: #fff;
-      line-height: 1.25;
+      font-weight: 800; color: #fff; line-height: 1.25;
     }
     header .meta {
-      margin-top: 10px;
-      font-size: 12px;
-      color: rgba(255,255,255,0.65);
-      letter-spacing: 0.03em;
+      margin-top: 10px; font-size: 12px;
+      color: rgba(255,255,255,0.65); letter-spacing: 0.03em;
     }
-
-    /* ── Main ── */
-    main {
-      max-width: 780px;
-      margin: 0 auto;
-      padding: 32px 20px 60px;
-    }
-
-    /* Intro card */
+    main { max-width: 780px; margin: 0 auto; padding: 32px 20px 60px; }
     .intro {
       background: var(--card);
       border: 1px solid var(--border);
       border-left: 4px solid var(--accent);
-      border-radius: 10px;
-      padding: 18px 20px;
-      margin-bottom: 32px;
-      font-size: 14px;
-      color: var(--muted);
-      line-height: 1.75;
+      border-radius: 10px; padding: 18px 20px;
+      margin-bottom: 28px; font-size: 14px;
+      color: var(--muted); line-height: 1.75;
     }
     .intro strong { color: var(--text); }
-
-    /* Section */
     section {
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 22px 24px;
-      margin-bottom: 16px;
-    }
-
-    .section-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
+      border-radius: 12px; padding: 22px 24px;
       margin-bottom: 14px;
     }
+    .section-header {
+      display: flex; align-items: center;
+      gap: 12px; margin-bottom: 12px;
+    }
     .section-number {
-      min-width: 32px;
-      height: 32px;
-      background: var(--primary-light);
-      color: var(--primary);
-      font-size: 12px;
-      font-weight: 800;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      letter-spacing: 0.02em;
+      min-width: 32px; height: 32px;
+      background: var(--primary-light); color: var(--primary);
+      font-size: 12px; font-weight: 800; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
     }
-    section h2 {
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--primary);
-    }
-
-    section p {
-      color: #374151;
-      margin-bottom: 10px;
-      font-size: 14px;
-    }
+    section h2 { font-size: 15px; font-weight: 700; color: var(--primary); }
+    section p { color: #374151; margin-bottom: 10px; font-size: 14px; }
     section p:last-child { margin-bottom: 0; }
-
     section strong { color: var(--text); font-weight: 600; }
-
-    ul, ol {
-      padding-left: 20px;
-      margin-top: 8px;
-      color: #374151;
-      font-size: 14px;
-    }
+    ul { padding-left: 20px; margin: 6px 0 10px; color: #374151; font-size: 14px; }
     li { margin-bottom: 5px; }
-
-    /* Footer */
     footer {
-      text-align: center;
-      padding: 28px 20px;
+      text-align: center; padding: 28px 20px;
       border-top: 1px solid var(--border);
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.7;
+      color: var(--muted); font-size: 12px; line-height: 1.7;
     }
     footer strong { color: var(--primary); font-weight: 700; }
-
     @media (max-width: 480px) {
       section { padding: 16px; }
       header { padding: 28px 16px 22px; }
@@ -158,17 +97,17 @@
 <main>
 
   <div class="intro">
-    <strong>Voxa – VMOU</strong> एक स्वतंत्र शैक्षणिक परीक्षा-तैयारी सेवा है। यह Vardhman Mahaveer Open University (VMOU) का official, authorised, supported या affiliated app नहीं है। VMOU की आधिकारिक जानकारी के लिए उसकी official website अवश्य देखें।
+    <strong>Voxa – VMOU</strong> एक Independent Educational Exam-Preparation Service है। यह Vardhman Mahaveer Open University (VMOU) का official, authorised, supported या affiliated app नहीं है। VMOU की आधिकारिक जानकारी के लिए उसकी official website अवश्य देखें।
   </div>
 
   <section>
     <div class="section-header">
       <div class="section-number">01</div>
-      <h2>सेवा एवं उत्पाद की प्रकृति</h2>
+      <h2>सेवा की प्रकृति</h2>
     </div>
-    <p>Voxa Smart Packs परीक्षा-तैयारी के लिए analysis-based, high-priority और expected questions, model answers, PYQ-based preparation, quick revision material तथा अन्य तैयारी-सामग्री उपलब्ध कराते हैं।</p>
-    <p>Smart Pack में दिए गए expected questions <strong>संभावित/विश्लेषण-आधारित प्रश्न हैं, confirmed question paper नहीं</strong>। Voxa कभी यह दावा नहीं करता कि कोई प्रश्न 100% निश्चित रूप से परीक्षा में आएगा।</p>
-    <p>सभी सामग्री का उद्देश्य परीक्षा की तैयारी में सहायता करना है; अंतिम परीक्षा-पत्र, प्रश्नों का चयन, अंक या परिणाम हमारे नियंत्रण में नहीं हैं।</p>
+    <p>Voxa Smart Packs परीक्षा-तैयारी के लिए expected questions, model answers, PYQ-based preparation और quick revision material उपलब्ध कराते हैं।</p>
+    <p>Smart Pack में दिए गए expected questions <strong>संभावित/विश्लेषण-आधारित प्रश्न हैं — confirmed question paper नहीं</strong>। Voxa कभी यह दावा नहीं करता कि कोई प्रश्न 100% निश्चित रूप से परीक्षा में आएगा।</p>
+    <p>अंतिम परीक्षा-पत्र, प्रश्नों का चयन, अंक या परिणाम हमारे नियंत्रण में नहीं हैं।</p>
   </section>
 
   <section>
@@ -177,23 +116,23 @@
       <h2>Smart Pack का उपयोग</h2>
     </div>
     <p>खरीदा गया Smart Pack केवल purchaser के व्यक्तिगत अध्ययन एवं तैयारी के लिए है।</p>
-    <p>अनधिकृत रूप से सामग्री को साझा करना अनुमत नहीं है, जैसे:</p>
+    <p>अनधिकृत sharing अनुमत नहीं है, जिसमें शामिल है:</p>
     <ul>
-      <li>WhatsApp, Telegram या किसी messaging platform पर sharing</li>
-      <li>Public website / social media / cloud drive पर upload</li>
+      <li>WhatsApp, Telegram या किसी messaging platform पर भेजना</li>
+      <li>Social media, cloud drive या public website पर upload करना</li>
       <li>पुनर्विक्रय, पुनर्प्रकाशन या commercial redistribution</li>
     </ul>
-    <p>Smart Pack की PDF सामग्री secure in-app reader के माध्यम से उपलब्ध कराई जाती है। जहाँ लागू हो, खरीदी गई सामग्री में unique Order ID / purchaser-specific watermark हो सकता है।</p>
+    <p>Smart Pack की सामग्री secure in-app reader के माध्यम से उपलब्ध कराई जाती है।</p>
   </section>
 
   <section>
     <div class="section-header">
       <div class="section-number">03</div>
-      <h2>Access और Entitlement</h2>
+      <h2>Access और Purchase</h2>
     </div>
-    <p>किसी paid Smart Pack की access payment की सफल verification और entitlement creation के बाद दी जाती है।</p>
-    <p>Access उस user account से जुड़ी होती है जिससे purchase की गई है। Client-side navigation या payment-success screen स्वयं payment का अंतिम प्रमाण नहीं है; access verified entitlement पर आधारित होती है।</p>
-    <p>खरीदी गई सामग्री app के in-app reader में पढ़ी जा सकती है। जहाँ सुविधा उपलब्ध हो, सामग्री offline reading के लिए app के private storage/cache में रखी जा सकती है; यह स्वतंत्र export या sharing की अनुमति नहीं देता।</p>
+    <p>किसी paid Smart Pack की access payment की सफल verification के बाद दी जाती है।</p>
+    <p>Access उस user account से जुड़ी होती है जिससे purchase की गई है।</p>
+    <p>खरीदी गई सामग्री app के in-app reader में पढ़ी जा सकती है। जहाँ सुविधा उपलब्ध हो, offline reading के लिए सामग्री app के storage में रखी जा सकती है — यह independent export या sharing की अनुमति नहीं देता।</p>
   </section>
 
   <section>
@@ -201,26 +140,26 @@
       <div class="section-number">04</div>
       <h2>Payment</h2>
     </div>
-    <p>Paid Smart Packs के भुगतान के लिए Razorpay जैसे payment gateway का उपयोग किया जा सकता है।</p>
-    <p>Payment की final verification के बाद paid entitlement प्रदान किया जाता है। Payment failure, cancellation या verification में देरी की स्थिति में access तुरंत उपलब्ध न हो सकती है।</p>
+    <p>Paid Smart Packs के भुगतान के लिए third-party payment gateway का उपयोग किया जा सकता है।</p>
+    <p>Payment failure, cancellation या verification में देरी की स्थिति में access तुरंत उपलब्ध न हो सकती है।</p>
     <p>किसी payment समस्या के लिए app में उपलब्ध <strong>Help &amp; Support / WhatsApp</strong> माध्यम का उपयोग करें।</p>
   </section>
 
   <section>
     <div class="section-header">
       <div class="section-number">05</div>
-      <h2>Content Availability और Updates</h2>
+      <h2>Content Availability</h2>
     </div>
-    <p>किसी paper या Smart Pack की availability बदल सकती है। कुछ papers "जल्द उपलब्ध" या अन्य availability state में हो सकते हैं।</p>
-    <p>Smart Pack का version समय-समय पर update हो सकता है। किसी update की उपलब्धता product के scope और entitlement पर निर्भर करेगी।</p>
+    <p>किसी paper या Smart Pack की availability बदल सकती है। कुछ papers "जल्द उपलब्ध" state में हो सकते हैं।</p>
+    <p>Smart Pack का content समय-समय पर update हो सकता है। किसी update की उपलब्धता product के scope पर निर्भर करेगी।</p>
   </section>
 
   <section>
     <div class="section-header">
       <div class="section-number">06</div>
-      <h2>Accuracy और Educational Disclaimer</h2>
+      <h2>Educational Disclaimer</h2>
     </div>
-    <p>Voxa परीक्षा की तैयारी को अधिक व्यवस्थित और परीक्षा-केंद्रित बनाने का प्रयास करता है। फिर भी syllabus, examination pattern, official notices, question papers और university requirements में परिवर्तन हो सकते हैं।</p>
+    <p>Voxa परीक्षा की तैयारी को अधिक व्यवस्थित और परीक्षा-केंद्रित बनाने का प्रयास करता है। फिर भी syllabus, examination pattern, official notices और university requirements में परिवर्तन हो सकते हैं।</p>
     <p>विद्यार्थी को latest syllabus, examination notices, dates और official instructions की स्वतंत्र रूप से पुष्टि करनी चाहिए।</p>
     <p>Voxa किसी examination result, marks, rank, pass/fail outcome या किसी निश्चित प्रश्न के आने की guarantee नहीं देता।</p>
   </section>
@@ -228,22 +167,14 @@
   <section>
     <div class="section-header">
       <div class="section-number">07</div>
-      <h2>Third-Party Services</h2>
+      <h2>Account</h2>
     </div>
-    <p>Authentication, payment, cloud storage और अन्य technical सुविधाओं के लिए Google / Firebase / Razorpay जैसे third-party services का उपयोग किया जा सकता है। इन services का उपयोग उनके अपने applicable terms और policies के अधीन हो सकता है।</p>
+    <p>आपका account व्यक्तिगत उपयोग के लिए है। Account access या purchased content को किसी दूसरे व्यक्ति को उपलब्ध कराना अनुमत नहीं है।</p>
   </section>
 
   <section>
     <div class="section-header">
       <div class="section-number">08</div>
-      <h2>Account</h2>
-    </div>
-    <p>Google Sign-In के माध्यम से बनाया गया account व्यक्तिगत उपयोग के लिए है। Authenticated access को दूसरे व्यक्ति को उपलब्ध कराना उचित नहीं है।</p>
-  </section>
-
-  <section>
-    <div class="section-header">
-      <div class="section-number">09</div>
       <h2>Intellectual Property</h2>
     </div>
     <p>Voxa द्वारा स्वयं तैयार की गई original explanations, model answers, analysis, presentation, design और Smart Pack compilation Voxa की intellectual property हो सकते हैं, जहाँ लागू हो।</p>
@@ -252,15 +183,15 @@
 
   <section>
     <div class="section-header">
-      <div class="section-number">10</div>
+      <div class="section-number">09</div>
       <h2>Service Changes</h2>
     </div>
-    <p>Voxa app, features, content structure, prices, availability या technical implementation में समय-समय पर बदलाव कर सकता है। महत्वपूर्ण बदलाव होने पर उन्हें app या संबंधित notice में बताया जा सकता है।</p>
+    <p>Voxa app, features, content, prices या availability में समय-समय पर बदलाव कर सकता है। महत्वपूर्ण बदलाव होने पर उन्हें app या संबंधित notice में बताया जा सकता है।</p>
   </section>
 
   <section>
     <div class="section-header">
-      <div class="section-number">11</div>
+      <div class="section-number">10</div>
       <h2>Contact</h2>
     </div>
     <p>किसी support, access, payment या content-related प्रश्न के लिए app में उपलब्ध <strong>Help &amp; Support / WhatsApp</strong> माध्यम का उपयोग करें।</p>
@@ -268,7 +199,7 @@
 
   <section>
     <div class="section-header">
-      <div class="section-number">12</div>
+      <div class="section-number">11</div>
       <h2>Acceptance</h2>
     </div>
     <p>App का उपयोग करने, account बनाने या paid Smart Pack खरीदने पर आप इन उपयोग की शर्तों को पढ़ने और स्वीकार करने की पुष्टि करते हैं।</p>
