@@ -16,159 +16,84 @@
       --bg:            #F9FAFB;
       --card:          #FFFFFF;
     }
-
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
                    'Noto Sans', 'Noto Sans Devanagari', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.8;
-      font-size: 15px;
+      background: var(--bg); color: var(--text);
+      line-height: 1.8; font-size: 15px;
     }
-
-    /* ── Header ── */
     header {
       background: var(--primary);
-      padding: 36px 24px 28px;
-      text-align: center;
+      padding: 36px 24px 28px; text-align: center;
     }
     header .logo {
       display: inline-block;
       background: rgba(255,255,255,0.15);
-      border-radius: 12px;
-      padding: 8px 20px;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      color: rgba(255,255,255,0.9);
-      text-transform: uppercase;
-      margin-bottom: 14px;
+      border-radius: 12px; padding: 8px 20px;
+      font-size: 13px; font-weight: 700;
+      letter-spacing: 0.06em; color: rgba(255,255,255,0.9);
+      text-transform: uppercase; margin-bottom: 14px;
     }
     header h1 {
       font-size: clamp(22px, 5vw, 30px);
-      font-weight: 800;
-      color: #fff;
-      line-height: 1.25;
+      font-weight: 800; color: #fff; line-height: 1.25;
     }
     header .meta {
-      margin-top: 10px;
-      font-size: 12px;
-      color: rgba(255,255,255,0.65);
-      letter-spacing: 0.03em;
+      margin-top: 10px; font-size: 12px;
+      color: rgba(255,255,255,0.65); letter-spacing: 0.03em;
     }
-
-    /* ── Main ── */
-    main {
-      max-width: 780px;
-      margin: 0 auto;
-      padding: 32px 20px 60px;
-    }
-
-    /* Intro card */
+    main { max-width: 780px; margin: 0 auto; padding: 32px 20px 60px; }
     .intro {
       background: var(--card);
       border: 1px solid var(--border);
       border-left: 4px solid var(--accent);
-      border-radius: 10px;
-      padding: 18px 20px;
-      margin-bottom: 32px;
-      font-size: 14px;
-      color: var(--muted);
-      line-height: 1.75;
+      border-radius: 10px; padding: 18px 20px;
+      margin-bottom: 28px; font-size: 14px;
+      color: var(--muted); line-height: 1.75;
     }
     .intro strong { color: var(--text); }
-
-    /* Section */
     section {
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 22px 24px;
-      margin-bottom: 16px;
-    }
-
-    .section-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
+      border-radius: 12px; padding: 22px 24px;
       margin-bottom: 14px;
     }
+    .section-header {
+      display: flex; align-items: center;
+      gap: 12px; margin-bottom: 12px;
+    }
     .section-number {
-      min-width: 32px;
-      height: 32px;
-      background: var(--primary-light);
-      color: var(--primary);
-      font-size: 12px;
-      font-weight: 800;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      min-width: 32px; height: 32px;
+      background: var(--primary-light); color: var(--primary);
+      font-size: 12px; font-weight: 800; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
     }
-    section h2 {
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--primary);
-    }
-
-    /* Sub-heading inside section */
+    section h2 { font-size: 15px; font-weight: 700; color: var(--primary); }
     section h3 {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin: 16px 0 8px;
+      font-size: 12px; font-weight: 700;
+      color: var(--accent); text-transform: uppercase;
+      letter-spacing: 0.05em; margin: 14px 0 6px;
     }
-    section h3:first-of-type { margin-top: 4px; }
-
-    section p {
-      color: #374151;
-      margin-bottom: 10px;
-      font-size: 14px;
-    }
+    section h3:first-of-type { margin-top: 2px; }
+    section p { color: #374151; margin-bottom: 10px; font-size: 14px; }
     section p:last-child { margin-bottom: 0; }
-
     section strong { color: var(--text); font-weight: 600; }
-
-    ul, ol {
-      padding-left: 20px;
-      margin: 6px 0 10px;
-      color: #374151;
-      font-size: 14px;
-    }
+    ul, ol { padding-left: 20px; margin: 6px 0 10px; color: #374151; font-size: 14px; }
     li { margin-bottom: 5px; }
-
-    /* Data tag chips */
-    .chip-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 8px;
-    }
+    .chip-group { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 4px; }
     .chip {
-      background: var(--accent-light);
-      color: #065F46;
-      font-size: 12px;
-      font-weight: 600;
-      padding: 3px 10px;
-      border-radius: 20px;
+      background: var(--accent-light); color: #065F46;
+      font-size: 12px; font-weight: 600;
+      padding: 3px 10px; border-radius: 20px;
       border: 1px solid #A7F3D0;
     }
-
-    /* Footer */
     footer {
-      text-align: center;
-      padding: 28px 20px;
+      text-align: center; padding: 28px 20px;
       border-top: 1px solid var(--border);
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.7;
+      color: var(--muted); font-size: 12px; line-height: 1.7;
     }
     footer strong { color: var(--primary); font-weight: 700; }
-
     @media (max-width: 480px) {
       section { padding: 16px; }
       header { padding: 28px 16px 22px; }
@@ -186,7 +111,7 @@
 <main>
 
   <div class="intro">
-    <strong>Voxa – VMOU</strong> एक स्वतंत्र शैक्षणिक परीक्षा-तैयारी सेवा है। हम आपकी जानकारी का उपयोग app को चलाने, account authentication, purchased content access और अध्ययन-सुविधाएँ उपलब्ध कराने के लिए करते हैं।
+    <strong>Voxa – VMOU</strong> एक Independent Educational Exam-Preparation Service है। हम आपकी जानकारी का उपयोग app को चलाने, account authentication, purchased content access और अध्ययन-सुविधाएँ उपलब्ध कराने के लिए करते हैं।
   </div>
 
   <section>
@@ -195,161 +120,118 @@
       <h2>हम कौन-सी जानकारी एकत्र करते हैं</h2>
     </div>
 
-    <h3>Google Account / Authentication</h3>
-    <p>Google Sign-In के माध्यम से हमें account से संबंधित कुछ जानकारी मिल सकती है:</p>
+    <h3>Account / Authentication</h3>
+    <p>Sign-in के माध्यम से हमें निम्न जानकारी मिल सकती है:</p>
     <div class="chip-group">
-      <span class="chip">नाम (display name)</span>
+      <span class="chip">नाम</span>
       <span class="chip">Email address</span>
-      <span class="chip">Profile / Photo URL</span>
-      <span class="chip">Firebase UID</span>
+      <span class="chip">Profile / Photo</span>
+      <span class="chip">User identifier</span>
     </div>
-    <p>इनका उपयोग authentication, account पहचान और account-related services के लिए किया जाता है।</p>
+    <p>इनका उपयोग केवल authentication और account पहचान के लिए किया जाता है।</p>
 
     <h3>Academic Profile</h3>
-    <p>App में आपके द्वारा दी गई शैक्षणिक जानकारी, जैसे Programme और Exam Session, का उपयोग relevant papers, subjects और Smart Packs दिखाने के लिए किया जाता है।</p>
+    <p>App में आपके द्वारा दी गई जानकारी — जैसे Programme और Exam Session — का उपयोग आपके लिए relevant papers और Smart Packs दिखाने के लिए किया जाता है।</p>
 
-    <h3>Purchase और Entitlement Information</h3>
-    <div class="chip-group">
-      <span class="chip">Paper / Smart Pack identifier</span>
-      <span class="chip">Tier</span>
-      <span class="chip">Purchase date</span>
-      <span class="chip">Order identifier</span>
-      <span class="chip">Payment identifier</span>
-      <span class="chip">Payment verification status</span>
-      <span class="chip">Entitlement / Access status</span>
-    </div>
+    <h3>Purchase Information</h3>
+    <p>Purchased Smart Pack से संबंधित जानकारी, जैसे purchase date, order details और payment status, आपके account से जुड़ी रहती है।</p>
 
-    <h3>Reading / Usage Progress</h3>
-    <p>यदि reading-progress सुविधा enabled है, तो सीमित information जैसे reading progress, last reading position और last accessed time account से जुड़ी हो सकती है।</p>
+    <h3>Reading Progress</h3>
+    <p>यदि reading-progress सुविधा उपलब्ध है, तो आपकी reading progress और last reading position account से जुड़ी हो सकती है।</p>
   </section>
 
   <section>
     <div class="section-header">
       <div class="section-number">02</div>
-      <h2>जानकारी का उपयोग क्यों किया जाता है</h2>
+      <h2>जानकारी का उपयोग</h2>
     </div>
     <ol>
-      <li>Google authentication और secure account access</li>
-      <li>Programme और exam session के अनुसार relevant content दिखाने</li>
-      <li>Purchased Smart Pack entitlement और access manage करने</li>
-      <li>Payment verification और order records रखने</li>
-      <li>In-app PDF reader तथा offline reading सुविधा देने</li>
-      <li>Reading progress सुरक्षित रखने</li>
-      <li>Support, troubleshooting और service communication</li>
-      <li>Security, reliability और misuse prevention</li>
+      <li>Secure account access और authentication</li>
+      <li>Programme और exam session के अनुसार relevant content दिखाना</li>
+      <li>Purchased Smart Pack की access manage करना</li>
+      <li>Payment verification और order records रखना</li>
+      <li>In-app reader और offline reading सुविधा देना</li>
+      <li>Reading progress सुरक्षित रखना</li>
+      <li>Support और service communication</li>
+      <li>Security और misuse prevention</li>
     </ol>
   </section>
 
   <section>
     <div class="section-header">
       <div class="section-number">03</div>
-      <h2>Payment Information</h2>
+      <h2>Payment</h2>
     </div>
-    <p>Paid purchases के लिए Razorpay जैसे payment service provider का उपयोग किया जा सकता है।</p>
-    <p>Payment processing के दौरान gateway द्वारा संभाली जाने वाली sensitive payment information उसकी अपनी security, privacy और terms framework के अनुसार process हो सकती है।</p>
+    <p>Paid purchases के लिए third-party payment service provider का उपयोग किया जा सकता है।</p>
+    <p>Sensitive payment information उस payment provider की अपनी security और privacy framework के अनुसार process होती है — हम उसे directly store नहीं करते।</p>
     <p>Paid Smart Pack access payment की successful verification के बाद प्रदान की जाती है।</p>
   </section>
 
   <section>
     <div class="section-header">
       <div class="section-number">04</div>
-      <h2>Firebase / Cloud Services</h2>
+      <h2>Content और PDF Security</h2>
     </div>
-    <p>Authentication, database, entitlement और secure content-delivery जैसी सुविधाओं के लिए Google Firebase जैसी cloud services का उपयोग किया जाता है।</p>
-    <p>Purchase history और account-related records आपके Firebase UID से जुड़े हो सकते हैं।</p>
-    <p><strong>हम आपकी personal information को सामान्यतः बेचते नहीं हैं।</strong></p>
-  </section>
-
-  <section>
-    <div class="section-header">
-      <div class="section-number">05</div>
-      <h2>Smart Pack और PDF Security</h2>
-    </div>
-    <p>Premium content secure in-app reader के माध्यम से उपलब्ध कराया जाता है। जहाँ लागू हो, PDF app के private storage/cache में रखी जा सकती है ताकि purchased content offline reading के लिए उपलब्ध रहे।</p>
+    <p>Premium content secure in-app reader के माध्यम से उपलब्ध कराया जाता है।</p>
+    <p>जहाँ उपलब्ध हो, purchased content offline reading के लिए app के private storage में रखी जा सकती है।</p>
     <p>हम purchased content को public file-sharing या unrestricted download के रूप में उपलब्ध कराने का उद्देश्य नहीं रखते।</p>
   </section>
 
   <section>
     <div class="section-header">
-      <div class="section-number">06</div>
-      <h2>Information Sharing</h2>
+      <div class="section-number">05</div>
+      <h2>जानकारी साझा करना</h2>
     </div>
     <p><strong>हम आपकी personal information को बेचते नहीं हैं।</strong></p>
-    <p>जानकारी केवल उस सीमा तक third-party service providers के साथ process हो सकती है जितनी authentication, payment, storage, hosting, security या support सुविधाओं को संचालित करने के लिए आवश्यक हो।</p>
+    <p>जानकारी केवल उतनी सीमा तक third-party service providers के साथ process हो सकती है जितनी app को चलाने के लिए आवश्यक हो — जैसे authentication, payment processing और app hosting।</p>
     <p>जहाँ कानूनन आवश्यक हो, वैधानिक प्रक्रिया के अनुसार जानकारी साझा की जा सकती है।</p>
   </section>
 
   <section>
     <div class="section-header">
-      <div class="section-number">07</div>
+      <div class="section-number">06</div>
       <h2>Data Security</h2>
     </div>
-    <p>हम account, purchase और entitlement data को अनधिकृत access से बचाने के लिए authentication, Firebase security rules और अन्य उपयुक्त technical controls का उपयोग करते हैं।</p>
-    <p>फिर भी internet या cloud-based systems में कोई भी security method पूर्णतः risk-free होने की guarantee नहीं दी जा सकती।</p>
+    <p>हम आपके account और purchase data को अनधिकृत access से बचाने के लिए उपयुक्त technical controls का उपयोग करते हैं।</p>
+    <p>फिर भी किसी भी internet-based service में absolute security की guarantee नहीं दी जा सकती।</p>
+  </section>
+
+  <section>
+    <div class="section-header">
+      <div class="section-number">07</div>
+      <h2>आपके विकल्प</h2>
+    </div>
+    <ul>
+      <li>आप account से sign out कर सकते हैं</li>
+      <li>App में उपलब्ध profile information update कर सकते हैं</li>
+      <li>Privacy या data-related प्रश्नों के लिए support से संपर्क कर सकते हैं</li>
+      <li>Data deletion requests के लिए हमसे संपर्क कर सकते हैं</li>
+    </ul>
   </section>
 
   <section>
     <div class="section-header">
       <div class="section-number">08</div>
-      <h2>Data Retention</h2>
+      <h2>Official University Relationship</h2>
     </div>
-    <p>हम account, purchase और entitlement records को service संचालन, access management, support और आवश्यक record-keeping के लिए आवश्यकता के अनुसार रख सकते हैं।</p>
-    <p>Reading progress और related usage records का retention study सुविधाओं के संचालन से जुड़ा हो सकता है।</p>
+    <p>Voxa – VMOU, Vardhman Mahaveer Open University (VMOU) का official, authorised, supported या affiliated app नहीं है।</p>
+    <p>VMOU के official notices, syllabus, examination dates और results के लिए VMOU की official website देखें।</p>
   </section>
 
   <section>
     <div class="section-header">
       <div class="section-number">09</div>
-      <h2>Your Choices</h2>
+      <h2>Policy Updates</h2>
     </div>
-    <ul>
-      <li>Google account से sign out कर सकते हैं</li>
-      <li>App में उपलब्ध profile information update कर सकते हैं</li>
-      <li>Privacy/data-related प्रश्नों के लिए support से संपर्क कर सकते हैं</li>
-      <li>उपलब्ध data/deletion requests के लिए हमसे संपर्क कर सकते हैं</li>
-    </ul>
-    <p>किसी request की प्रक्रिया करते समय account ownership की पुष्टि आवश्यक हो सकती है।</p>
+    <p>Service या legal requirements में बदलाव के अनुसार इस Privacy Policy को update किया जा सकता है। Updated version app में उपलब्ध कराया जाएगा और "अंतिम अद्यतन" तारीख बदली जाएगी।</p>
   </section>
 
   <section>
     <div class="section-header">
       <div class="section-number">10</div>
-      <h2>Intended Use</h2>
-    </div>
-    <p>Voxa – VMOU एक academic exam-preparation service है। किसी minor के account या information के संबंध में parent/guardian को आवश्यक सावधानी बरतनी चाहिए।</p>
-  </section>
-
-  <section>
-    <div class="section-header">
-      <div class="section-number">11</div>
-      <h2>Third-Party Services</h2>
-    </div>
-    <p>Google Sign-In, Firebase, Razorpay और अन्य integrated services अपनी-अपनी privacy policies और terms के अनुसार data process कर सकते हैं। उनकी current policies संबंधित providers की official websites पर देखी जा सकती हैं।</p>
-  </section>
-
-  <section>
-    <div class="section-header">
-      <div class="section-number">12</div>
-      <h2>Official University Relationship</h2>
-    </div>
-    <p>Voxa – VMOU, Vardhman Mahaveer Open University (VMOU) का official, authorised, supported या affiliated app नहीं है।</p>
-    <p>VMOU के official notices, syllabus, examination dates, results और अन्य authoritative information के लिए VMOU की official website/sources देखें।</p>
-  </section>
-
-  <section>
-    <div class="section-header">
-      <div class="section-number">13</div>
-      <h2>Policy Updates</h2>
-    </div>
-    <p>Service, technology या legal requirements में बदलाव के अनुसार इस Privacy Policy को समय-समय पर update किया जा सकता है। Updated version app में उपलब्ध कराया जाएगा और "अंतिम अद्यतन" तारीख बदली जाएगी।</p>
-  </section>
-
-  <section>
-    <div class="section-header">
-      <div class="section-number">14</div>
       <h2>Contact</h2>
     </div>
-    <p>किसी privacy, account, purchase या data-related प्रश्न के लिए app में उपलब्ध <strong>Help &amp; Support / WhatsApp</strong> माध्यम का उपयोग करें।</p>
+    <p>किसी privacy, account या data-related प्रश्न के लिए app में उपलब्ध <strong>Help &amp; Support / WhatsApp</strong> माध्यम का उपयोग करें।</p>
   </section>
 
 </main>
