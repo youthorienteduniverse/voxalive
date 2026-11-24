@@ -54,6 +54,15 @@
     .cta svg { width: 20px; height: 20px; flex: 0 0 20px; }
     .alt { text-align: center; font-size: 14px; color: var(--muted); margin: 12px 0 0; }\n    .alt a { font-weight: 600; }
     .copy { background: none; border: 1px solid var(--border); border-radius: 8px; padding: 4px 10px; font: inherit; font-size: 13px; color: var(--maroon); cursor: pointer; margin-left: 6px; }
+    .confirm-wrap { margin: 14px 0 0; text-align: center; }
+    .confirm-btn { min-height: 46px; padding: 10px 18px; border: 1px solid var(--maroon); border-radius: 10px; background: #fff; color: var(--maroon); font: inherit; font-size: 15px; font-weight: 650; cursor: pointer; }
+    .confirm-btn:hover { background: var(--soft, #fff5f7); }
+    .sent-state { display: none; margin: 16px 0 0; padding: 18px 20px; border: 1px solid #b9d9c2; border-radius: var(--radius); background: #f3faf5; color: var(--text); }
+    .sent-state h2 { color: #176b35; margin: 0 0 7px; font-size: 17px; }
+    .sent-state p { margin: 0 0 8px; font-size: 14px; }
+    .sent-state p:last-of-type { margin-bottom: 12px; }
+    .reset-confirmation { border: 0; padding: 4px 0; background: transparent; color: var(--maroon); font: inherit; font-size: 13px; text-decoration: underline; cursor: pointer; }
+
     .footer { text-align: center; border-top: 1px solid var(--border); padding: 20px 16px 26px; color: var(--muted); font-size: 13px; }
     @media (max-width: 520px) {
       .site-header { padding: 27px 16px 22px; }
@@ -86,7 +95,7 @@
       <h2>ईमेल से अनुरोध भेजने की प्रक्रिया</h2>
       <ol>
         <li>नीचे दिए गए <strong>खाता हटाने का अनुरोध भेजें</strong> बटन पर क्लिक करें। आपके ईमेल ऐप में पहले से भरा हुआ संदेश खुलेगा।</li>
-        <li>संदेश में अपना VOXALIVE खाते से जुड़ा पंजीकृत Google ईमेल पता भरें।</li>
+        <li>संदेश में VOXALIVE ऐप में उपयोग किया गया Google ईमेल पता भरें। <strong>कृपया वही Gmail पता लिखें जिससे आपने VOXALIVE में साइन-इन किया था।</strong></li>
         <li>अनुरोध उसी ईमेल पते से भेजें जिसका उपयोग आप VOXALIVE में प्रवेश के लिए करते हैं। इससे खाते की पहचान की पुष्टि करने में मदद मिलेगी।</li>
         <li>हमारी टीम अनुरोध और खाते से जुड़े ईमेल पते की पुष्टि करेगी। आवश्यकता होने पर हम आपसे उसी पंजीकृत ईमेल पते पर संपर्क कर सकते हैं।</li>
         <li>पहचान और अनुरोध की पुष्टि के बाद खाते तथा उससे जुड़े हटाए जा सकने वाले व्यक्तिगत डेटा को हटाने की प्रक्रिया पूरी की जाएगी।</li>
@@ -123,7 +132,7 @@
     </section>
 
     <a class="cta" id="gmailDeleteMail"
-       href="https://mail.google.com/mail/?view=cm&fs=1&to=support%40voxalive.co.in&su=VOXALIVE%20Account%20Deletion%20Request&body=%E0%A4%A8%E0%A4%AE%E0%A4%B8%E0%A5%8D%E0%A4%A4%E0%A5%87%20VOXALIVE%20%E0%A4%9F%E0%A5%80%E0%A4%AE%2C%0D%0A%0D%0A%E0%A4%AE%E0%A5%88%E0%A4%82%20%E0%A4%85%E0%A4%AA%E0%A4%A8%E0%A4%BE%20VOXALIVE%20%E0%A4%96%E0%A4%BE%E0%A4%A4%E0%A4%BE%20%E0%A4%94%E0%A4%B0%20%E0%A4%89%E0%A4%B8%E0%A4%B8%E0%A5%87%20%E0%A4%9C%E0%A5%81%E0%A4%A1%E0%A4%BC%E0%A4%BE%20%E0%A4%B5%E0%A5%8D%E0%A4%AF%E0%A4%95%E0%A5%8D%E0%A4%A4%E0%A4%BF%E0%A4%97%E0%A4%A4%20%E0%A4%A1%E0%A5%87%E0%A4%9F%E0%A4%BE%20%E0%A4%B9%E0%A4%9F%E0%A4%BE%E0%A4%A8%E0%A5%87%20%E0%A4%95%E0%A4%BE%20%E0%A4%85%E0%A4%A8%E0%A5%81%E0%A4%B0%E0%A5%8B%E0%A4%A7%20%E0%A4%95%E0%A4%B0%E0%A4%A4%E0%A4%BE%2F%E0%A4%95%E0%A4%B0%E0%A4%A4%E0%A5%80%20%E0%A4%B9%E0%A5%82%E0%A4%81%E0%A5%A4%0D%0A%0D%0A%E0%A4%AA%E0%A4%82%E0%A4%9C%E0%A5%80%E0%A4%95%E0%A5%83%E0%A4%A4%20Google%20%E0%A4%88%E0%A4%AE%E0%A5%87%E0%A4%B2%20%E0%A4%AA%E0%A4%A4%E0%A4%BE%3A%20%0D%0A%E0%A4%A8%E0%A4%BE%E0%A4%AE%20%28%E0%A4%B5%E0%A5%88%E0%A4%95%E0%A4%B2%E0%A5%8D%E0%A4%AA%E0%A4%BF%E0%A4%95%29%3A%20%0D%0A%0D%0A%E0%A4%AE%E0%A5%88%E0%A4%82%20%E0%A4%B8%E0%A4%AE%E0%A4%9D%E0%A4%A4%E0%A4%BE%2F%E0%A4%B8%E0%A4%AE%E0%A4%9D%E0%A4%A4%E0%A5%80%20%E0%A4%B9%E0%A5%82%E0%A4%81%20%E0%A4%95%E0%A4%BF%20%E0%A4%96%E0%A4%BE%E0%A4%A4%E0%A4%BE%20%E0%A4%B9%E0%A4%9F%E0%A4%BE%E0%A4%A8%E0%A5%87%20%E0%A4%95%E0%A5%80%20%E0%A4%95%E0%A4%BE%E0%A4%B0%E0%A5%8D%E0%A4%B0%E0%A4%B5%E0%A4%BE%E0%A4%88%20%E0%A4%B8%E0%A5%8D%E0%A4%A5%E0%A4%BE%E0%A4%AF%E0%A5%80%20%E0%A4%B9%E0%A5%88%E0%A5%A4%0D%0A%0D%0A%E0%A4%A7%E0%A4%A8%E0%A5%8D%E0%A4%AF%E0%A4%B5%E0%A4%BE%E0%A4%A6"
+       href="https://mail.google.com/mail/?view=cm&fs=1&to=support%40voxalive.co.in&su=VOXALIVE%20Account%20Deletion%20Request&body=%E0%A4%A8%E0%A4%AE%E0%A4%B8%E0%A5%8D%E0%A4%A4%E0%A5%87%20VOXALIVE%20%E0%A4%9F%E0%A5%80%E0%A4%AE%2C%0D%0A%0D%0A%E0%A4%AE%E0%A5%88%E0%A4%82%20%E0%A4%85%E0%A4%AA%E0%A4%A8%E0%A4%BE%20VOXALIVE%20%E0%A4%96%E0%A4%BE%E0%A4%A4%E0%A4%BE%20%E0%A4%94%E0%A4%B0%20%E0%A4%89%E0%A4%B8%E0%A4%B8%E0%A5%87%20%E0%A4%9C%E0%A5%81%E0%A4%A1%E0%A4%BC%E0%A4%BE%20%E0%A4%B5%E0%A5%8D%E0%A4%AF%E0%A4%95%E0%A5%8D%E0%A4%A4%E0%A4%BF%E0%A4%97%E0%A4%A4%20%E0%A4%A1%E0%A5%87%E0%A4%9F%E0%A4%BE%20%E0%A4%B9%E0%A4%9F%E0%A4%BE%E0%A4%A8%E0%A5%87%20%E0%A4%95%E0%A4%BE%20%E0%A4%85%E0%A4%A8%E0%A5%81%E0%A4%B0%E0%A5%8B%E0%A4%A7%20%E0%A4%95%E0%A4%B0%E0%A4%A4%E0%A4%BE%2F%E0%A4%95%E0%A4%B0%E0%A4%A4%E0%A5%80%20%E0%A4%B9%E0%A5%82%E0%A4%81%E0%A5%A4%0D%0A%0D%0AVOXALIVE%20%E0%A4%90%E0%A4%AA%20%E0%A4%AE%E0%A5%87%E0%A4%82%20%E0%A4%89%E0%A4%AA%E0%A4%AF%E0%A5%8B%E0%A4%97%20%E0%A4%95%E0%A4%BF%E0%A4%AF%E0%A4%BE%20%E0%A4%97%E0%A4%AF%E0%A4%BE%20Google%20%E0%A4%88%E0%A4%AE%E0%A5%87%E0%A4%B2%20%E0%A4%AA%E0%A4%A4%E0%A4%BE%3A%20%0D%0A%E0%A4%95%E0%A5%83%E0%A4%AA%E0%A4%AF%E0%A4%BE%20%E0%A4%B5%E0%A4%B9%E0%A5%80%20Gmail%20%E0%A4%AA%E0%A4%A4%E0%A4%BE%20%E0%A4%B2%E0%A4%BF%E0%A4%96%E0%A5%87%E0%A4%82%20%E0%A4%9C%E0%A4%BF%E0%A4%B8%E0%A4%B8%E0%A5%87%20%E0%A4%86%E0%A4%AA%E0%A4%A8%E0%A5%87%20VOXALIVE%20%E0%A4%AE%E0%A5%87%E0%A4%82%20%E0%A4%B8%E0%A4%BE%E0%A4%87%E0%A4%A8-%E0%A4%87%E0%A4%A8%20%E0%A4%95%E0%A4%BF%E0%A4%AF%E0%A4%BE%20%E0%A4%A5%E0%A4%BE%E0%A5%A4%0D%0A%E0%A4%A8%E0%A4%BE%E0%A4%AE%20%28%E0%A4%B5%E0%A5%88%E0%A4%95%E0%A4%B2%E0%A5%8D%E0%A4%AA%E0%A4%BF%E0%A4%95%29%3A%20%0D%0A%0D%0A%E0%A4%AE%E0%A5%88%E0%A4%82%20%E0%A4%B8%E0%A4%AE%E0%A4%9D%E0%A4%A4%E0%A4%BE%2F%E0%A4%B8%E0%A4%AE%E0%A4%9D%E0%A4%A4%E0%A5%80%20%E0%A4%B9%E0%A5%82%E0%A4%81%20%E0%A4%95%E0%A4%BF%20%E0%A4%96%E0%A4%BE%E0%A4%A4%E0%A4%BE%20%E0%A4%B9%E0%A4%9F%E0%A4%BE%E0%A4%A8%E0%A5%87%20%E0%A4%95%E0%A5%80%20%E0%A4%95%E0%A4%BE%E0%A4%B0%E0%A5%8D%E0%A4%B0%E0%A4%B5%E0%A4%BE%E0%A4%88%20%E0%A4%B8%E0%A5%8D%E0%A4%A5%E0%A4%BE%E0%A4%AF%E0%A5%80%20%E0%A4%B9%E0%A5%88%E0%A5%A4%0D%0A%0D%0A%E0%A4%A7%E0%A4%A8%E0%A5%8D%E0%A4%AF%E0%A4%B5%E0%A4%BE%E0%A4%A6"
        target="_blank" rel="noopener noreferrer">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <rect x="3" y="5" width="18" height="14" rx="2"></rect>
@@ -136,7 +145,7 @@
       बटन Gmail का पहले से भरा हुआ संदेश खोलेगा। विवरण जाँचकर आपको स्वयं <strong>Send</strong> दबाना होगा।
       <br>
       कोई दूसरा email app इस्तेमाल करते हैं?
-      <a id="otherMailApp" href="mailto:support@voxalive.co.in?subject=VOXALIVE%20Account%20Deletion%20Request&body=%E0%A4%A8%E0%A4%AE%E0%A4%B8%E0%A5%8D%E0%A4%A4%E0%A5%87%20VOXALIVE%20%E0%A4%9F%E0%A5%80%E0%A4%AE%2C%0D%0A%0D%0A%E0%A4%AE%E0%A5%88%E0%A4%82%20%E0%A4%85%E0%A4%AA%E0%A4%A8%E0%A4%BE%20VOXALIVE%20%E0%A4%96%E0%A4%BE%E0%A4%A4%E0%A4%BE%20%E0%A4%94%E0%A4%B0%20%E0%A4%89%E0%A4%B8%E0%A4%B8%E0%A5%87%20%E0%A4%9C%E0%A5%81%E0%A4%A1%E0%A4%BC%E0%A4%BE%20%E0%A4%B5%E0%A5%8D%E0%A4%AF%E0%A4%95%E0%A5%8D%E0%A4%A4%E0%A4%BF%E0%A4%97%E0%A4%A4%20%E0%A4%A1%E0%A5%87%E0%A4%9F%E0%A4%BE%20%E0%A4%B9%E0%A4%9F%E0%A4%BE%E0%A4%A8%E0%A5%87%20%E0%A4%95%E0%A4%BE%20%E0%A4%85%E0%A4%A8%E0%A5%81%E0%A4%B0%E0%A5%8B%E0%A4%A7%20%E0%A4%95%E0%A4%B0%E0%A4%A4%E0%A4%BE%2F%E0%A4%95%E0%A4%B0%E0%A4%A4%E0%A5%80%20%E0%A4%B9%E0%A5%82%E0%A4%81%E0%A5%A4%0D%0A%0D%0A%E0%A4%AA%E0%A4%82%E0%A4%9C%E0%A5%80%E0%A4%95%E0%A5%83%E0%A4%A4%20Google%20%E0%A4%88%E0%A4%AE%E0%A5%87%E0%A4%B2%20%E0%A4%AA%E0%A4%A4%E0%A4%BE%3A%20%0D%0A%E0%A4%A8%E0%A4%BE%E0%A4%AE%20%28%E0%A4%B5%E0%A5%88%E0%A4%95%E0%A4%B2%E0%A5%8D%E0%A4%AA%E0%A4%BF%E0%A4%95%29%3A%20%0D%0A%0D%0A%E0%A4%AE%E0%A5%88%E0%A4%82%20%E0%A4%B8%E0%A4%AE%E0%A4%9D%E0%A4%A4%E0%A4%BE%2F%E0%A4%B8%E0%A4%AE%E0%A4%9D%E0%A4%A4%E0%A5%80%20%E0%A4%B9%E0%A5%82%E0%A4%81%20%E0%A4%95%E0%A4%BF%20%E0%A4%96%E0%A4%BE%E0%A4%A4%E0%A4%BE%20%E0%A4%B9%E0%A4%9F%E0%A4%BE%E0%A4%A8%E0%A5%87%20%E0%A4%95%E0%A5%80%20%E0%A4%95%E0%A4%BE%E0%A4%B0%E0%A5%8D%E0%A4%B0%E0%A4%B5%E0%A4%BE%E0%A4%88%20%E0%A4%B8%E0%A5%8D%E0%A4%A5%E0%A4%BE%E0%A4%AF%E0%A5%80%20%E0%A4%B9%E0%A5%88%E0%A5%A4%0D%0A%0D%0A%E0%A4%A7%E0%A4%A8%E0%A5%8D%E0%A4%AF%E0%A4%B5%E0%A4%BE%E0%A4%A6">दूसरे email app से अनुरोध भेजें</a>
+      <a id="otherMailApp" href="mailto:support@voxalive.co.in?subject=VOXALIVE%20Account%20Deletion%20Request&body=%E0%A4%A8%E0%A4%AE%E0%A4%B8%E0%A5%8D%E0%A4%A4%E0%A5%87%20VOXALIVE%20%E0%A4%9F%E0%A5%80%E0%A4%AE%2C%0D%0A%0D%0A%E0%A4%AE%E0%A5%88%E0%A4%82%20%E0%A4%85%E0%A4%AA%E0%A4%A8%E0%A4%BE%20VOXALIVE%20%E0%A4%96%E0%A4%BE%E0%A4%A4%E0%A4%BE%20%E0%A4%94%E0%A4%B0%20%E0%A4%89%E0%A4%B8%E0%A4%B8%E0%A5%87%20%E0%A4%9C%E0%A5%81%E0%A4%A1%E0%A4%BC%E0%A4%BE%20%E0%A4%B5%E0%A5%8D%E0%A4%AF%E0%A4%95%E0%A5%8D%E0%A4%A4%E0%A4%BF%E0%A4%97%E0%A4%A4%20%E0%A4%A1%E0%A5%87%E0%A4%9F%E0%A4%BE%20%E0%A4%B9%E0%A4%9F%E0%A4%BE%E0%A4%A8%E0%A5%87%20%E0%A4%95%E0%A4%BE%20%E0%A4%85%E0%A4%A8%E0%A5%81%E0%A4%B0%E0%A5%8B%E0%A4%A7%20%E0%A4%95%E0%A4%B0%E0%A4%A4%E0%A4%BE%2F%E0%A4%95%E0%A4%B0%E0%A4%A4%E0%A5%80%20%E0%A4%B9%E0%A5%82%E0%A4%81%E0%A5%A4%0D%0A%0D%0AVOXALIVE%20%E0%A4%90%E0%A4%AA%20%E0%A4%AE%E0%A5%87%E0%A4%82%20%E0%A4%89%E0%A4%AA%E0%A4%AF%E0%A5%8B%E0%A4%97%20%E0%A4%95%E0%A4%BF%E0%A4%AF%E0%A4%BE%20%E0%A4%97%E0%A4%AF%E0%A4%BE%20Google%20%E0%A4%88%E0%A4%AE%E0%A5%87%E0%A4%B2%20%E0%A4%AA%E0%A4%A4%E0%A4%BE%3A%20%0D%0A%E0%A4%95%E0%A5%83%E0%A4%AA%E0%A4%AF%E0%A4%BE%20%E0%A4%B5%E0%A4%B9%E0%A5%80%20Gmail%20%E0%A4%AA%E0%A4%A4%E0%A4%BE%20%E0%A4%B2%E0%A4%BF%E0%A4%96%E0%A5%87%E0%A4%82%20%E0%A4%9C%E0%A4%BF%E0%A4%B8%E0%A4%B8%E0%A5%87%20%E0%A4%86%E0%A4%AA%E0%A4%A8%E0%A5%87%20VOXALIVE%20%E0%A4%AE%E0%A5%87%E0%A4%82%20%E0%A4%B8%E0%A4%BE%E0%A4%87%E0%A4%A8-%E0%A4%87%E0%A4%A8%20%E0%A4%95%E0%A4%BF%E0%A4%AF%E0%A4%BE%20%E0%A4%A5%E0%A4%BE%E0%A5%A4%0D%0A%E0%A4%A8%E0%A4%BE%E0%A4%AE%20%28%E0%A4%B5%E0%A5%88%E0%A4%95%E0%A4%B2%E0%A5%8D%E0%A4%AA%E0%A4%BF%E0%A4%95%29%3A%20%0D%0A%0D%0A%E0%A4%AE%E0%A5%88%E0%A4%82%20%E0%A4%B8%E0%A4%AE%E0%A4%9D%E0%A4%A4%E0%A4%BE%2F%E0%A4%B8%E0%A4%AE%E0%A4%9D%E0%A4%A4%E0%A5%80%20%E0%A4%B9%E0%A5%82%E0%A4%81%20%E0%A4%95%E0%A4%BF%20%E0%A4%96%E0%A4%BE%E0%A4%A4%E0%A4%BE%20%E0%A4%B9%E0%A4%9F%E0%A4%BE%E0%A4%A8%E0%A5%87%20%E0%A4%95%E0%A5%80%20%E0%A4%95%E0%A4%BE%E0%A4%B0%E0%A5%8D%E0%A4%B0%E0%A4%B5%E0%A4%BE%E0%A4%88%20%E0%A4%B8%E0%A5%8D%E0%A4%A5%E0%A4%BE%E0%A4%AF%E0%A5%80%20%E0%A4%B9%E0%A5%88%E0%A5%A4%0D%0A%0D%0A%E0%A4%A7%E0%A4%A8%E0%A5%8D%E0%A4%AF%E0%A4%B5%E0%A4%BE%E0%A4%A6">दूसरे email app से अनुरोध भेजें</a>
       <br>
       Email app न खुले तो पता कॉपी करें:
       <strong id="supportEmail">support@voxalive.co.in</strong>
@@ -144,6 +153,21 @@
       <br>
       <span>ईमेल का विषय: <strong>VOXALIVE Account Deletion Request</strong></span>
     </p>
+
+    <div class="confirm-wrap" id="confirmWrap">
+      <button type="button" class="confirm-btn" id="confirmSentBtn">
+        मैंने अनुरोध ईमेल भेज दिया है
+      </button>
+    </div>
+
+    <section class="sent-state" id="sentState" role="status" aria-live="polite">
+      <h2>आपने deletion request भेजे जाने की पुष्टि की है।</h2>
+      <p>यह पुष्टि इसी browser में सुरक्षित रखी गई है, ताकि आपसे बार-बार ईमेल भेजने को न कहा जाए।</p>
+      <p><strong>ध्यान दें:</strong> यह आपकी स्वयं की पुष्टि है; इससे VOXALIVE को ईमेल प्राप्त होने की स्वतः पुष्टि नहीं होती। हमारी टीम प्राप्त ईमेल की जाँच के बाद अनुरोध पर कार्रवाई करेगी।</p>
+      <button type="button" class="reset-confirmation" id="resetConfirmation">
+        यह मेरी पुष्टि नहीं है — वापस जाएँ
+      </button>
+    </section>
   </main>
 
   <footer class="footer">
@@ -155,42 +179,97 @@
 
   <script>
     (function () {
-      var btn = document.getElementById("copyBtn");
-      btn.addEventListener("click", function () {
-        var email = "support@voxalive.co.in";
-        var originalText = "ईमेल कॉपी करें";
+      var copyBtn = document.getElementById("copyBtn");
+      var gmailLink = document.getElementById("gmailDeleteMail");
+      var mailOptions = document.querySelector(".alt");
+      var confirmWrap = document.getElementById("confirmWrap");
+      var confirmBtn = document.getElementById("confirmSentBtn");
+      var sentState = document.getElementById("sentState");
+      var resetBtn = document.getElementById("resetConfirmation");
+      var storageKey = "voxaliveDeletionRequestConfirmed_v1";
 
-        function done() {
-          btn.textContent = "कॉपी हो गया ✓";
-          window.setTimeout(function () {
-            btn.textContent = originalText;
-          }, 2200);
+      function showConfirmed() {
+        if (gmailLink) gmailLink.hidden = true;
+        if (mailOptions) mailOptions.hidden = true;
+        if (confirmWrap) confirmWrap.hidden = true;
+        if (sentState) sentState.style.display = "block";
+      }
+
+      function showPending() {
+        if (gmailLink) gmailLink.hidden = false;
+        if (mailOptions) mailOptions.hidden = false;
+        if (confirmWrap) confirmWrap.hidden = false;
+        if (sentState) sentState.style.display = "none";
+      }
+
+      // Restore the user's confirmation when this page is reopened in the same browser.
+      try {
+        if (window.localStorage.getItem(storageKey) === "yes") {
+          showConfirmed();
         }
+      } catch (e) {
+        // Storage may be unavailable; the confirmation will still work for this page view.
+      }
 
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(email).then(done).catch(function () {
-            btn.textContent = email;
-          });
-          return;
-        }
+      if (confirmBtn) {
+        confirmBtn.addEventListener("click", function () {
+          try {
+            window.localStorage.setItem(storageKey, "yes");
+          } catch (e) {
+            // Continue with an in-page confirmation if browser storage is blocked.
+          }
+          showConfirmed();
+        });
+      }
 
-        var field = document.createElement("textarea");
-        field.value = email;
-        field.setAttribute("readonly", "");
-        field.style.position = "fixed";
-        field.style.opacity = "0";
-        document.body.appendChild(field);
-        field.select();
+      if (resetBtn) {
+        resetBtn.addEventListener("click", function () {
+          try {
+            window.localStorage.removeItem(storageKey);
+          } catch (e) {
+            // The page can still return to its pending state.
+          }
+          showPending();
+        });
+      }
 
-        try {
-          if (document.execCommand("copy")) done();
-          else btn.textContent = email;
-        } catch (e) {
-          btn.textContent = email;
-        }
+      if (copyBtn) {
+        copyBtn.addEventListener("click", function () {
+          var email = "support@voxalive.co.in";
+          var originalText = "ईमेल कॉपी करें";
 
-        document.body.removeChild(field);
-      });
+          function done() {
+            copyBtn.textContent = "कॉपी हो गया ✓";
+            window.setTimeout(function () {
+              copyBtn.textContent = originalText;
+            }, 2200);
+          }
+
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(email).then(done).catch(function () {
+              copyBtn.textContent = email;
+            });
+            return;
+          }
+
+          var field = document.createElement("textarea");
+          field.value = email;
+          field.setAttribute("readonly", "");
+          field.style.position = "fixed";
+          field.style.opacity = "0";
+          document.body.appendChild(field);
+          field.select();
+
+          try {
+            if (document.execCommand("copy")) done();
+            else copyBtn.textContent = email;
+          } catch (e) {
+            copyBtn.textContent = email;
+          }
+
+          document.body.removeChild(field);
+        });
+      }
     })();
   </script>
 </body>
