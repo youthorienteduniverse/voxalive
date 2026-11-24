@@ -54,14 +54,6 @@
     .cta svg { width: 20px; height: 20px; flex: 0 0 20px; }
     .alt { text-align: center; font-size: 14px; color: var(--muted); margin: 12px 0 0; }\n    .alt a { font-weight: 600; }
     .copy { background: none; border: 1px solid var(--border); border-radius: 8px; padding: 4px 10px; font: inherit; font-size: 13px; color: var(--maroon); cursor: pointer; margin-left: 6px; }
-    .confirm-wrap { margin: 14px 0 0; text-align: center; }
-    .confirm-btn { min-height: 46px; padding: 10px 18px; border: 1px solid var(--maroon); border-radius: 10px; background: #fff; color: var(--maroon); font: inherit; font-size: 15px; font-weight: 650; cursor: pointer; }
-    .confirm-btn:hover { background: var(--soft, #fff5f7); }
-    .sent-state { display: none; margin: 16px 0 0; padding: 18px 20px; border: 1px solid #b9d9c2; border-radius: var(--radius); background: #f3faf5; color: var(--text); }
-    .sent-state h2 { color: #176b35; margin: 0 0 7px; font-size: 17px; }
-    .sent-state p { margin: 0 0 8px; font-size: 14px; }
-    .sent-state p:last-of-type { margin-bottom: 12px; }
-    .reset-confirmation { border: 0; padding: 4px 0; background: transparent; color: var(--maroon); font: inherit; font-size: 13px; text-decoration: underline; cursor: pointer; }
 
     .footer { text-align: center; border-top: 1px solid var(--border); padding: 20px 16px 26px; color: var(--muted); font-size: 13px; }
     @media (max-width: 520px) {
@@ -151,24 +143,8 @@
       <strong id="supportEmail">support@voxalive.co.in</strong>
       <button type="button" class="copy" id="copyBtn">ईमेल कॉपी करें</button>
       <br>
-      <span>ईमेल का विषय: <strong>VOXALIVE Account Deletion Request</strong></span>
-    </p>
-
-    <div class="confirm-wrap" id="confirmWrap">
-      <button type="button" class="confirm-btn" id="confirmSentBtn">
-        मैंने अनुरोध ईमेल भेज दिया है
-      </button>
-    </div>
-
-    <section class="sent-state" id="sentState" role="status" aria-live="polite">
-      <h2>आपने deletion request भेजे जाने की पुष्टि की है।</h2>
-      <p>यह पुष्टि इसी browser में सुरक्षित रखी गई है, ताकि आपसे बार-बार ईमेल भेजने को न कहा जाए।</p>
-      <p><strong>ध्यान दें:</strong> यह आपकी स्वयं की पुष्टि है; इससे VOXALIVE को ईमेल प्राप्त होने की स्वतः पुष्टि नहीं होती। हमारी टीम प्राप्त ईमेल की जाँच के बाद अनुरोध पर कार्रवाई करेगी।</p>
-      <button type="button" class="reset-confirmation" id="resetConfirmation">
-        यह मेरी पुष्टि नहीं है — वापस जाएँ
-      </button>
-    </section>
-  </main>
+      <span>ईमेल का विषय: <strong>VOXALIVE Account Deletion Request</strong></span><br><span>मोबाइल पर बटन आपके डिवाइस के default email app को खोलेगा। यदि विकल्प दिखें, तो Gmail चुनें।</span>
+    </p></main>
 
   <footer class="footer">
     <a href="https://voxalive.co.in/voxa_rpsc_privacy.html">गोपनीयता नीति</a>
@@ -179,63 +155,61 @@
 
   <script>
     (function () {
-      var copyBtn = document.getElementById("copyBtn");
+      var email = "support@voxalive.co.in";
+      var subject = "VOXALIVE Account Deletion Request";
+      var lines = [
+        "नमस्ते VOXALIVE टीम,",
+        "",
+        "मैं अपना VOXALIVE खाता और उससे जुड़ा व्यक्तिगत डेटा हटाने का अनुरोध करता/करती हूँ।",
+        "",
+        "VOXALIVE ऐप में उपयोग किया गया Google ईमेल पता: ",
+        "कृपया वही Gmail पता लिखें जिससे आपने VOXALIVE में साइन-इन किया था।",
+        "नाम (वैकल्पिक): ",
+        "",
+        "मैं समझता/समझती हूँ कि खाता हटाने की कार्रवाई स्थायी है।",
+        "",
+        "धन्यवाद"
+      ];
+      var body = lines.join(String.fromCharCode(13, 10));
+
+      function enc(value) {
+        return encodeURIComponent(value);
+      }
+
+      var mailtoUrl = "mailto:" + email + "?subject=" + enc(subject) + "&body=" + enc(body);
+      var gmailWebUrl = "https://mail.google.com/mail/?view=cm&fs=1&to=" +
+        enc(email) + "&su=" + enc(subject) + "&body=" + enc(body);
+
       var gmailLink = document.getElementById("gmailDeleteMail");
-      var mailOptions = document.querySelector(".alt");
-      var confirmWrap = document.getElementById("confirmWrap");
-      var confirmBtn = document.getElementById("confirmSentBtn");
-      var sentState = document.getElementById("sentState");
-      var resetBtn = document.getElementById("resetConfirmation");
-      var storageKey = "voxaliveDeletionRequestConfirmed_v1";
+      var otherMailLink = document.getElementById("otherMailApp");
+      var userAgent = navigator.userAgent || "";
+      var isAndroid = /Android/i.test(userAgent);
+      var isAppleMobile = /iPhone|iPad|iPod/i.test(userAgent);
+      var isMobile = isAndroid || isAppleMobile ||
+        (navigator.maxTouchPoints > 1 && /Macintosh/i.test(userAgent));
 
-      function showConfirmed() {
-        if (gmailLink) gmailLink.hidden = true;
-        if (mailOptions) mailOptions.hidden = true;
-        if (confirmWrap) confirmWrap.hidden = true;
-        if (sentState) sentState.style.display = "block";
-      }
-
-      function showPending() {
-        if (gmailLink) gmailLink.hidden = false;
-        if (mailOptions) mailOptions.hidden = false;
-        if (confirmWrap) confirmWrap.hidden = false;
-        if (sentState) sentState.style.display = "none";
-      }
-
-      // Restore the user's confirmation when this page is reopened in the same browser.
-      try {
-        if (window.localStorage.getItem(storageKey) === "yes") {
-          showConfirmed();
+      // On phones, use mailto so the operating system opens the registered email app.
+      // On desktop, open Gmail's web composer.
+      if (gmailLink) {
+        if (isMobile) {
+          gmailLink.href = mailtoUrl;
+          gmailLink.removeAttribute("target");
+          gmailLink.textContent = "Gmail / Email ऐप में अनुरोध लिखें";
+        } else {
+          gmailLink.href = gmailWebUrl;
+          gmailLink.target = "_blank";
+          gmailLink.rel = "noopener noreferrer";
+          gmailLink.textContent = "Gmail में deletion request लिखें";
         }
-      } catch (e) {
-        // Storage may be unavailable; the confirmation will still work for this page view.
       }
 
-      if (confirmBtn) {
-        confirmBtn.addEventListener("click", function () {
-          try {
-            window.localStorage.setItem(storageKey, "yes");
-          } catch (e) {
-            // Continue with an in-page confirmation if browser storage is blocked.
-          }
-          showConfirmed();
-        });
+      if (otherMailLink) {
+        otherMailLink.href = mailtoUrl;
       }
 
-      if (resetBtn) {
-        resetBtn.addEventListener("click", function () {
-          try {
-            window.localStorage.removeItem(storageKey);
-          } catch (e) {
-            // The page can still return to its pending state.
-          }
-          showPending();
-        });
-      }
-
+      var copyBtn = document.getElementById("copyBtn");
       if (copyBtn) {
         copyBtn.addEventListener("click", function () {
-          var email = "support@voxalive.co.in";
           var originalText = "ईमेल कॉपी करें";
 
           function done() {
